@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mi Inventario de Compras</string>
+    <string name="Crear">Crear</string>
+    <string name="Crear_lista">CREAR LISTA DE PRODUCTOS</string>
+    <string name="Entradas">ENTRADAS</string>
+    <string name="Entradas2">Entradas</string>
+    <string name="Salidas">SALIDAS</string>
+    <string name="Salidas2">Salidas</string>
+    <string name="Alertas">ALERTAS</string>
+    <string name="Alertas2">Alertas</string>
+    <string name="Lista">LISTA</string>
+    <string name="Lista2">Lista</string>
+</resources>
