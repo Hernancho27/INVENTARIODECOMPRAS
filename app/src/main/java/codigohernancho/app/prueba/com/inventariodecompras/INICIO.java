@@ -20,7 +20,6 @@ public class INICIO extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-
         boton1 = (Button)findViewById(R.id.boton1);
         boton1.setOnClickListener(this);
         boton2 = (Button)findViewById(R.id.boton2);
@@ -31,7 +30,6 @@ public class INICIO extends AppCompatActivity implements View.OnClickListener{
         boton4.setOnClickListener(this);
         boton5 = (Button)findViewById(R.id.boton5);
         boton5.setOnClickListener(this);
-
     }
 
     @Override
