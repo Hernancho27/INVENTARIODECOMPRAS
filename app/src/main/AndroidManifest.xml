@@ -13,7 +13,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -63,7 +63,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".LISTA"
+        <activity
+            android:name=".LISTA"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/Lista2">
@@ -72,8 +73,17 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".DrawerMenu"
+            android:label="@string/title_activity_drawer_menu"
+            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
-
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
 
 
         </activity>

@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="codigohernancho.app.prueba.com.inventariodecompras.INICIO">
->
+    tools:context="codigohernancho.app.prueba.com.inventariodecompras.INICIO"><![CDATA[>    ]]>
+
+    <include android:id="@+id/toolbar2"
+        layout="@layout/toolbar2"/>
 
     <Button
-        android:id="@+id/boton1"
+        android:id="@+id/boton5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Crear_lista" />
-
-    <Button
-        android:id="@+id/boton2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Entradas" />
+        android:text="@string/Lista" />
 
     <Button
         android:id="@+id/boton3"
@@ -27,15 +25,40 @@
         android:text="@string/Salidas" />
 
     <Button
+        android:id="@+id/boton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Entradas" />
+
+    <Button
+        android:id="@+id/boton1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Crear_lista" />
+
+    <Button
         android:id="@+id/boton4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Alertas" />
 
-    <Button
-        android:id="@+id/boton5"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Lista" />
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_inicio" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </LinearLayout>
