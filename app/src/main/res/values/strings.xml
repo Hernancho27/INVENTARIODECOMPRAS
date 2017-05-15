@@ -16,6 +16,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Crear Producto</string>
+    <string name="Inventario_de_Compras">Inventario de Compras</string>
+    <string name="UNAD">UNAD</string>
     <string name="op2">Entradas</string>
     <string name="op3">Salidas</string>
     <string name="op4">Alertas</string>
