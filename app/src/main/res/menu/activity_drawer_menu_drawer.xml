@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/crear"
+            android:drawable="@drawable/ic_crear"
+            android:icon="@drawable/ic_crear"
             android:title="Crear Producto" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/entradas"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Entradas" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/salidas"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Salidas" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/alertas"
             android:icon="@drawable/ic_menu_manage"
             android:title="Alertas" />
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/informes"
             android:icon="@drawable/ic_menu_share"
             android:title="Informes" />
         <item
-            android:id="@+id/nav_send"
+            android:id="@+id/configuracion"
             android:icon="@drawable/ic_menu_send"
             android:title="Configuracion" />
         <item
-            android:id="@+id/Usuarios"
+            android:id="@+id/usuarios"
             android:title="Usuarios" />
     </group>
 
