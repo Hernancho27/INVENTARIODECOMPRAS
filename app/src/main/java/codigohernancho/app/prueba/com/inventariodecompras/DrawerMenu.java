@@ -1,5 +1,6 @@
 package codigohernancho.app.prueba.com.inventariodecompras;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -83,8 +84,11 @@ public class DrawerMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.crear) {
+            Intent intent1 = new Intent(DrawerMenu.this,CREAR.class);
+            startActivity(intent1);
             // Handle the camera action
-        } else if (id == R.id.entradas) {
+        } else
+            if (id == R.id.entradas) {
 
         } else if (id == R.id.salidas) {
 

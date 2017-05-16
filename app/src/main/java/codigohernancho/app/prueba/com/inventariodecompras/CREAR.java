@@ -3,11 +3,11 @@ package codigohernancho.app.prueba.com.inventariodecompras;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CrearLista extends AppCompatActivity {
+public class CREAR extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_lista);
+        setContentView(R.layout.activity_crear);
     }
 }

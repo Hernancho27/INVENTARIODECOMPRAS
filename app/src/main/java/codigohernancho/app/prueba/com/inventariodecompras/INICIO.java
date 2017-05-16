@@ -49,7 +49,7 @@ public class INICIO extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.boton1:
-                Intent intent1 = new Intent(INICIO.this,CrearLista.class);
+                Intent intent1 = new Intent(INICIO.this,CREAR.class);
                 startActivity(intent1);
                 break;
             case R.id.boton2:
@@ -65,7 +65,7 @@ public class INICIO extends AppCompatActivity implements View.OnClickListener{
                 startActivity(intent4);
                 break;
             case R.id.boton5:
-                Intent intent5 = new Intent(INICIO.this,LISTA.class);
+                Intent intent5 = new Intent(INICIO.this,INFORMES.class);
                 startActivity(intent5);
                 break;
         }

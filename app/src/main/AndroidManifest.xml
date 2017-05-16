@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CrearLista"
+            android:name=".CREAR"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/Crear" />
@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LISTA"
+            android:name=".INFORMES"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/Lista2">
@@ -79,11 +79,11 @@
             android:label="@string/title_activity_drawer_menu"
             android:theme="@style/AppTheme">
             android:theme="@style/AppTheme">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
 
         </activity>
