@@ -84,17 +84,25 @@ public class DrawerMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.crear) {
-            Intent intent1 = new Intent(DrawerMenu.this,CREAR.class);
-            startActivity(intent1);
+                Intent intent1 = new Intent(DrawerMenu.this,CREAR.class);
+                startActivity(intent1);
             // Handle the camera action
         } else
             if (id == R.id.entradas) {
+                Intent intent1 = new Intent(DrawerMenu.this,ENTRADAS.class);
+                startActivity(intent1);
 
         } else if (id == R.id.salidas) {
+                Intent intent1 = new Intent(DrawerMenu.this,SALIDAS.class);
+                startActivity(intent1);
 
         } else if (id == R.id.alertas) {
+                Intent intent1 = new Intent(DrawerMenu.this,ALERTAS.class);
+                startActivity(intent1);
 
         } else if (id == R.id.informes) {
+                Intent intent1 = new Intent(DrawerMenu.this,INFORMES.class);
+                startActivity(intent1);
 
         } else if (id == R.id.configuracion) {
 
