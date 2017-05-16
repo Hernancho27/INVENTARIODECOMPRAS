@@ -23,6 +23,6 @@
     <string name="op4">Alertas</string>
     <string name="op5">Informes</string>
     <string name="title_activity_menuprincipal">MENUPRINCIPAL</string>
-    <string name="title_activity_drawer_menu">DrawerMenu</string>
+    <string name="title_activity_drawer_menu">Mi Inventario de Compras</string>
 
 </resources>

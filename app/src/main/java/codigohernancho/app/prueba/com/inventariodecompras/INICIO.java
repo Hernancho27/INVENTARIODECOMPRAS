@@ -1,11 +1,9 @@
 package codigohernancho.app.prueba.com.inventariodecompras;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.content.Intent;
 import android.view.Menu;
@@ -27,32 +25,26 @@ public class INICIO extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar2);
-        setSupportActionBar(toolbar);
-
-        boton1 = (Button)findViewById(R.id.boton1);
+        boton1 = (Button) findViewById(R.id.boton1);
         boton1.setOnClickListener(this);
-        boton2 = (Button)findViewById(R.id.boton2);
+        boton2 = (Button) findViewById(R.id.boton2);
         boton2.setOnClickListener(this);
-        boton3 = (Button)findViewById(R.id.boton3);
+        boton3 = (Button) findViewById(R.id.boton3);
         boton3.setOnClickListener(this);
-        boton4 = (Button)findViewById(R.id.boton4);
+        boton4 = (Button) findViewById(R.id.boton4);
         boton4.setOnClickListener(this);
-        boton5 = (Button)findViewById(R.id.boton5);
+        boton5 = (Button) findViewById(R.id.boton5);
         boton5.setOnClickListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View view) {
-                                       Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                               .setAction("Action", null).show();
-                                   }
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
         });
-
-
-    };
-
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
