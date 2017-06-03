@@ -12,6 +12,7 @@
     android:baselineAligned="false"
     android:weightSum="1">
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="155dp"
