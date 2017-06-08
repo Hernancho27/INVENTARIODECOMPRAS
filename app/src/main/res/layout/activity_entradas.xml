@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,32 +12,38 @@
     android:baselineAligned="false"
     android:weightSum="1">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="155dp"
-        android:layout_height="137dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_conversion_absoluteHeight="341dp"
-        tools:layout_conversion_absoluteWidth="156dp"
-        tools:layout_conversion_absoluteX="0dp"
-        tools:layout_conversion_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
     <EditText
-        android:id="@+id/txtstockMax"
-        android:layout_width="173dp"
-        android:layout_height="46dp"
+        android:id="@+id/txtcodigoABuscar"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_weight="0.02"
         android:ems="10"
+        android:hint="Ingrese el Codigo a buscar"
         android:inputType="textPersonName"
-        android:hint="Stock actual"
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
-        tools:layout_conversion_absoluteY="341dp"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        tools:layout_conversion_absoluteY="426dp"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="94dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/txtnombreProductoABuscar"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingrese el Nombre de Producto a Buscar"
+        android:inputType="textPersonName"
+        tools:layout_conversion_absoluteHeight="42dp"
+        tools:layout_conversion_absoluteWidth="384dp"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="468dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="153dp"
+        android:layout_below="@+id/txtcodigoABuscar"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/txtcantidad"
@@ -51,27 +57,47 @@
         tools:layout_conversion_absoluteX="0dp"
         tools:layout_conversion_absoluteY="383dp"
         tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="46dp" />
+        tools:layout_editor_absoluteY="46dp"
+        android:layout_above="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="155dp"
+        android:layout_height="137dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:layout_conversion_absoluteHeight="341dp"
+        tools:layout_conversion_absoluteWidth="156dp"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_above="@+id/txtnombreProductoEncontrado"
+        android:layout_alignEnd="@+id/txtstockMinProductoEncontrado" />
 
     <EditText
-        android:id="@+id/txtcodigo"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
+        android:id="@+id/txtstockActualProductoEncontrado"
+        android:layout_width="173dp"
+        android:layout_height="46dp"
         android:ems="10"
-        android:hint="Codigo"
+        android:hint="Stock actual"
         android:inputType="textPersonName"
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
-        tools:layout_conversion_absoluteY="426dp"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="94dp"
-        android:layout_weight="0.02" />
+        tools:layout_conversion_absoluteY="341dp"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_above="@+id/txtnombreProductoEncontrado"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/txtnombre"
-        android:layout_width="384dp"
+        android:id="@+id/txtnombreProductoEncontrado"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.02"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName"
@@ -80,10 +106,13 @@
         tools:layout_conversion_absoluteX="0dp"
         tools:layout_conversion_absoluteY="468dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="153dp" />
+        tools:layout_editor_absoluteY="153dp"
+        android:layout_above="@+id/txtmarcaProductoEncontrado"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/imageView" />
 
     <EditText
-        android:id="@+id/txtmarca"
+        android:id="@+id/txtmarcaProductoEncontrado"
         android:layout_width="379dp"
         android:layout_height="39dp"
         android:contentDescription="Marca"
@@ -91,37 +120,67 @@
         android:hint="Marca"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="203dp" />
+        tools:layout_editor_absoluteY="203dp"
+        android:layout_above="@+id/txtunidadProductoEncontrado"
+        android:layout_alignEnd="@+id/txtunidadProductoEncontrado" />
 
     <EditText
-        android:id="@+id/txtunidad"
+        android:id="@+id/txtunidadProductoEncontrado"
         android:layout_width="379dp"
         android:layout_height="42dp"
         android:ems="10"
         android:hint="Unidad"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="249dp" />
+        tools:layout_editor_absoluteY="249dp"
+        android:layout_above="@+id/txtdescripcionProductoEncontrado"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/txtdescripcionProductoEncontrado" />
 
     <EditText
-        android:id="@+id/txtdescripcion"
+        android:id="@+id/txtdescripcionProductoEncontrado"
         android:layout_width="366dp"
         android:layout_height="53dp"
         android:ems="10"
         android:hint="Descripcion"
         android:inputType="textMultiLine"
         tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="298dp" />
+        tools:layout_editor_absoluteY="298dp"
+        android:layout_above="@+id/txtstockMinProductoEncontrado"
+        android:layout_alignParentStart="true" />
 
     <EditText
-        android:id="@+id/txtstockMin"
+        android:id="@+id/txtstockMinProductoEncontrado"
         android:layout_width="363dp"
         android:layout_height="45dp"
         android:ems="10"
         android:hint="Stock Minimo"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="390dp" />
+        tools:layout_editor_absoluteY="390dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp" />
+
+    <Button
+        android:id="@+id/btnBuscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:onClick="modificar_clicked"
+        android:layout_above="@+id/txtcantidad"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="50dp" />
+
+    <Button
+        android:id="@+id/btnLimpiar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtcantidad"
+        android:layout_marginStart="34dp"
+        android:layout_toEndOf="@+id/btnBuscar"
+        android:onClick="limpiar_clicked"
+        android:text="Borrar" />
 
 
-</LinearLayout>
+</RelativeLayout>
