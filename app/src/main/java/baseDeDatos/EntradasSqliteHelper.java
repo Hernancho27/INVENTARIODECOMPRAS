@@ -15,7 +15,7 @@ import objetos.Entrada;
 public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
 
-/*prueba de datos*/
+/*prueba de datos comenrarios*/
     public EntradasSqliteHelper(Context context) {
         super(context, "BDInventario.sqlite", null, 1);
     }
