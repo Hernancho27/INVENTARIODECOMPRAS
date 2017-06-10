@@ -106,6 +106,8 @@ public class DrawerMenu
                 startActivity(intent1);
 
         } else if (id == R.id.configuracion) {
+                Intent intent1 = new Intent(DrawerMenu.this,SCANNER.class);
+                startActivity(intent1);
 
         }
 
