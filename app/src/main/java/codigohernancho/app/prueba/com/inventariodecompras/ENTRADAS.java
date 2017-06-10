@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import baseDeDatos.EntradasSqliteHelper;
+
 import objetos.Entrada;
 
 public class ENTRADAS extends AppCompatActivity {
