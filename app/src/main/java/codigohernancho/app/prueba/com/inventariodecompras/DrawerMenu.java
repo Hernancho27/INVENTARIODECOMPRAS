@@ -15,8 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class DrawerMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class DrawerMenu
+        extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,3 +114,4 @@ public class DrawerMenu extends AppCompatActivity
         return true;
     }
 }
+
