@@ -31,6 +31,14 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="61dp"
+        android:layout_height="59dp"
+        android:layout_gravity="bottom|left"
+        android:background="@drawable/botonscanner"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="top|right" />
 
 
 </android.support.design.widget.CoordinatorLayout>
