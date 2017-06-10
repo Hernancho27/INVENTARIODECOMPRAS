@@ -15,6 +15,7 @@ import objetos.Entrada;
 public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
 
+    
 
     public EntradasSqliteHelper(Context context) {
         super(context, "BDInventario.sqlite", null, 1);

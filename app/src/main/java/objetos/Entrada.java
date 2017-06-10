@@ -8,6 +8,7 @@ public class Entrada {
 
     public Entrada(){}
 
+
     public Entrada(String nom, int cantAdd)
     {
         this.nombreProducto = nom;

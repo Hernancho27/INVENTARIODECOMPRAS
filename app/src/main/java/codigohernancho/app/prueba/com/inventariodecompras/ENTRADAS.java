@@ -28,7 +28,6 @@ public class ENTRADAS extends AppCompatActivity {
     EditText descripcion;
     EditText stockMin;
     Button adicionar;
-    EntradasSqliteHelper u;
 
 
     public ENTRADAS()
@@ -40,7 +39,7 @@ public class ENTRADAS extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entradas);
-        u = new EntradasSqliteHelper(this);
+
 
         codigoABuscar = (EditText) findViewById(R.id.txtcodigoABuscar);
         nombreProductoABuscar = (EditText) findViewById(R.id.txtnombreProductoABuscar);
@@ -111,37 +110,9 @@ public class ENTRADAS extends AppCompatActivity {
 
     }
 
-    public void guardar_clicked(View view){
-        Cursor cursor=null;
-        u.createProducto(new Entrada(nombreProductoABuscar.getText().toString(), Integer.parseInt(codigoABuscar.getText().toString())));
 
-    }
 
-    public void modificar_clicked(View view){
-        int id = Integer.parseInt( codigoABuscar.getText().toString() );
-        Cursor c = u.entradabyid(id, nombreProductoABuscar.getText().toString());
 
-        codigoABuscar.setText(c.getString(c.getColumnIndexOrThrow("id")));
-        nombreProducto.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
-        cantidadARegistrar.setText(c.getString(c.getColumnIndexOrThrow("cantidad")));
-    }
-
-    public void limpiar_clicked(View view){
-        codigoABuscar.setText("");
-        nombreProductoABuscar.setText("");
-    }
-
-    public void limpiarCajas()
-    {
-        stockMax.setText("");
-        cantidadARegistrar.setText("");
-        codigoABuscar.setText("");
-        nombreProducto.setText("");
-        marca.setText("");
-        unidad.setText("");
-        descripcion.setText("");
-        stockMin.setText("");
-    }
 
 
 }
