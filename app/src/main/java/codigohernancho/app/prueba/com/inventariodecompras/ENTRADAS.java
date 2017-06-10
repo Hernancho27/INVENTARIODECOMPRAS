@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import objetos.Entrada;
-
 public class ENTRADAS extends AppCompatActivity {
 
     EditText codigoABuscar;
