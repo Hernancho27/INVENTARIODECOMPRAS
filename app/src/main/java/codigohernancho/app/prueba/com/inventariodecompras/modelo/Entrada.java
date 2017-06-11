@@ -1,4 +1,4 @@
-package objetos;
+package codigohernancho.app.prueba.com.inventariodecompras.modelo;
 
 public class Entrada {
     int id;

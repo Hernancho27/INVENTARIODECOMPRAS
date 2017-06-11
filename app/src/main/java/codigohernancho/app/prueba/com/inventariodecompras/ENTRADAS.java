@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.app.AlertDialog;
 
-import baseDeDatos.EntradasSqliteHelper;
-import objetos.Entrada;
+import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
+import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
 
 public class ENTRADAS extends AppCompatActivity {
 
