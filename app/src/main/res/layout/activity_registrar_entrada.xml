@@ -13,7 +13,7 @@
     android:weightSum="1">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/txtMarcaProductoEncontrado"
         android:layout_width="379dp"
         android:layout_height="39dp"
         android:layout_alignParentStart="true"
@@ -60,7 +60,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:id="@+id/txtcantidad"
+        android:id="@+id/txtCantidadAAdicionar"
         android:layout_width="173dp"
         android:layout_height="48dp"
         android:ems="10"
@@ -86,9 +86,9 @@
         tools:layout_conversion_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
-        android:layout_alignEnd="@+id/txtdescripcionProductoEncontrado"
-        android:layout_above="@+id/txtdescripcionProductoEncontrado"
-        android:layout_alignTop="@+id/txtnombreProductoEncontrado" />
+        android:layout_alignTop="@+id/txtnombreProductoEncontrado"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/txtdescripcionProductoEncontrado" />
 
     <EditText
         android:id="@+id/txtstockActualProductoEncontrado"
@@ -126,7 +126,7 @@
         android:layout_toStartOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/txtmarcaProductoEncontrado"
+        android:id="@+id/txtCantidadProductoEncontrado"
         android:layout_width="379dp"
         android:layout_height="39dp"
         android:layout_above="@+id/txtunidadProductoEncontrado"
@@ -181,7 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buscar"
-        android:onClick="modificar_clicked"
+        android:onClick="buscarProducto_clicked"
         android:layout_marginTop="12dp"
         android:layout_below="@+id/txtnombreProductoABuscar"
         android:layout_alignParentStart="true"
@@ -191,12 +191,11 @@
         android:id="@+id/btnLimpiar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="buscarProducto_clicked"
+        android:onClick="limpiar_clicked"
         android:text="Borrar"
         android:layout_alignBaseline="@+id/btnBuscar"
         android:layout_alignBottom="@+id/btnBuscar"
-        android:layout_toEndOf="@+id/btnBuscar"
-        android:layout_marginStart="49dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textView"
@@ -206,17 +205,28 @@
         android:textAlignment="center"
         android:textSize="18sp"
         android:visibility="visible"
-        android:layout_alignBaseline="@+id/txtcantidad"
-        android:layout_alignBottom="@+id/txtcantidad"
+        android:layout_alignBaseline="@+id/txtCantidadAAdicionar"
+        android:layout_alignBottom="@+id/txtCantidadAAdicionar"
         android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btnGuardarEntrada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtcantidad"
+        android:layout_below="@+id/txtCantidadAAdicionar"
         android:layout_toEndOf="@+id/btnBuscar"
+        android:onClick="guardarEntrada_clicked"
         android:text="Guardar" />
+
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtCantidadAAdicionar"
+        android:layout_alignEnd="@+id/txtCantidadAAdicionar"
+        android:layout_marginEnd="17dp"
+        android:onClick="guardarProducto_clicked"
+        android:text="Adicionar" />
 
 
 </RelativeLayout>

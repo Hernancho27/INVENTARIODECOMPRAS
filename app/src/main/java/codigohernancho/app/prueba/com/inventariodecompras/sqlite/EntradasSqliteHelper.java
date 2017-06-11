@@ -7,11 +7,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 
 public class EntradasSqliteHelper extends SQLiteOpenHelper{
@@ -19,36 +22,38 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
 /*prueba de datos comenrariosdf*/
     public EntradasSqliteHelper(Context context) {
-        super(context, "inventario.sqlite", null, 1);
+        super(context, "inventario.sqlite", null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         /*ESTE METODO SE EJECUTA AUTOMATICAMENTE SI LA BASE DE DATOS NO EXISTE */
         db.execSQL("CREATE TABLE registrarEntradas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER, cantidadTotalAnterior INTEGER, cantidadTotalActual INTEGER, fechaRegistro DATETIME)");
-        db.execSQL("CREATE TABLE Productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto VARCHAR(20), descripcion VARCHAR(100), stock_minimo INTEGER, stock_maximo INTEGER, cantidad INTEGER);");
+        db.execSQL("CREATE TABLE Productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto VARCHAR(20), marca VARCHAR(20), unidad VARCHAR(20), descripcion VARCHAR(100), stock_minimo INTEGER, stock_maximo INTEGER, cantidad INTEGER);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         /**ESTE METODO ACTUALIZA LA VERSION DE LA BASE DE DATOS ... ENTONCES QUEDA POR DEFINIR SI SE CONSTRUYE DE
          * NUEVO LA TABLA Y SE REALIZA UN BACKUP DE LOS DATOS O SI DEFINITIVAMENTE SE ELIMINA Y SE CREA NUEVAMENTE*/
-        db.execSQL("DROP TABLE IF EXIST registrarEntradas;");
+        db.execSQL("DROP TABLE IF EXISTS registrarEntradas");
+        db.execSQL("DROP TABLE IF EXISTS Productos");
         db.execSQL("CREATE TABLE registrarEntradas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER, cantidadTotalAnterior INTEGER, cantidadTotalActual INTEGER, fechaRegistro DATETIME);");
-        db.execSQL("DROP TABLE IF EXIST Productos;");
-        db.execSQL("CREATE TABLE Productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto VARCHAR(20), descripcion VARCHAR(100), stock_minimo INTEGER, stock_maximo INTEGER, cantidad INTEGER);");
+        db.execSQL("CREATE TABLE Productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto VARCHAR(20), marca VARCHAR(20), unidad VARCHAR(20), descripcion VARCHAR(100), stock_minimo INTEGER, stock_maximo INTEGER, cantidad INTEGER);");
         onCreate(db);
     }
 
     //public void createProducto(Entrada e)
-   /* public void createProducto()
+    public void createProducto()
     {
         try
         {
 
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("nombreProducto", "Nescafe");
+            values.put("nombreProducto", "Cafe");
+            values.put("marca", "Nescafe");
+            values.put("unidad", "Libra");
             values.put("descripcion", "cafe importado");
             values.put("stock_minimo", 1);
             values.put("stock_maximo", 5);
@@ -58,7 +63,9 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
 
             ContentValues values1 = new ContentValues();
-            values1.put("nombreProducto", "Detergente Ariel");
+            values1.put("nombreProducto", "Detergente");
+            values1.put("marca", "Ariel");
+            values1.put("unidad", "Kilo");
             values1.put("descripcion", "detergente para lavar ropa");
             values1.put("stock_minimo", 1);
             values1.put("stock_maximo", 6);
@@ -67,7 +74,9 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
 
             ContentValues values2 = new ContentValues();
-            values2.put("nombreProducto", "Salvo liquido");
+            values2.put("nombreProducto", "jabon liquido");
+            values2.put("marca", "Salvo");
+            values2.put("unidad", "botella");
             values2.put("descripcion", "lavaloza");
             values2.put("stock_minimo", 1);
             values2.put("stock_maximo", 4);
@@ -84,7 +93,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
         }
 
-    }*/
+    }
 
 
     public void crearEntrada(Entrada e)
@@ -110,7 +119,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
     }
 
-    /*public Cursor entradabyid(int idEntrada, String nombre){
+    public Cursor encontrarProductoPorId(int idEntrada, String nombre){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM Productos WHERE (1=1)";
             if (idEntrada > 0)
@@ -130,7 +139,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         }
 
         return c;
-    }*/
+    }
 
 
     public Cursor encontrarEntradaPorId(int idProducto, String codigoProducto){

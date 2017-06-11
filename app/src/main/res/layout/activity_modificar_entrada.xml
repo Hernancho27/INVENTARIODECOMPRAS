@@ -60,7 +60,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:id="@+id/txtcantidad"
+        android:id="@+id/txtCantidadAAdicionar"
         android:layout_width="173dp"
         android:layout_height="48dp"
         android:ems="10"
@@ -203,10 +203,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/txtcantidad"
+        android:layout_alignBottom="@+id/txtCantidadAAdicionar"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/txtcantidad"
-        android:layout_toStartOf="@+id/txtcantidad"
+        android:layout_alignTop="@+id/txtCantidadAAdicionar"
+        android:layout_toStartOf="@+id/txtCantidadAAdicionar"
         android:text="Adiciona la cantidad  >>"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -216,7 +216,7 @@
         android:id="@+id/btnGuardarEntrada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtcantidad"
+        android:layout_below="@+id/txtCantidadAAdicionar"
         android:layout_toEndOf="@+id/btnBuscar"
         android:text="Guardar" />
 

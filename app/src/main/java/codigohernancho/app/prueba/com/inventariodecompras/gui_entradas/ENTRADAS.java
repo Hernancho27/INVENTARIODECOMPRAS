@@ -21,16 +21,20 @@ public class ENTRADAS extends AppCompatActivity {
     EditText codigoABuscar;
     EditText nombreProductoABuscar;
     EditText cantidadARegistrar;
-    EditText stockMax;
-    EditText nombreProducto;
-    EditText marca;
-    EditText unidad;
-    EditText descripcion;
-    EditText stockMin;
+
+    EditText nombreProductoEncontrado;
+    EditText marcaProductoEncontrado;
+    EditText cantidadProductoEncontrado;
+    EditText unidadProductoEncontrado;
+    EditText descripcionProductoEncontrado;
+    EditText stockMinimoProductoEncontrado;
+    EditText stockMaximoProductoEncontrado;
+
     Button adicionar;
     EntradasSqliteHelper u;
     int idProductoEncontrado;
     int cantidadActualProductoEncontrado;
+
 
     public ENTRADAS()
     {
@@ -45,26 +49,29 @@ public class ENTRADAS extends AppCompatActivity {
 
         codigoABuscar = (EditText) findViewById(R.id.txtcodigoABuscar);
         nombreProductoABuscar = (EditText) findViewById(R.id.txtnombreProductoABuscar);
-        cantidadARegistrar = (EditText) findViewById(R.id.txtcantidad);
+        cantidadARegistrar = (EditText) findViewById(R.id.txtCantidadAAdicionar);
 
 
-        stockMax = (EditText) findViewById(R.id.txtstockActualProductoEncontrado);
-        stockMax.setEnabled(false);
+        stockMaximoProductoEncontrado = (EditText) findViewById(R.id.txtstockActualProductoEncontrado);
+        stockMaximoProductoEncontrado.setEnabled(false);
 
-        nombreProducto = (EditText) findViewById(R.id.txtnombreProductoEncontrado);
-        nombreProducto.setEnabled(false);
+        nombreProductoEncontrado = (EditText) findViewById(R.id.txtnombreProductoEncontrado);
+        nombreProductoEncontrado.setEnabled(false);
 
-        marca = (EditText) findViewById(R.id.txtmarcaProductoEncontrado);
-        marca.setEnabled(false);
+        marcaProductoEncontrado = (EditText) findViewById(R.id.txtMarcaProductoEncontrado);
+        marcaProductoEncontrado.setEnabled(false);
 
-        unidad = (EditText) findViewById(R.id.txtunidadProductoEncontrado);
-        unidad.setEnabled(false);
+        cantidadProductoEncontrado = (EditText) findViewById(R.id.txtCantidadProductoEncontrado);
+        cantidadProductoEncontrado.setEnabled(false);
 
-        descripcion = (EditText) findViewById(R.id.txtdescripcionProductoEncontrado);
-        descripcion.setEnabled(false);
+        unidadProductoEncontrado = (EditText) findViewById(R.id.txtunidadProductoEncontrado);
+        unidadProductoEncontrado.setEnabled(false);
 
-        stockMin = (EditText) findViewById(R.id.txtstockMinProductoEncontrado);
-        stockMin.setEnabled(false);
+        descripcionProductoEncontrado = (EditText) findViewById(R.id.txtdescripcionProductoEncontrado);
+        descripcionProductoEncontrado.setEnabled(false);
+
+        stockMinimoProductoEncontrado = (EditText) findViewById(R.id.txtstockMinProductoEncontrado);
+        stockMinimoProductoEncontrado.setEnabled(false);
 
 
 
@@ -90,14 +97,14 @@ public class ENTRADAS extends AppCompatActivity {
 
             case R.id.action_add:
             {
-                String stockMa= stockMax.getText().toString();
+                String stockMa= stockMaximoProductoEncontrado.getText().toString();
                 String cant= cantidadARegistrar.getText().toString();
                 String cod= codigoABuscar.getText().toString();
-                String nomprod = nombreProducto.getText().toString();
-                String marc= marca.getText().toString();
-                String unid= unidad.getText().toString();
-                String descr= descripcion.getText().toString();
-                String sockMi= stockMin.getText().toString();
+                String nomprod = nombreProductoEncontrado.getText().toString();
+                String marc= marcaProductoEncontrado.getText().toString();
+                String unid= unidadProductoEncontrado.getText().toString();
+                String descr= descripcionProductoEncontrado.getText().toString();
+                String sockMi= stockMinimoProductoEncontrado.getText().toString();
 
                 Toast.makeText(this, "El usuario es: "+nomprod+" "+marc+" "+unid, Toast.LENGTH_LONG ).show();
 
@@ -112,34 +119,87 @@ public class ENTRADAS extends AppCompatActivity {
 
     }
 
-    public void guardar_clicked(View view){
-        Cursor cursor=null;
-        //u.createProducto(new Entrada(nombreProductoABuscar.getText().toString(), Integer.parseInt(codigoABuscar.getText().toString())));
-        u.crearEntrada(new Entrada(idProductoEncontrado, cantidadActualProductoEncontrado, Integer.parseInt(cantidadARegistrar.getText().toString())));
+
+    public void guardarProducto_clicked(View view){
+        try
+        {
+            Cursor cursor=null;
+            u.createProducto();
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this, "ERROR GUARDAR "+ex, Toast.LENGTH_LONG ).show();
+        }
+
+
+    }
+
+    public void guardarEntrada_clicked(View view){
+        try
+        {
+            Cursor cursor=null;
+            u.crearEntrada(new Entrada(idProductoEncontrado, cantidadActualProductoEncontrado, Integer.parseInt(cantidadARegistrar.getText().toString())));
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this, "ERROR GUARDAR "+ex, Toast.LENGTH_LONG ).show();
+        }
+
+
     }
 
     public void buscarProducto_clicked(View view){
-        int id = Integer.parseInt( codigoABuscar.getText().toString() );
-        Cursor c = u.encontrarEntradaPorId(id, nombreProductoABuscar.getText().toString());
+        int codigo =0;
+        String nombre ="";
+        try
+        {
+            if(!codigoABuscar.getText().toString().equals(""))
+            {
+                codigo = Integer.parseInt( codigoABuscar.getText().toString() );
+            }
+            if(!nombreProductoABuscar.getText().toString().equals(""))
+            {
+                nombre = nombreProductoABuscar.getText().toString();
+            }
+            Cursor c = u.encontrarProductoPorId(codigo, nombre);
 
-        idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
-        nombreProducto.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
-        cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
-        descripcion.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
-        stockMin.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
-        stockMax.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));
+            idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
+            nombreProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
+            cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
+            cantidadProductoEncontrado.setText(cantidadActualProductoEncontrado+"");
+            marcaProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("marca")) );
+            unidadProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("unidad")) );
+            descripcionProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
+            stockMinimoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
+            stockMaximoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));
+
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this, "ERROR BUSCAR "+ex, Toast.LENGTH_LONG ).show();
+
+        }
+
     }
 
     public void buscarEntrada_clicked(View view){
-        int id = Integer.parseInt( codigoABuscar.getText().toString() );
-        Cursor c = u.encontrarEntradaPorId(id, nombreProductoABuscar.getText().toString());
+        try
+        {
+            int id = Integer.parseInt( codigoABuscar.getText().toString() );
+            Cursor c = u.encontrarEntradaPorId(id, nombreProductoABuscar.getText().toString());
 
-        idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
-        nombreProducto.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
-        cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
-        descripcion.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
-        stockMin.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
-        stockMax.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));
+            idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
+            nombreProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
+            cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
+            descripcionProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
+            stockMinimoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
+            stockMaximoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this, "ERROR BUSCAR "+ex, Toast.LENGTH_LONG ).show();
+        }
+
     }
     public void modificar_clicked(View view){
 
@@ -147,15 +207,14 @@ public class ENTRADAS extends AppCompatActivity {
     }
 
     public void limpiar_clicked(View view){
-        codigoABuscar.setText("");
-        nombreProductoABuscar.setText("");
+       limpiarCajas();
     }
 
 
     public void confirmacion(){
 
         AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-        dlgAlert.setMessage("Se ha modificado exitosamente!");
+        dlgAlert.setMessage("El Proceso de realizo correctamente exitosamente!");
         dlgAlert.setTitle("Agregar Entrada");
         dlgAlert.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
@@ -169,14 +228,14 @@ public class ENTRADAS extends AppCompatActivity {
 
     public void limpiarCajas()
     {
-        stockMax.setText("");
+        stockMaximoProductoEncontrado.setText("");
         cantidadARegistrar.setText("");
         codigoABuscar.setText("");
-        nombreProducto.setText("");
-        marca.setText("");
-        unidad.setText("");
-        descripcion.setText("");
-        stockMin.setText("");
+        nombreProductoEncontrado.setText("");
+        marcaProductoEncontrado.setText("");
+        unidadProductoEncontrado.setText("");
+        descripcionProductoEncontrado.setText("");
+        stockMinimoProductoEncontrado.setText("");
     }
 
 
