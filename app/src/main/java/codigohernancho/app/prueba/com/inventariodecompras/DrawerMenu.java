@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import codigohernancho.app.prueba.com.inventariodecompras.gui_entradas.ENTRADAS;
+
 public class DrawerMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

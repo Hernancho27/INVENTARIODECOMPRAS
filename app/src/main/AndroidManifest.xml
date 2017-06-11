@@ -22,7 +22,7 @@
         </intent-filter>
 
         <activity
-            android:name=".ENTRADAS"
+            android:name=".gui_entradas.ENTRADAS"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/Entradas2" />

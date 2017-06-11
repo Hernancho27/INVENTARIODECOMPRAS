@@ -1,4 +1,4 @@
-package codigohernancho.app.prueba.com.inventariodecompras;
+package codigohernancho.app.prueba.com.inventariodecompras.gui_entradas;
 
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.app.AlertDialog;
 
+import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
 import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
 
