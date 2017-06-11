@@ -1,17 +1,35 @@
 package objetos;
 
 public class Entrada {
+    int id;
+    int idProducto;
     int cantidadActual;
-    String nombreProducto;
-    int cantidadAdicionada;
-    int totalCantidad;
+    int cantidadAAdicionar;
+    int cantidadTotal;
 
     public Entrada(){}
 
-    public Entrada(String nom, int cantAdd)
+    public Entrada (int idProd, int cantAc, int cantA_Add)
     {
-        this.nombreProducto = nom;
-        this.cantidadAdicionada = cantAdd;
+        this.idProducto= idProd;
+        this.cantidadActual=cantAc;
+        this.cantidadAAdicionar=cantA_Add;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public int getCantidadActual() {
@@ -22,27 +40,19 @@ public class Entrada {
         this.cantidadActual = cantidadActual;
     }
 
-    public String getNombreProducto() {
-        return nombreProducto;
+    public int getCantidadAAdicionar() {
+        return cantidadAAdicionar;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setCantidadAAdicionar(int cantidadAAdicionar) {
+        this.cantidadAAdicionar = cantidadAAdicionar;
     }
 
-    public int getCantidadAdicionada() {
-        return cantidadAdicionada;
+    public int getCantidadTotal() {
+        return cantidadTotal;
     }
 
-    public void setCantidadAdicionada(int cantidadAdicionada) {
-        this.cantidadAdicionada = cantidadAdicionada;
-    }
-
-    public int getTotalCantidad() {
-        return totalCantidad;
-    }
-
-    public void setTotalCantidad(int cantidadAc, int cantidadAd) {
-        this.totalCantidad = cantidadAc + cantidadAd;
+    public void setCantidadTotal(int cantidadTotal) {
+        this.cantidadTotal = cantidadTotal;
     }
 }

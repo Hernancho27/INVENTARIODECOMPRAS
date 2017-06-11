@@ -1,9 +1,7 @@
 package codigohernancho.app.prueba.com.inventariodecompras;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 import baseDeDatos.EntradasSqliteHelper;
 import objetos.Entrada;
@@ -29,7 +28,8 @@ public class ENTRADAS extends AppCompatActivity {
     EditText stockMin;
     Button adicionar;
     EntradasSqliteHelper u;
-
+    int idProductoEncontrado;
+    int cantidadActualProductoEncontrado;
 
     public ENTRADAS()
     {
@@ -39,7 +39,7 @@ public class ENTRADAS extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entradas);
+        setContentView(R.layout.activity_registrar_entrada);
         u = new EntradasSqliteHelper(this);
 
         codigoABuscar = (EditText) findViewById(R.id.txtcodigoABuscar);
@@ -113,22 +113,57 @@ public class ENTRADAS extends AppCompatActivity {
 
     public void guardar_clicked(View view){
         Cursor cursor=null;
-        u.createProducto(new Entrada(nombreProductoABuscar.getText().toString(), Integer.parseInt(codigoABuscar.getText().toString())));
-
+        //u.createProducto(new Entrada(nombreProductoABuscar.getText().toString(), Integer.parseInt(codigoABuscar.getText().toString())));
+        u.crearEntrada(new Entrada(idProductoEncontrado, cantidadActualProductoEncontrado, Integer.parseInt(cantidadARegistrar.getText().toString())));
     }
 
-    public void modificar_clicked(View view){
+    public void buscarProducto_clicked(View view){
         int id = Integer.parseInt( codigoABuscar.getText().toString() );
-        Cursor c = u.entradabyid(id, nombreProductoABuscar.getText().toString());
+        Cursor c = u.encontrarEntradaPorId(id, nombreProductoABuscar.getText().toString());
 
-        codigoABuscar.setText(c.getString(c.getColumnIndexOrThrow("id")));
+        idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
         nombreProducto.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
-        cantidadARegistrar.setText(c.getString(c.getColumnIndexOrThrow("cantidad")));
+        cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
+        descripcion.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
+        stockMin.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
+        stockMax.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));
+    }
+
+    public void buscarEntrada_clicked(View view){
+        int id = Integer.parseInt( codigoABuscar.getText().toString() );
+        Cursor c = u.encontrarEntradaPorId(id, nombreProductoABuscar.getText().toString());
+
+        idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
+        nombreProducto.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
+        cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
+        descripcion.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
+        stockMin.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
+        stockMax.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));
+    }
+    public void modificar_clicked(View view){
+
+        finish();
     }
 
     public void limpiar_clicked(View view){
         codigoABuscar.setText("");
         nombreProductoABuscar.setText("");
+    }
+
+
+    public void confirmacion(){
+
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setMessage("Se ha modificado exitosamente!");
+        dlgAlert.setTitle("Agregar Entrada");
+        dlgAlert.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //dismiss the dialog
+                    }
+                });
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
     }
 
     public void limpiarCajas()
