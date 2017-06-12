@@ -4,25 +4,24 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class SCANNER extends AppCompatActivity implements ZXingScannerView.ResultHandler{
+public class ESCANEAR extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView escanerView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scanner);
-    }
-
-    public void Scanner(View view ){
+        setContentView(R.layout.activity_escanear);
         escanerView=new ZXingScannerView(this);
         setContentView(escanerView);
         escanerView.setResultHandler(this);
         escanerView.startCamera();
     }
+
 
     @Override
     protected void onPause() {
@@ -39,5 +38,6 @@ public class SCANNER extends AppCompatActivity implements ZXingScannerView.Resul
         alertDialog.show();
         escanerView.resumeCameraPreview(this);
     }
+
 
 }

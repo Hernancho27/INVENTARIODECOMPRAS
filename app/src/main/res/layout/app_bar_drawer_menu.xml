@@ -20,18 +20,24 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_drawer_menu"
-        android:id="@+id/include" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_drawer_menu"
+        tools:mockup="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="62dp"
+        android:layout_height="55dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-
+        android:background="@drawable/botonscanner"
+        android:onClick="Scanner"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="top|right"
+        tools:layout_editor_absoluteY="138dp"
+        tools:layout_editor_absoluteX="311dp"
+        tools:ignore="MissingConstraints" />
 
 
 </android.support.design.widget.CoordinatorLayout>
