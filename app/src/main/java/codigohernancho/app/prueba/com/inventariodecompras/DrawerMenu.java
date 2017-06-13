@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -28,6 +29,7 @@ public class DrawerMenu
         extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     Button leerCodigo;
+    EditText codNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class DrawerMenu
             }
                                 });
 
+        codNombre = (EditText) findViewById(R.id.codbarras);
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -59,8 +64,13 @@ public class DrawerMenu
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Intent intent=getIntent();//Traemos el codigo de la activity escanear.
+        Bundle extras=intent.getExtras();
 
-
+        if(extras!=null){//Validamos que el codigo no venga vacio.
+            String codigo=extras.getString("CODIGO");
+            codNombre.setText(codigo);
+        }
     }
 
 

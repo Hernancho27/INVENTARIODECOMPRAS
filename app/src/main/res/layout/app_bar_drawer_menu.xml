@@ -39,5 +39,14 @@
         tools:layout_editor_absoluteX="311dp"
         tools:ignore="MissingConstraints" />
 
+    <EditText
+        android:id="@+id/codbarras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:hint="Codigo nombre"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="top|left" />
+
 
 </android.support.design.widget.CoordinatorLayout>

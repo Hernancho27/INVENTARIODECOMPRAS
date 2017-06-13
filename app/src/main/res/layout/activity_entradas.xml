@@ -122,7 +122,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="203dp"
         android:layout_above="@+id/txtunidadProductoEncontrado"
-        android:layout_alignEnd="@+id/txtunidadProductoEncontrado" />
+        android:layout_alignEnd="@+id/txtnombreProductoEncontrado" />
 
     <EditText
         android:id="@+id/txtunidadProductoEncontrado"
