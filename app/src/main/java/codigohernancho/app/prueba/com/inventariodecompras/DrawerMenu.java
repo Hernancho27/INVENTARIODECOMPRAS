@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,14 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.zxing.Result;
-
-import me.dm7.barcodescanner.core.ViewFinderView;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.FragmentoProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
 
 
 public class DrawerMenu
         extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    public static final String EXTRA_PRODUCTO_ID = "extra_producto_id";
 
     Button leerCodigo;
     EditText codNombre;
@@ -71,6 +70,8 @@ public class DrawerMenu
             String codigo=extras.getString("CODIGO");
             codNombre.setText(codigo);
         }
+
+
     }
 
 
@@ -136,11 +137,8 @@ public class DrawerMenu
                 startActivity(intent1);
 
         } else if (id == R.id.configuracion) {
-                Context context = getApplicationContext();
-                CharSequence text = "Opción Configuracion no Configurada";
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                Intent intent1 = new Intent(DrawerMenu.this, ActividadProductos.class);
+                startActivity(intent1);
 
         } else if (id == R.id.usuarios) {
                 Context context = getApplicationContext();
