@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="codigohernancho.app.prueba.com.inventariodecompras.gui_entradas.listadoEntradas"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp"
+    android:baselineAligned="false"
+    android:weightSum="1">
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/lvlitems"
+        android:layout_below="@+id/id_txt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/id_txt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="10dp"
+        android:text="Id" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Apellido"
+        android:id="@+id/apellido_txt"
+        android:layout_alignBottom="@+id/id_txt"
+        android:layout_toRightOf="@+id/id_txt"
+        android:layout_toEndOf="@+id/id_txt"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Nombre"
+        android:id="@+id/nombre_txt"
+        android:layout_alignTop="@+id/apellido_txt"
+        android:layout_toRightOf="@+id/apellido_txt"
+        android:layout_toEndOf="@+id/apellido_txt"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp" />
+
+
+
+
+</RelativeLayout>

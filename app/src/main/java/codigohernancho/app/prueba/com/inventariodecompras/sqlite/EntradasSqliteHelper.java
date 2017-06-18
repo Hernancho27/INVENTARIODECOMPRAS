@@ -185,6 +185,20 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
     }
 
+
+    public Cursor listarEntradas()
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        //String query = ("SELECT * FROM registrarEntradas WHERE 1 ORDER BY idProducto;");
+        String query = ("SELECT * FROM Productos WHERE 1 ORDER BY id;");
+        Cursor c = db.rawQuery(query, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
     public void eliminarEntrada()
     {
 

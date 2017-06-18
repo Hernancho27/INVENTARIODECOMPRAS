@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.app.AlertDialog;
+import android.widget.ListView;
+import android.content.Intent;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
@@ -120,6 +122,7 @@ public class ENTRADAS extends AppCompatActivity {
     }
 
 
+
     public void guardarProducto_clicked(View view){
         try
         {
@@ -194,6 +197,21 @@ public class ENTRADAS extends AppCompatActivity {
             descripcionProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
             stockMinimoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
             stockMaximoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this, "ERROR BUSCAR "+ex, Toast.LENGTH_LONG ).show();
+        }
+
+    }
+
+
+    public void listar_clicked(View view)
+    {
+        try
+        {
+            Intent i = new Intent(this, listadoEntradas.class);
+            startActivity(i);
         }
         catch (Exception ex)
         {
