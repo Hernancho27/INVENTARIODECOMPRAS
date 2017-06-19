@@ -37,6 +37,10 @@
             android:name=".gui.detalle_producto.ActividadDetalleProducto"
             android:label="@string/title_activity_lawyer_detail"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".gui.agregar_editar_producto.ActividadAgregarEditar"
+            android:label="@string/title_activity_add_edit"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".ENTRADAS"
