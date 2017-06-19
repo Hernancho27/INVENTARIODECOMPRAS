@@ -25,11 +25,6 @@ public class listadoEntradas extends AppCompatActivity {
         u = new EntradasSqliteHelper(this);
         cargarDatos();
     }
-    public void listar_clicked(View view)
-    {
-        Intent i = new Intent(this, listadoEntradas.class);
-        startActivity(i);
-    }
 
     public void cargarDatos()
     {

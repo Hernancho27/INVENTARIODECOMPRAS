@@ -28,18 +28,22 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         /*ESTE METODO SE EJECUTA AUTOMATICAMENTE SI LA BASE DE DATOS NO EXISTE */
-        db.execSQL("CREATE TABLE registrarEntradas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER, cantidadTotalAnterior INTEGER, cantidadTotalActual INTEGER, fechaRegistro DATETIME)");
-        db.execSQL("CREATE TABLE Productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto VARCHAR(20), marca VARCHAR(20), unidad VARCHAR(20), descripcion VARCHAR(100), stock_minimo INTEGER, stock_maximo INTEGER, cantidad INTEGER);");
+        /*db.execSQL("CREATE TABLE registrarEntradas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER, cantidadTotalAnterior INTEGER, cantidadTotalActual INTEGER, fechaRegistro DATETIME)");
+        * db.execSQL("CREATE TABLE Productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto VARCHAR(20), marca VARCHAR(20), unidad VARCHAR(20), descripcion VARCHAR(100), stock_minimo INTEGER, stock_maximo INTEGER, cantidad INTEGER);");*/
+        db.execSQL("CREATE TABLE Entradas (entrada_id INTEGER PRIMARY KEY AUTOINCREMENT, producto_id INTEGER, cantidad_entrada INTEGER, fecha DATETIME, estado INTEGER, FOREIGN KEY(producto_id) REFERENCES Productos(producto_id));");
+        db.execSQL("CREATE TABLE Productos (producto_id INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(20), descripcion VARCHAR(100), fecha_creacion DATETIME, cantidad INTEGER, estado INTEGER);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         /**ESTE METODO ACTUALIZA LA VERSION DE LA BASE DE DATOS ... ENTONCES QUEDA POR DEFINIR SI SE CONSTRUYE DE
          * NUEVO LA TABLA Y SE REALIZA UN BACKUP DE LOS DATOS O SI DEFINITIVAMENTE SE ELIMINA Y SE CREA NUEVAMENTE*/
-        db.execSQL("DROP TABLE IF EXISTS registrarEntradas");
+        db.execSQL("DROP TABLE IF EXISTS Entradas");
         db.execSQL("DROP TABLE IF EXISTS Productos");
-        db.execSQL("CREATE TABLE registrarEntradas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER, cantidadTotalAnterior INTEGER, cantidadTotalActual INTEGER, fechaRegistro DATETIME);");
-        db.execSQL("CREATE TABLE Productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto VARCHAR(20), marca VARCHAR(20), unidad VARCHAR(20), descripcion VARCHAR(100), stock_minimo INTEGER, stock_maximo INTEGER, cantidad INTEGER);");
+        /*db.execSQL("CREATE TABLE registrarEntradas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER, cantidadTotalAnterior INTEGER, cantidadTotalActual INTEGER, fechaRegistro DATETIME);");
+        db.execSQL("CREATE TABLE Productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto VARCHAR(20), marca VARCHAR(20), unidad VARCHAR(20), descripcion VARCHAR(100), stock_minimo INTEGER, stock_maximo INTEGER, cantidad INTEGER);");*/
+        db.execSQL("CREATE TABLE Entradas (entrada_id INTEGER PRIMARY KEY AUTOINCREMENT, producto_id INTEGER, cantidad_entrada INTEGER, fecha DATETIME, estado INTEGER, FOREIGN KEY(producto_id) REFERENCES Productos(producto_id));");
+        db.execSQL("CREATE TABLE Productos (producto_id INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(20), descripcion VARCHAR(100), fecha_creacion DATETIME, cantidad INTEGER, estado INTEGER);");
         onCreate(db);
     }
 
@@ -49,19 +53,31 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         try
         {
 
+            Date fechaActual = new Date();
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values2 = new ContentValues();
+            values2.put("nombre", "Cafe");
+            values2.put("descripcion", "cafe importado");
+            values2.put("fecha_creacion", formato.format(fechaActual));
+            values2.put("cantidad", 0);
+            values2.put("estado", 1);
+
+
+            ContentValues values1 = new ContentValues();
+            values1.put("nombre", "jabon liquido");
+            values1.put("descripcion", "Salvo");
+            values1.put("fecha_creacion", formato.format(fechaActual));
+            values1.put("cantidad", 0);
+            values1.put("estado", 1);
+
             ContentValues values = new ContentValues();
-            values.put("nombreProducto", "Cafe");
-            values.put("marca", "Nescafe");
-            values.put("unidad", "Libra");
-            values.put("descripcion", "cafe importado");
-            values.put("stock_minimo", 1);
-            values.put("stock_maximo", 5);
+            values.put("nombre", "Detergente");
+            values.put("descripcion", "Ariel");
+            values.put("fecha_creacion", formato.format(fechaActual));
             values.put("cantidad", 0);
-
-
-
-
+            values.put("estado", 1);
+            /*
             ContentValues values1 = new ContentValues();
             values1.put("nombreProducto", "Detergente");
             values1.put("marca", "Ariel");
@@ -80,7 +96,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
             values2.put("descripcion", "lavaloza");
             values2.put("stock_minimo", 1);
             values2.put("stock_maximo", 4);
-            values2.put("cantidad", 0);
+            values2.put("cantidad", 0);*/
 
 
             db.insert("Productos", null, values);
@@ -105,11 +121,11 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues valoresDeRegistro = new ContentValues();
-            valoresDeRegistro.put("idProducto", e.getIdProducto());
-            valoresDeRegistro.put("cantidadTotalAnterior", e.getCantidadActual());
-            valoresDeRegistro.put("cantidadTotalActual", totalEntrada);
-            valoresDeRegistro.put("fechaRegistro", formato.format(fechaActual));
-            db.insert("registrarEntradas", null, valoresDeRegistro);
+            valoresDeRegistro.put("producto_id", e.getIdProducto());
+            valoresDeRegistro.put("cantidad_entrada", totalEntrada);
+            valoresDeRegistro.put("fecha", formato.format(fechaActual));
+            valoresDeRegistro.put("estado", 1);
+            db.insert("Entradas", null, valoresDeRegistro);
             db.close();
         }
         catch (SQLiteException ex)
@@ -124,12 +140,12 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         String query = "SELECT * FROM Productos WHERE (1=1)";
             if (idEntrada > 0)
             {
-                query += " AND (id = " + idEntrada + ") ";
+                query += " AND (entrada_id = " + idEntrada + ") ";
             }
 
             if (!nombre.equals(""))
             {
-                query += "AND (nombreProducto LIKE '%"+nombre + "%') ";
+                query += "AND (nombre LIKE '%"+nombre + "%') ";
             }
         query += ";";
         Cursor c = db.rawQuery(query, null);
@@ -144,16 +160,16 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
     public Cursor encontrarEntradaPorId(int idProducto, String codigoProducto){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM registrarEntradas WHERE (1=1)";
+        String query = "SELECT * FROM Entradas WHERE (1=1)";
         if (idProducto > 0)
         {
-            query += " AND (id = " + idProducto + ") ";
+            query += " AND (producto_id = " + idProducto + ") ";
         }
-
+        /*
         if (!codigoProducto.equals(""))
         {
-            query += "AND (idProducto LIKE '%"+codigoProducto + "%') ";
-        }
+            query += "AND (producto_id LIKE '%"+codigoProducto + "%') ";
+        }*/
         query += ";";
         Cursor c = db.rawQuery(query, null);
 
@@ -174,12 +190,12 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         int totalEntrada = e.getCantidadActual() + e.getCantidadAAdicionar();
 
         ContentValues valores = new ContentValues();
-        valores.put("idProducto", e.getIdProducto());
-        valores.put("cantidadTotalAnterior", e.getCantidadActual());
-        valores.put("cantidadTotalActual", totalEntrada);
-        valores.put("fechaRegistro", formato.format(fechaActual));
+        valores.put("producto_id", e.getIdProducto());
+        valores.put("cantidad_entrada", e.getCantidadActual());
+        valores.put("fecha", formato.format(fechaActual));
+        valores.put("estado", 1);
         SQLiteDatabase db = getWritableDatabase();
-        db.update("registrarEntradas", valores, "id" + "= ?", new String[] { String.valueOf(e.getId())});
+        db.update("Entradas", valores, "entrada_id" + "= ?", new String[] { String.valueOf(e.getId())});
         db.close();
 
 
@@ -190,7 +206,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
     {
         SQLiteDatabase db = getReadableDatabase();
         //String query = ("SELECT * FROM registrarEntradas WHERE 1 ORDER BY idProducto;");
-        String query = ("SELECT * FROM Productos WHERE 1 ORDER BY id;");
+        String query = ("SELECT * FROM Productos WHERE 1 ORDER BY producto_id;");
         Cursor c = db.rawQuery(query, null);
 
         if (c != null) {

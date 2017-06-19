@@ -182,10 +182,8 @@
         android:layout_height="wrap_content"
         android:text="Buscar"
         android:onClick="buscarProducto_clicked"
-        android:layout_marginTop="12dp"
         android:layout_below="@+id/txtnombreProductoABuscar"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="45dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btnLimpiar"
@@ -193,9 +191,8 @@
         android:layout_height="wrap_content"
         android:onClick="limpiar_clicked"
         android:text="Borrar"
-        android:layout_alignBaseline="@+id/btnBuscar"
-        android:layout_alignBottom="@+id/btnBuscar"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/txtnombreProductoABuscar"
+        android:layout_toEndOf="@+id/btnBuscar" />
 
     <TextView
         android:id="@+id/textView"
@@ -222,11 +219,21 @@
         android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/txtCantidadAAdicionar"
-        android:layout_alignEnd="@+id/txtCantidadAAdicionar"
-        android:layout_marginEnd="17dp"
         android:onClick="guardarProducto_clicked"
-        android:text="Adicionar" />
+        android:text="Adicionar"
+        android:layout_below="@+id/txtnombreProductoABuscar"
+        android:layout_toEndOf="@+id/btnLimpiar" />
 
+    <Button
+        android:id="@+id/btnListado"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnRegistrar"
+        android:layout_alignBottom="@+id/btnRegistrar"
+        android:layout_alignParentEnd="true"
+        android:layout_column="1"
+        android:layout_row="0"
+        android:onClick="listar_clicked"
+        android:text="Listado" />
 
 </RelativeLayout>

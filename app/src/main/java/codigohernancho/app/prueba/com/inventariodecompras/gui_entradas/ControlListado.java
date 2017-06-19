@@ -13,12 +13,15 @@ import codigohernancho.app.prueba.com.inventariodecompras.R;
 public class ControlListado extends CursorAdapter
 {
 
-public ControlListado (Context context, Cursor cursor)
+    public ControlListado (Context context, Cursor cursor)
 {
     super(context, cursor, 0);
 }
     @Override
+
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
+
+        final LayoutInflater inflater = LayoutInflater.from(context);
         return LayoutInflater.from(context).inflate(R.layout.activity_listado_entrada, parent, false);
     }
 
@@ -32,9 +35,9 @@ public ControlListado (Context context, Cursor cursor)
 
 
 
-        int txtid = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
-        String txtapellido = cursor.getString(cursor.getColumnIndexOrThrow("nombreProducto"));
-        String txtnombre = cursor.getString(cursor.getColumnIndexOrThrow("marca"));
+        int txtid = cursor.getInt(1);
+        String txtapellido = cursor.getString(2);
+        String txtnombre = cursor.getString(3);
 
         idtxt.setText(String.valueOf(txtid));
         apellidotxt.setText(txtapellido);
