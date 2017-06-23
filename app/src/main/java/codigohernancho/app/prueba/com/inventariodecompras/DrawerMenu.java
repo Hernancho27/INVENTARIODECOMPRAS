@@ -2,7 +2,10 @@ package codigohernancho.app.prueba.com.inventariodecompras;
 
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.database.Cursor;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -10,30 +13,63 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.FragmentoProductos;
+
+import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DBHelper;
+import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
 
 
 public class DrawerMenu
-        extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+        extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    private DataBaseManager manager;
+    private Cursor cursor;
+    private ListView lista;
+    private SimpleCursorAdapter adapter;
+    private TextView tv;
+    private Button bt;
 
     public static final String EXTRA_PRODUCTO_ID = "extra_producto_id";
 
     Button leerCodigo;
     EditText codNombre;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_menu);
+
+        DBHelper helper = new DBHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        manager = new DataBaseManager(this);
+        lista = (ListView) findViewById(R.id.ListView);
+        tv= (TextView) findViewById(R.id.codbarras);
+        bt= (Button) findViewById(R.id.button1);
+
+        bt.setOnClickListener(this);
+                /*ejemplos*/
+        manager.insertar("1236547","Arroz","Arroz Diana");;
+        manager.insertar("789654","Maiz","Maiz tierno en arina");
+        manager.insertar("456987","Azucar","Azucar Morena");
+
+        String[] from = new String[]{manager.CN_NAME,manager.CN_CODIGO,manager.CN_DESCRIPCION};
+        int [] to = new int[] {android.R.id.text1,android.R.id.text2};
+
+        cursor = manager.cargarCursorContactos();
+        adapter = new SimpleCursorAdapter(this,android.R.layout.two_line_list_item,cursor,from,to);
+        lista.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,7 +88,6 @@ public class DrawerMenu
                                 });
 
         codNombre = (EditText) findViewById(R.id.codbarras);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -153,6 +188,16 @@ public class DrawerMenu
         return true;
     }
 
+
+    @Override
+    public void onClick(View view) {
+
+        if (view.getId() == R.id.button1){
+            Cursor c =manager.buscarContacto(tv.getText().toString());
+            adapter.changeCursor(c);
+            //new BuscarTask().execute();
+
+    }}
 
 
 

@@ -26,27 +26,68 @@
         layout="@layout/content_drawer_menu"
         tools:mockup="@color/colorAccent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="62dp"
-        android:layout_height="55dp"
-        android:layout_gravity="bottom|end"
-        android:background="@drawable/botonscanner"
-        android:onClick="Scanner"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="top|right"
-        tools:layout_editor_absoluteY="138dp"
-        tools:layout_editor_absoluteX="311dp"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@android:dimen/app_icon_size"
+        android:layout_weight="1"
+        android:elevation="0dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/codbarras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:hint="Codigo nombre"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="top|left" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:elevation="0dp">
+
+            <EditText
+                android:id="@+id/codbarras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_weight="1"
+                android:hint="Codigo nombre"
+                app:layout_anchor="@+id/include"
+                app:layout_anchorGravity="top|left" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="60dp"
+                android:layout_height="55dp"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/ic_buscar"
+                android:onClick="Buscar"
+                app:layout_anchor="@+id/include"
+                app:layout_anchorGravity="top|right"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="311dp"
+                tools:layout_editor_absoluteY="138dp"
+                android:layout_weight="0.01" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="60dp"
+                android:layout_height="55dp"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/botonscanner"
+                android:onClick="Scanner"
+                app:layout_anchor="@+id/include"
+                app:layout_anchorGravity="top|right"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="311dp"
+                tools:layout_editor_absoluteY="138dp"
+                android:layout_weight="0.01" />
+
+
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/ListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
