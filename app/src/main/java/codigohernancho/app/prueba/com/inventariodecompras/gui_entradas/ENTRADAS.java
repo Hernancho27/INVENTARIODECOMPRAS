@@ -210,7 +210,7 @@ public class ENTRADAS extends AppCompatActivity {
     {
         try
         {
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, listadoEntradas.class);
             startActivity(i);
         }
         catch (Exception ex)

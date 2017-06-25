@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import codigohernancho.app.prueba.com.inventariodecompras.gui_entradas.ENTRADAS;
+import codigohernancho.app.prueba.com.inventariodecompras.gui_entradas.listadoEntradas;
 
 public class DrawerMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -91,7 +92,7 @@ public class DrawerMenu extends AppCompatActivity
             // Handle the camera action
         } else
             if (id == R.id.entradas) {
-                Intent intent1 = new Intent(DrawerMenu.this,ENTRADAS.class);
+                Intent intent1 = new Intent(DrawerMenu.this,listadoEntradas.class);
                 startActivity(intent1);
 
         } else if (id == R.id.salidas) {

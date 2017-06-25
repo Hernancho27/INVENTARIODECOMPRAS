@@ -22,7 +22,7 @@ public class ControlListado extends CursorAdapter
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
 
         final LayoutInflater inflater = LayoutInflater.from(context);
-        return LayoutInflater.from(context).inflate(R.layout.activity_main, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.activity_listado_entrada, parent, false);
     }
 
 

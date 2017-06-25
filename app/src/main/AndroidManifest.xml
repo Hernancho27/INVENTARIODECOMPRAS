@@ -22,12 +22,17 @@
         </intent-filter>
 
         <!--Adicionado por balmes-->
-        <activity
+        <!--<activity
             android:name=".gui_entradas.ENTRADAS"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/Entradas2" />
+            android:label="@string/Entradas2" />-->
 
+        <activity
+            android:name=".gui_entradas.listadoEntradas"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/Entradas" />
 
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
