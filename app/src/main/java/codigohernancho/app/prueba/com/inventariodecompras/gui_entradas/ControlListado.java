@@ -22,7 +22,7 @@ public class ControlListado extends CursorAdapter
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
 
         final LayoutInflater inflater = LayoutInflater.from(context);
-        return LayoutInflater.from(context).inflate(R.layout.activity_listado_entrada, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.activity_main, parent, false);
     }
 
 
@@ -30,18 +30,18 @@ public class ControlListado extends CursorAdapter
     public void bindView(View view, Context context, Cursor cursor) {
 
         TextView idtxt = (TextView) view.findViewById(R.id.id_txt);
-        TextView apellidotxt = (TextView) view.findViewById(R.id.apellido_txt);
         TextView nombretxt = (TextView) view.findViewById(R.id.nombre_txt);
+        TextView cantidadtxt = (TextView) view.findViewById(R.id.cantidad_txt);
 
 
 
-        int txtid = cursor.getInt(1);
-        String txtapellido = cursor.getString(2);
-        String txtnombre = cursor.getString(3);
+        int txtid = cursor.getInt(0);
+        String txtnombre = cursor.getString(1);
+        int txtcantidad = cursor.getInt(2);
 
         idtxt.setText(String.valueOf(txtid));
-        apellidotxt.setText(txtapellido);
         nombretxt.setText(txtnombre);
+        cantidadtxt.setText(String.valueOf(txtcantidad));
 
     }
 }

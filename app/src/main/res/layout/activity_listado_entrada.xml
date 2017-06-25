@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -38,7 +37,7 @@
         android:layout_height="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Apellido"
-        android:id="@+id/apellido_txt"
+        android:id="@+id/cantidad_txt"
         android:layout_alignBottom="@+id/id_txt"
         android:layout_toRightOf="@+id/id_txt"
         android:layout_toEndOf="@+id/id_txt"
@@ -51,9 +50,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Nombre"
         android:id="@+id/nombre_txt"
-        android:layout_alignTop="@+id/apellido_txt"
-        android:layout_toRightOf="@+id/apellido_txt"
-        android:layout_toEndOf="@+id/apellido_txt"
+        android:layout_alignTop="@+id/cantidad_txt"
+        android:layout_toRightOf="@+id/cantidad_txt"
+        android:layout_toEndOf="@+id/cantidad_txt"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp" />
 

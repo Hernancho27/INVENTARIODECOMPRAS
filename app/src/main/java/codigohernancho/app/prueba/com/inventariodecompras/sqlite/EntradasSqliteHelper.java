@@ -206,7 +206,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
     {
         SQLiteDatabase db = getReadableDatabase();
         //String query = ("SELECT * FROM registrarEntradas WHERE 1 ORDER BY idProducto;");
-        String query = ("SELECT * FROM Productos WHERE 1 ORDER BY producto_id;");
+        String query = ("SELECT e.entrada_id as _id, p.nombre, e.cantidad_entrada FROM Productos as p INNER JOIN Entradas as e ON e.producto_id = p.producto_id WHERE 1 ORDER BY e.producto_id;");
         Cursor c = db.rawQuery(query, null);
 
         if (c != null) {
