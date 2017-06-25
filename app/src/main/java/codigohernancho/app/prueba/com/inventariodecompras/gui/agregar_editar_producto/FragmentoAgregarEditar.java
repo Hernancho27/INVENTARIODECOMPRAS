@@ -1,6 +1,7 @@
 package codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class FragmentoAgregarEditar extends Fragment {
     private OperacionesBaseDatos mOperacionesBaseDatos;
 
     private FloatingActionButton mSaveButton;
+    private FloatingActionButton mAddImgButton;
     private TextInputEditText mNombreField;
     private TextInputEditText mCantidadField;
     private TextInputEditText mDescripcionField;
@@ -68,6 +70,7 @@ public class FragmentoAgregarEditar extends Fragment {
 
         // Referencias UI
         mSaveButton = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        mAddImgButton = (FloatingActionButton) getActivity().findViewById(R.id.fabimg);
         mNombreField = (TextInputEditText) root.findViewById(R.id.et_nombre);
         mCantidadField = (TextInputEditText) root.findViewById(R.id.et_cantidad);
         mDescripcionField = (TextInputEditText) root.findViewById(R.id.et_descripcion);
@@ -80,6 +83,12 @@ public class FragmentoAgregarEditar extends Fragment {
             @Override
             public void onClick(View view) {
                 addEditProducto();
+            }
+        });
+        mAddImgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowScreenEditImgProducto();
             }
         });
 
@@ -95,6 +104,11 @@ public class FragmentoAgregarEditar extends Fragment {
 
     private void loadProducto() {
         new GetProductoByIdTask().execute();
+    }
+
+    private void ShowScreenEditImgProducto(){
+        Intent intent = new Intent(getActivity(), ActividadAgregarImagen.class);
+        startActivityForResult(intent, ActividadAgregarImagen.RESULT_OK);
     }
 
     private void addEditProducto() {
