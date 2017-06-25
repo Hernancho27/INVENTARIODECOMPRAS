@@ -1,7 +1,7 @@
 package codigohernancho.app.prueba.com.inventariodecompras.modelo;
 
 public class Entrada {
-    int id;
+    long id;
     int idProducto;
     int cantidadActual;
     int cantidadAAdicionar;
@@ -16,11 +16,11 @@ public class Entrada {
         this.cantidadAAdicionar=cantA_Add;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

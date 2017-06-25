@@ -27,7 +27,8 @@
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/Entradas2" />-->
-
+        <activity android:name=".gui_entradas.verEntrada"
+            android:allowBackup="true"/>
         <activity
             android:name=".gui_entradas.listadoEntradas"
             android:allowBackup="true"

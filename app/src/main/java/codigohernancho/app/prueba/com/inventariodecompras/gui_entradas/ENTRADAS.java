@@ -188,7 +188,8 @@ public class ENTRADAS extends AppCompatActivity {
         try
         {
             int id = Integer.parseInt( codigoABuscar.getText().toString() );
-            Cursor c = u.encontrarEntradaPorId(id, nombreProductoABuscar.getText().toString());
+            Entrada e= new Entrada();
+            Cursor c = u.encontrarEntradaPorId(e);
 
             idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
             nombreProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));

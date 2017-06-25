@@ -2,10 +2,7 @@ package codigohernancho.app.prueba.com.inventariodecompras.gui_entradas;
 
 
 import android.database.Cursor;
-import android.database.CursorJoiner;
-import android.database.CursorJoiner.Result;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +11,6 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.gui_entradas.VerEntrada;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
 
 public class listadoEntradas extends AppCompatActivity {
@@ -44,21 +40,19 @@ public class listadoEntradas extends AppCompatActivity {
             Toast.makeText(this, "ERROR LISTADO "+ex, Toast.LENGTH_LONG ).show();
         }
 
-        try
-        {
+
             lvlitems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(listadoEntradas.this, VerEntrada.class);
-                    intent.putExtra("id",id);
+                    Intent intent = new Intent(listadoEntradas.this, verEntrada.class);
+                    //intent.putExtra("entrada_id",id);
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("entrada_id", id);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             });
-        }
-        catch (Exception ex)
-        {
-            Toast.makeText(this, "ERROR ENVIAR ID "+ex, Toast.LENGTH_LONG ).show();
-        }
+
 
     }
 

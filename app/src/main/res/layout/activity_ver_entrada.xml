@@ -6,7 +6,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="codigohernancho.app.prueba.com.inventariodecompras.gui_entradas.verEntrada">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -37,15 +38,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context="codigohernancho.app.prueba.com.inventariodecompras.CREAR">
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Space
+                <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textView4"
@@ -56,33 +64,58 @@
                     android:textAlignment="center"
                     android:textColor="@android:color/background_light"
                     android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:text="Nombre"
+                    android:textSize="24sp" />
+
                 <EditText
                     android:id="@+id/txt_nombre_producto"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/textView10"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:textSize="24sp" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="198dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Cantidad"
+                    android:textSize="24sp" />
 
                 <EditText
                     android:id="@+id/txt_cantidad_producto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="180dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:textAlignment="textEnd"
+                    android:textSize="24sp" />
             </RelativeLayout>
 
         </LinearLayout>

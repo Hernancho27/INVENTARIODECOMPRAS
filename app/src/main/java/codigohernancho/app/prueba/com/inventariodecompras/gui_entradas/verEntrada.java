@@ -12,7 +12,7 @@ import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
 
-public class VerEntrada extends AppCompatActivity {
+public class verEntrada extends AppCompatActivity {
     EditText nombre_producto;
     EditText cantidad_producto;
     EntradasSqliteHelper u;
@@ -28,21 +28,17 @@ public class VerEntrada extends AppCompatActivity {
 
         nombre_producto = (EditText) findViewById(R.id.txt_nombre_producto);
         cantidad_producto = (EditText) findViewById(R.id.txt_cantidad_producto);
-
         try {
-            Entrada unaEntrada = new Entrada();
-
-            Intent i = getIntent(); // gets the previously created intent
-            String stringid = i.getExtras().getString("id");
-
-            int id = Integer.parseInt(stringid);
-            Cursor c = u.encontrarEntradaPorId(id, "");
+            Entrada e = new Entrada();
+            Long id = getIntent().getExtras().getLong("entrada_id");
+            e.setId(id.longValue());
+            Cursor c = u.encontrarEntradaPorId(e);
             nombre_producto.setText(c.getString(c.getColumnIndexOrThrow("nombre")));
             cantidad_producto.setText(c.getString(c.getColumnIndexOrThrow("cantidad")));
         }
         catch (Exception ex)
         {
-            Toast.makeText(this, "ERROR MOSTRAR ID "+ex, Toast.LENGTH_LONG ).show();
+            Toast.makeText(this, "ERROR LISTADO "+ex, Toast.LENGTH_LONG ).show();
         }
 
 

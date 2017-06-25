@@ -155,26 +155,30 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
     }
 
 
-    public Cursor encontrarEntradaPorId(int idProducto, String codigoProducto){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM Entradas WHERE (1=1)";
-        if (idProducto > 0)
+    public Cursor encontrarEntradaPorId(Entrada e){
+        try
         {
-            query += " AND (producto_id = " + idProducto + ") ";
+            SQLiteDatabase db = getWritableDatabase();
+            String query = "SELECT e.entrada_id as _id, p.nombre as nombre, e.cantidad_entrada as cantidad FROM Productos as p INNER JOIN Entradas as e ON e.producto_id = p.producto_id WHERE (1=1)";
+            if (e.getId() > 0)
+            {
+                query += " AND (e.entrada_id = " + e.getId() + ") ";
+            }
+            query += ";";
+            Cursor c = db.rawQuery(query, null);
+
+            if (c != null) {
+                c.moveToFirst();
+            }
+
+            return c;
+
         }
-        /*
-        if (!codigoProducto.equals(""))
+        catch (Exception ex)
         {
-            query += "AND (producto_id LIKE '%"+codigoProducto + "%') ";
-        }*/
-        query += ";";
-        Cursor c = db.rawQuery(query, null);
 
-        if (c != null) {
-            c.moveToFirst();
         }
-
-        return c;
+        return null;
     }
 
 
