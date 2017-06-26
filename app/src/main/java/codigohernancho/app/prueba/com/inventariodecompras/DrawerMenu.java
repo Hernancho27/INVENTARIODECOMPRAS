@@ -60,7 +60,7 @@ public class DrawerMenu
 
         bt.setOnClickListener(this);
                 /*ejemplos*/
-        manager.insertar("1236547","Arroz","Arroz Diana");;
+        manager.insertar("1236547","Arroz","Arroz Diana");
         manager.insertar("789654","Maiz","Maiz tierno en arina");
         manager.insertar("456987","Azucar","Azucar Morena");
 
