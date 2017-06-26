@@ -21,7 +21,7 @@
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
 
-        <!--Adicionado por balmes-->
+        <!--ADICIONADO por balmes-->
         <!--<activity
             android:name=".gui_entradas.registrarEntrada"
             android:allowBackup="true"
@@ -29,14 +29,17 @@
             android:label="@string/Entradas2" />-->
         <activity android:name=".gui_entradas.modificarEntrada"
             android:allowBackup="true"/>
+
         <activity android:name=".gui_entradas.registrarEntrada"
             android:allowBackup="true"/>
+        <activity android:name=".gui_entradas.listadoEntrada"
+            android:allowBackup="true"/>
         <activity
-            android:name=".gui_entradas.listadoEntrada"
+            android:name=".gui_entradas.inicioEntradas"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/Entradas" />
-
+        <!--FIN ADICIONES-->
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
