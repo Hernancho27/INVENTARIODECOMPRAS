@@ -17,7 +17,7 @@ import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
 
-public class ENTRADAS extends AppCompatActivity {
+public class registrarEntrada extends AppCompatActivity {
 
     EditText codigoABuscar;
     EditText nombreProductoABuscar;
@@ -37,7 +37,7 @@ public class ENTRADAS extends AppCompatActivity {
     int cantidadActualProductoEncontrado;
 
 
-    public ENTRADAS()
+    public registrarEntrada()
     {
 //        createProducto();
     }
@@ -130,7 +130,7 @@ public class ENTRADAS extends AppCompatActivity {
         {
             Cursor cursor=null;
             u.crearEntrada(new Entrada(idProductoEncontrado, cantidadActualProductoEncontrado, Integer.parseInt(cantidadARegistrar.getText().toString())));
-            Intent intent = new Intent(ENTRADAS.this, listadoEntradas.class);
+            Intent intent = new Intent(registrarEntrada.this, listadoEntrada.class);
             startActivity(intent);
         }
         catch (Exception ex)
@@ -183,10 +183,7 @@ public class ENTRADAS extends AppCompatActivity {
 
 
 
-    public void modificar_clicked(View view){
 
-        finish();
-    }
 
     public void limpiar_clicked(View view){
        limpiarCajas();

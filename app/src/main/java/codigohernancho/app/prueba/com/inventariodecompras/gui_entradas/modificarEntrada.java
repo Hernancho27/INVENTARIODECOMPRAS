@@ -4,41 +4,45 @@ package codigohernancho.app.prueba.com.inventariodecompras.gui_entradas;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
 
-public class verEntrada extends AppCompatActivity {
+public class modificarEntrada extends AppCompatActivity {
     EditText nombre_producto;
     EditText cantidad_producto;
     EntradasSqliteHelper u;
+    int IdProducto;
+    long IdEntrada;
+    String mensaje;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         //Aqui se hace el retrieve de la base de datos tomando un valor que viene en el intent anterior
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_entrada);
+        setContentView(R.layout.activity_modificar_entrada);
         u = new EntradasSqliteHelper(this);
 
 
         nombre_producto = (EditText) findViewById(R.id.txt_nombre_producto);
         cantidad_producto = (EditText) findViewById(R.id.txt_cantidad_producto);
-
         nombre_producto.setEnabled(false);
-        cantidad_producto.setEnabled(false);
+
         try {
             Entrada e = new Entrada();
             Long id = getIntent().getExtras().getLong("entrada_id");
             e.setId(id.longValue());
             Cursor c = u.encontrarEntradaPorId(e);
+            IdProducto = c.getInt(c.getColumnIndexOrThrow("producto_id"));
+            IdEntrada = id.longValue();
             nombre_producto.setText(c.getString(c.getColumnIndexOrThrow("nombre")));
             cantidad_producto.setText(c.getString(c.getColumnIndexOrThrow("cantidad")));
         }
@@ -53,8 +57,24 @@ public class verEntrada extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(verEntrada.this, ENTRADAS.class);
-                startActivity(intent);
+                Intent intent = new Intent(modificarEntrada.this, listadoEntrada.class);
+
+                try
+                {
+                    Entrada e = new Entrada();
+                    e.setCantidadAAdicionar(Integer.parseInt(cantidad_producto.getText().toString()));
+                    e.setIdProducto(IdProducto);
+                    e.setId(IdEntrada);
+                    if (u.modificarEntrada(e))
+                    {
+                        startActivity(intent);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Toast.makeText(modificarEntrada.this, "Se ha producido un ERROR: \n Se deben ingresar valores numericos \n No se logrò modificar el registro", Toast.LENGTH_LONG ).show();
+                    //Toast.makeText(modificarEntrada.this, "Se ha producido un error al mdificar el registro", Toast.LENGTH_LONG ).show();
+                }
                 //Snackbar.make(view, "Se presionó el FAB", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
@@ -66,7 +86,7 @@ public class verEntrada extends AppCompatActivity {
     {
         try
         {
-            Intent i = new Intent(this, ENTRADAS.class);
+            Intent i = new Intent(this, registrarEntrada.class);
             startActivity(i);
         }
         catch (Exception ex)
@@ -75,4 +95,5 @@ public class verEntrada extends AppCompatActivity {
         }
 
     }
+
 }

@@ -128,7 +128,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         }
         catch (SQLiteException ex)
         {
-            Toast.makeText(null, "ERROR CREAR ENTRADAS "+ex, Toast.LENGTH_LONG ).show();
+            Toast.makeText(null, "ERROR CREAR registrarEntrada "+ex, Toast.LENGTH_LONG ).show();
         }
 
     }
@@ -160,7 +160,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         try
         {
             SQLiteDatabase db = getWritableDatabase();
-            String query = "SELECT e.entrada_id as _id, p.nombre as nombre, e.cantidad_entrada as cantidad FROM Productos as p INNER JOIN Entradas as e ON e.producto_id = p.producto_id WHERE (1=1)";
+            String query = "SELECT e.entrada_id as _id, e.producto_id, p.nombre as nombre, e.cantidad_entrada as cantidad FROM Productos as p INNER JOIN Entradas as e ON e.producto_id = p.producto_id WHERE (1=1)";
             if (e.getId() > 0)
             {
                 query += " AND (e.entrada_id = " + e.getId() + ") ";
@@ -184,7 +184,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
 
 
-    public void modificarEntrada(Entrada e)
+    public boolean modificarEntrada(Entrada e)
     {
 
         Date fechaActual = new Date();
@@ -193,14 +193,17 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
         ContentValues valores = new ContentValues();
         valores.put("producto_id", e.getIdProducto());
-        valores.put("cantidad_entrada", e.getCantidadActual());
+        valores.put("cantidad_entrada", e.getCantidadAAdicionar());
         valores.put("fecha", formato.format(fechaActual));
         valores.put("estado", 1);
         SQLiteDatabase db = getWritableDatabase();
-        db.update("Entradas", valores, "entrada_id" + "= ?", new String[] { String.valueOf(e.getId())});
+        int entradas = db.update("Entradas", valores, "entrada_id" + "= ?", new String[]{String.valueOf(e.getId())});
         db.close();
-
-
+        if (entradas > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
 

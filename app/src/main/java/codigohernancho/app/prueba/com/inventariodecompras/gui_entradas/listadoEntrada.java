@@ -13,7 +13,7 @@ import android.widget.Toast;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
 
-public class listadoEntradas extends AppCompatActivity {
+public class listadoEntrada extends AppCompatActivity {
 
 
     EntradasSqliteHelper u;
@@ -44,7 +44,7 @@ public class listadoEntradas extends AppCompatActivity {
             lvlitems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(listadoEntradas.this, verEntrada.class);
+                    Intent intent = new Intent(listadoEntrada.this, modificarEntrada.class);
                     //intent.putExtra("entrada_id",id);
                     Bundle bundle = new Bundle();
                     bundle.putLong("entrada_id", id);
