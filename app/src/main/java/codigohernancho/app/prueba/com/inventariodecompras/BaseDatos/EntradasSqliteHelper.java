@@ -1,4 +1,4 @@
-package codigohernancho.app.prueba.com.inventariodecompras.sqlite;
+package codigohernancho.app.prueba.com.inventariodecompras.BaseDatos;
 
 
 import android.content.ContentValues;

@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -15,7 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
-import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
+import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.EntradasSqliteHelper;
 
 public class modificarEntrada extends AppCompatActivity {
     EditText nombre_producto;

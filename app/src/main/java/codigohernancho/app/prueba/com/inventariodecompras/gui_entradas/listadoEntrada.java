@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 
-import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
+import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.EntradasSqliteHelper;
 
 public class listadoEntrada extends AppCompatActivity {
 
