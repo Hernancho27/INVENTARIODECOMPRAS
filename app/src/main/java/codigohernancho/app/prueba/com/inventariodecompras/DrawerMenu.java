@@ -176,12 +176,18 @@ public class DrawerMenu
                 startActivity(intent1);
 
         } else if (id == R.id.usuarios) {
-                Context context = getApplicationContext();
-                CharSequence text = "Opción Usuarios no Configurada";
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-    }
+        Context context = getApplicationContext();
+        CharSequence text = "Opción Usuarios no Configurada";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+        } else if (id == R.id.bloc) {
+                Intent intent1 = new Intent(DrawerMenu.this, MainActivity.class);
+                startActivity(intent1);
+
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

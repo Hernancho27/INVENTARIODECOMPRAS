@@ -33,4 +33,20 @@
     <string name="title_activity_menuprincipal">MENUPRINCIPAL</string>
     <string name="title_activity_drawer_menu">Mi Inventario de Compras</string>
 
+    //strings del Bloc de Notas
+    <string name="Bloc_de_notas">Bloc de notas</string>
+    <string name="add_nota">Agregar/Editar Nota</string>
+    <string name="ver_nota">Visualizacion de la Nota</string>
+    <string name="title_activity_ver_nota">Ver Nota</string>
+
+
+    <string name="menu_crear">Crear Nota</string>
+    <string name="menu_editar">Editar Nota</string>
+    <string name="menu_eliminar">Eliminar Nota</string>
+    <string name="menu_borrar_todas">Borrar todas</string>
+    <string name="menu_salir">Salir</string>
+    <string name="title_activity_agregar_nota2">Agregar Nota2</string>
+    <string name="title_activity_agregar_nota">Agregar Nota</string>
+
+
 </resources>
