@@ -76,7 +76,7 @@ public class AgregarNota extends AppCompatActivity {
                 CookieSyncManager.createInstance(this);
                 CookieManager cookiesManager = CookieManager.getInstance();
                 cookiesManager.removeAllCookie();
-                Intent intent = new Intent(AgregarNota.this, MainActivity.class);
+                    Intent intent = new Intent(AgregarNota.this, BLOCNOTAS.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 return true;
@@ -122,7 +122,7 @@ public class AgregarNota extends AppCompatActivity {
             }
         }else{
             if(type.equals("edit")){
-                Add.setText("Acnutalizar Nota");
+                Add.setText("Actualizar Nota");
                 if(title.equals("")){
                     msj = "Ingrese un titulo";
                     TITLE.requestFocus();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="codigohernancho.app.prueba.com.inventariodecompras.MainActivity">
+    tools:context="codigohernancho.app.prueba.com.inventariodecompras.BLOCNOTAS">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
 
 
         <android.support.design.widget.AppBarLayout

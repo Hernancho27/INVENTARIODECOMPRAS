@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class BLOCNOTAS extends AppCompatActivity {
 
     ListView lista;
     TextView textLista;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_blocnotas);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.EXIT:
                 //finish();
-                Intent intent1 = new Intent(MainActivity.this, DrawerMenu.class);
+                Intent intent1 = new Intent(BLOCNOTAS.this, DrawerMenu.class);
                 startActivity(intent1);
                 return true;
             default:
@@ -130,28 +130,23 @@ public class MainActivity extends AppCompatActivity {
         String type = "",content = "";
         if (act.equals("add")){
             type = "add";
-            Intent intent = new Intent(MainActivity.this,AgregarNota.class);
+            Intent intent = new Intent(BLOCNOTAS.this,AgregarNota.class);
             intent.putExtra("type", type);
             startActivity(intent);
         }else {
             if (act.equals("edit")){
                 type = "edit";
                 content = getNote();
-                Intent intent = new Intent(MainActivity.this,AgregarNota.class);
+                Intent intent = new Intent(BLOCNOTAS.this,AgregarNota.class);
                 intent.putExtra("type",type);
                 intent.putExtra("title",getTitle);
                 intent.putExtra("content",content);
                 startActivity(intent);
-               /*String type ="edit";
-                Intent intent = new Intent(MainActivity.this,AgregarNota.class);
-                intent.putExtra("type",type);
-                intent.putExtra("title",title);
-                intent.putExtra("content",content);
-                startActivity(intent);*/
+
             }else{
                 if(act.equals("see")){
                     content = getNote();
-                    Intent intent = new Intent(MainActivity.this,VerNota.class);
+                    Intent intent = new Intent(BLOCNOTAS.this,VerNota.class);
                     intent.putExtra("title",getTitle);
                     intent.putExtra("content",content);
                     startActivity(intent);
@@ -185,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     actividad("edit");
-                    //Toast.makeText(MainActivity.this, "Editar Nota", Toast.LENGTH_SHORT).show();
                 }
             });
         }else{

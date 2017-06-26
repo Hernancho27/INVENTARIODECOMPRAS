@@ -84,7 +84,7 @@ public class VerNota extends AppCompatActivity {
                 CookieSyncManager.createInstance(this);
                 CookieManager cookiesManager = CookieManager.getInstance();
                 cookiesManager.removeAllCookie();
-                Intent intent = new Intent(VerNota.this, MainActivity.class);
+                Intent intent = new Intent(VerNota.this, BLOCNOTAS.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

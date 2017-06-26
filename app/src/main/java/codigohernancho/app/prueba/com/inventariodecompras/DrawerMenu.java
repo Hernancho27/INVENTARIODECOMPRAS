@@ -183,7 +183,7 @@ public class DrawerMenu
         toast.show();
 
         } else if (id == R.id.bloc) {
-                Intent intent1 = new Intent(DrawerMenu.this, MainActivity.class);
+                Intent intent1 = new Intent(DrawerMenu.this, BLOCNOTAS.class);
                 startActivity(intent1);
 
         }

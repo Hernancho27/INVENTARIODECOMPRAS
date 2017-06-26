@@ -101,7 +101,7 @@
         </activity>
         <activity android:name=".ESCANEAR"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".BLOCNOTAS"
             android:label="@string/Bloc_de_notas"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
