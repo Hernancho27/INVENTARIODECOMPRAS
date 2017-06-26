@@ -81,49 +81,8 @@ public class registrarEntrada extends AppCompatActivity {
 
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.menu_entradas, menu);
-        return  true;
-    }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-            {
-                this.finish();
-                return true;
-            }
-
-            case R.id.action_add:
-            {
-                String stockMa= stockMaximoProductoEncontrado.getText().toString();
-                String cant= cantidadARegistrar.getText().toString();
-                String cod= codigoABuscar.getText().toString();
-                String nomprod = nombreProductoEncontrado.getText().toString();
-                String marc= marcaProductoEncontrado.getText().toString();
-                String unid= unidadProductoEncontrado.getText().toString();
-                String descr= descripcionProductoEncontrado.getText().toString();
-                String sockMi= stockMinimoProductoEncontrado.getText().toString();
-
-                Toast.makeText(this, "El usuario es: "+nomprod+" "+marc+" "+unid, Toast.LENGTH_LONG ).show();
-
-                return  true;
-            }
-            default:
-            {
-                return  super.onOptionsItemSelected(item);
-            }
-        }
-
-
-    }
-
+    
 
     public void guardarEntrada_clicked(View view){
         try

@@ -45,70 +45,6 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    //public void createProducto(Entrada e)
-    public void createProducto()
-    {
-        try
-        {
-
-            Date fechaActual = new Date();
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values2 = new ContentValues();
-            values2.put("nombre", "Cafe");
-            values2.put("descripcion", "cafe importado");
-            values2.put("fecha_creacion", formato.format(fechaActual));
-            values2.put("cantidad", 0);
-            values2.put("estado", 1);
-
-
-            ContentValues values1 = new ContentValues();
-            values1.put("nombre", "jabon liquido");
-            values1.put("descripcion", "Salvo");
-            values1.put("fecha_creacion", formato.format(fechaActual));
-            values1.put("cantidad", 0);
-            values1.put("estado", 1);
-
-            ContentValues values = new ContentValues();
-            values.put("nombre", "Detergente");
-            values.put("descripcion", "Ariel");
-            values.put("fecha_creacion", formato.format(fechaActual));
-            values.put("cantidad", 0);
-            values.put("estado", 1);
-            /*
-            ContentValues values1 = new ContentValues();
-            values1.put("nombreProducto", "Detergente");
-            values1.put("marca", "Ariel");
-            values1.put("unidad", "Kilo");
-            values1.put("descripcion", "detergente para lavar ropa");
-            values1.put("stock_minimo", 1);
-            values1.put("stock_maximo", 6);
-            values1.put("cantidad", 0);
-
-
-
-            ContentValues values2 = new ContentValues();
-            values2.put("nombreProducto", "jabon liquido");
-            values2.put("marca", "Salvo");
-            values2.put("unidad", "botella");
-            values2.put("descripcion", "lavaloza");
-            values2.put("stock_minimo", 1);
-            values2.put("stock_maximo", 4);
-            values2.put("cantidad", 0);*/
-
-
-            db.insert("Productos", null, values);
-            db.insert("Productos", null, values1);
-            db.insert("Productos", null, values2);
-            db.close();
-        }
-        catch (SQLiteException ex)
-        {
-
-        }
-
-    }
-
 
     public void crearEntrada(Entrada e)
     {
@@ -210,8 +146,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
     public Cursor listarEntradas()
     {
         SQLiteDatabase db = getReadableDatabase();
-        //String query = ("SELECT * FROM registrarEntradas WHERE 1 ORDER BY idProducto;");
-        String query = ("SELECT e.entrada_id as _id, p.nombre, e.cantidad_entrada FROM Productos as p INNER JOIN Entradas as e ON e.producto_id = p.producto_id WHERE 1 ORDER BY e.producto_id;");
+        String query = ("SELECT e.entrada_id as _id, p.nombre, e.cantidad_entrada FROM Productos as p INNER JOIN Entradas as e ON e.producto_id = p.producto_id WHERE 1 ORDER BY e.entrada_id;");
         Cursor c = db.rawQuery(query, null);
 
         if (c != null) {
@@ -220,9 +155,35 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
         return c;
     }
-    public void eliminarEntrada()
-    {
 
+
+    public boolean eliminarEntrada(Entrada e)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        //db.execSQL("DELETE FROM Entradas WHERE entrada_id = " + e.getId() + ";");
+        int entradas = db.delete("Entradas", "entrada_id" + "= ?", new String[]{String.valueOf(e.getId())});
+        db.close();
+        if (entradas > 0)
+        {
+            return true;
+        }
+        return false;
     }
+
+
+    public boolean eliminarEntradaLogico(Entrada e)
+    {
+        ContentValues valores = new ContentValues();
+        valores.put("estado", e.getEstado());
+        SQLiteDatabase db = getWritableDatabase();
+        int entradas = db.update("Entradas", valores, "estado" + "= ?", new String[]{String.valueOf(e.getEstado())});
+        db.close();
+        if (entradas > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
 

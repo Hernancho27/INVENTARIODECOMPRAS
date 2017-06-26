@@ -40,6 +40,7 @@ public class ControlListado extends CursorAdapter
         int txtcantidad = cursor.getInt(2);
 
         idtxt.setText(String.valueOf(txtid));
+        idtxt.setVisibility(View.INVISIBLE);
         nombretxt.setText(txtnombre);
         cantidadtxt.setText(String.valueOf(txtcantidad));
 

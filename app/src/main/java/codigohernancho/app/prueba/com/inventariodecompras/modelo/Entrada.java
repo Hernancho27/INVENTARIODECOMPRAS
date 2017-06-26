@@ -6,6 +6,7 @@ public class Entrada {
     int cantidadActual;
     int cantidadAAdicionar;
     int cantidadTotal;
+    int estado;
 
     public Entrada(){}
 
@@ -54,5 +55,13 @@ public class Entrada {
 
     public void setCantidadTotal(int cantidadTotal) {
         this.cantidadTotal = cantidadTotal;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 }

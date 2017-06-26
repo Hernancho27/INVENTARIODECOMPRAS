@@ -4,6 +4,9 @@ package codigohernancho.app.prueba.com.inventariodecompras.gui_entradas;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,6 +14,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
+
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.EntradasSqliteHelper;
 
 public class listadoEntrada extends AppCompatActivity {
@@ -55,6 +59,50 @@ public class listadoEntrada extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        //getMenuInflater().inflate(R.menu.menu_entradas, menu);
+        //return  true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_entradas, menu);
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+            {
+                this.finish();
+                return true;
+            }
+
+            case R.id.action_add:
+            {
+                Toast.makeText(this, "El usuario es: "+1+" "+1+" "+1, Toast.LENGTH_LONG ).show();
+                return  true;
+            }
+            default:
+            {
+                return  super.onOptionsItemSelected(item);
+            }
+        }
+
+
+    }
+
 
 
 }

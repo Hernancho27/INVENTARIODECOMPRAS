@@ -1,6 +1,8 @@
 package codigohernancho.app.prueba.com.inventariodecompras.gui_entradas;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -22,6 +24,8 @@ public class modificarEntrada extends AppCompatActivity {
     int IdProducto;
     long IdEntrada;
     String mensaje;
+    FloatingActionButton fab;
+    FloatingActionButton fab_eliminar;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -53,7 +57,7 @@ public class modificarEntrada extends AppCompatActivity {
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.FAB);
+        fab = (FloatingActionButton) findViewById(R.id.FAB);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,8 +82,75 @@ public class modificarEntrada extends AppCompatActivity {
                 //Snackbar.make(view, "Se presionó el FAB", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
+
+
+
+
+        fab_eliminar = (FloatingActionButton) findViewById(R.id.FAB1);
+        fab_eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmacion();
+                //Snackbar.make(view, "Se presionó el FAB", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }
+        });
+
     }
 
+
+
+    public void confirmacion(){
+
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setTitle("Desea eliminar el registro actual?");
+        dlgAlert.setCancelable(false);
+
+        //dlgAlert.setMessage(elimina_input.getText());
+
+        dlgAlert.setPositiveButton("Aceptar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Aceptar();
+                    }
+                });
+
+        dlgAlert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Cancelar();
+            }
+        });
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+    }
+
+    public void Aceptar()
+    {
+        try
+        {
+            Intent intent = new Intent(modificarEntrada.this, listadoEntrada.class);
+            Entrada e = new Entrada();
+            e.setId(IdEntrada);
+            e.setEstado(0);
+            if (u.eliminarEntrada(e))
+            {
+                startActivity(intent);
+            }
+            /*if (u.eliminarEntradaLogico(e))
+            {
+                startActivity(intent);
+            }*/
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(modificarEntrada.this, "Se ha producido un ERROR: \n Se deben ingresar valores numericos \n No se logrò modificar el registro", Toast.LENGTH_LONG ).show();
+            //Toast.makeText(modificarEntrada.this, "Se ha producido un error al mdificar el registro", Toast.LENGTH_LONG ).show();
+        }
+    }
+
+    public void Cancelar()
+    {
+        finish();
+    }
 
 
     public void crearEntrada_clicked(View view)
