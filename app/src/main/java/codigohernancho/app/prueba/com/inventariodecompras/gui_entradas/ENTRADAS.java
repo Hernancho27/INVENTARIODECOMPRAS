@@ -55,25 +55,29 @@ public class ENTRADAS extends AppCompatActivity {
 
         stockMaximoProductoEncontrado = (EditText) findViewById(R.id.txtstockActualProductoEncontrado);
         stockMaximoProductoEncontrado.setEnabled(false);
+        stockMaximoProductoEncontrado.setVisibility(View.INVISIBLE);
 
         nombreProductoEncontrado = (EditText) findViewById(R.id.txtnombreProductoEncontrado);
         nombreProductoEncontrado.setEnabled(false);
 
         marcaProductoEncontrado = (EditText) findViewById(R.id.txtMarcaProductoEncontrado);
         marcaProductoEncontrado.setEnabled(false);
+        marcaProductoEncontrado.setVisibility(View.INVISIBLE);
 
         cantidadProductoEncontrado = (EditText) findViewById(R.id.txtCantidadProductoEncontrado);
         cantidadProductoEncontrado.setEnabled(false);
 
         unidadProductoEncontrado = (EditText) findViewById(R.id.txtunidadProductoEncontrado);
         unidadProductoEncontrado.setEnabled(false);
+        unidadProductoEncontrado.setVisibility(View.INVISIBLE);
+
 
         descripcionProductoEncontrado = (EditText) findViewById(R.id.txtdescripcionProductoEncontrado);
         descripcionProductoEncontrado.setEnabled(false);
 
         stockMinimoProductoEncontrado = (EditText) findViewById(R.id.txtstockMinProductoEncontrado);
         stockMinimoProductoEncontrado.setEnabled(false);
-
+        stockMinimoProductoEncontrado.setVisibility(View.INVISIBLE);
 
 
     }
@@ -126,6 +130,8 @@ public class ENTRADAS extends AppCompatActivity {
         {
             Cursor cursor=null;
             u.crearEntrada(new Entrada(idProductoEncontrado, cantidadActualProductoEncontrado, Integer.parseInt(cantidadARegistrar.getText().toString())));
+            Intent intent = new Intent(ENTRADAS.this, listadoEntradas.class);
+            startActivity(intent);
         }
         catch (Exception ex)
         {
@@ -174,27 +180,6 @@ public class ENTRADAS extends AppCompatActivity {
         }
 
     }
-
-    /*public void buscarEntrada_clicked(View view){
-        try
-        {
-            int id = Integer.parseInt( codigoABuscar.getText().toString() );
-            Entrada e= new Entrada();
-            Cursor c = u.encontrarEntradaPorId(e);
-
-            idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
-            nombreProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
-            cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
-            descripcionProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
-            stockMinimoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
-            stockMaximoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));
-        }
-        catch (Exception ex)
-        {
-            Toast.makeText(this, "ERROR BUSCAR "+ex, Toast.LENGTH_LONG ).show();
-        }
-
-    }*/
 
 
 

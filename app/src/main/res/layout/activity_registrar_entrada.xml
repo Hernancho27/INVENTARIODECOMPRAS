@@ -182,7 +182,7 @@ android:layout_height="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/txtnombreProductoABuscar"
                             android:layout_toEndOf="@+id/btnLimpiar"
-                            android:onClick=""
+                            android:onClick="limpiar_clicked"
                             android:text="Limpiar" />
 
                     </TableRow>
@@ -271,37 +271,38 @@ android:layout_height="match_parent"
                     android:id="@+id/txtdescripcionProductoEncontrado"
                     android:layout_width="366dp"
                     android:layout_height="53dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
                     android:ems="10"
                     android:hint="Descripcion"
                     android:inputType="textMultiLine"
                     tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="298dp" />
+                    tools:layout_editor_absoluteY="298dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignEnd="@+id/txtCantidadProductoEncontrado"
+                    android:layout_marginEnd="28dp" />
 
                 <EditText
                     android:id="@+id/txtstockMinProductoEncontrado"
                     android:layout_width="363dp"
                     android:layout_height="45dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentStart="true"
                     android:ems="10"
                     android:hint="Stock Minimo"
                     android:inputType="textPersonName"
                     tools:layout_editor_absoluteX="11dp"
-                    tools:layout_editor_absoluteY="390dp" />
+                    tools:layout_editor_absoluteY="390dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignEnd="@+id/txtdescripcionProductoEncontrado" />
 
                 <EditText
                     android:id="@+id/txtunidadProductoEncontrado"
                     android:layout_width="379dp"
                     android:layout_height="50dp"
-                    android:layout_above="@+id/txtdescripcionProductoEncontrado"
-                    android:layout_alignParentEnd="true"
                     android:ems="10"
                     android:hint="Unidad"
                     android:inputType="textPersonName"
                     tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="249dp" />
+                    tools:layout_editor_absoluteY="249dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignEnd="@+id/txtstockMinProductoEncontrado" />
 
                 <EditText
                     android:id="@+id/txtCantidadProductoEncontrado"

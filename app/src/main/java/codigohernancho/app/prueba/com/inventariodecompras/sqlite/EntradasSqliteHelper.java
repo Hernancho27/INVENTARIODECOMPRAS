@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -127,7 +128,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         }
         catch (SQLiteException ex)
         {
-
+            Toast.makeText(null, "ERROR CREAR ENTRADAS "+ex, Toast.LENGTH_LONG ).show();
         }
 
     }
@@ -137,7 +138,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         String query = "SELECT * FROM Productos WHERE (1=1)";
             if (idEntrada > 0)
             {
-                query += " AND (entrada_id = " + idEntrada + ") ";
+                query += " AND (producto_id = " + idEntrada + ") ";
             }
 
             if (!nombre.equals(""))
