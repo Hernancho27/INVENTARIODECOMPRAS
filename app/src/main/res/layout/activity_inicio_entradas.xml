@@ -88,7 +88,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_weight="1"
-                        android:text="VER ENTRADAS" />
+                        android:text="VER ENTRADAS"
+                        android:onClick="verEntradas_clicked"/>
                 </LinearLayout>
 
             </RelativeLayout>
