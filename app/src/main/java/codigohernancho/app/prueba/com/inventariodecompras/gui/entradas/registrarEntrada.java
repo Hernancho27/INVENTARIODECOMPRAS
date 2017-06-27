@@ -95,7 +95,7 @@ public class registrarEntrada extends AppCompatActivity {
         }
         catch (Exception ex)
         {
-            Toast.makeText(this, "ERROR GUARDAR "+ex, Toast.LENGTH_LONG ).show();
+            Toast.makeText(this, "ERROR GUARDAR LA ENTRADA \n Debe ingresar un valor numérico. ", Toast.LENGTH_LONG ).show();
         }
 
 
