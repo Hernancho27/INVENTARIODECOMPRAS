@@ -35,6 +35,10 @@
             android:id="@+id/usuarios"
             android:icon="@drawable/ic_usuarios"
             android:title="Usuarios" />
+        <item
+            android:id="@+id/bloc"
+            android:icon="@drawable/ic_notas"
+            android:title="Bloc de Notas" />
     </group>
 
 </menu>

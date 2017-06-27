@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="codigohernancho.app.prueba.com.inventariodecompras"    >
+    package="codigohernancho.app.prueba.com.inventariodecompras">
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -34,6 +36,25 @@
             android:allowBackup="true"/>
         <activity android:name=".gui.entradas.listadoEntrada"
             android:allowBackup="true"/>
+        <activity
+            android:name=".gui.productos.ActividadProductos"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".gui.detalle_producto.ActividadDetalleProducto"
+            android:label="@string/title_activity_lawyer_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".gui.agregar_editar_producto.ActividadAgregarEditar"
+            android:label="@string/title_activity_add_edit"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".gui.entradas.inicioEntradas"
             android:allowBackup="true"
@@ -90,8 +111,38 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ESCANEAR"></activity>
+        <activity
+            android:name=".BLOCNOTAS"
+            android:label="@string/Bloc_de_notas"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AgregarNota"
+            android:label="@string/title_activity_agregar_nota"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".VerNota"
+            android:label="@string/title_activity_ver_nota"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

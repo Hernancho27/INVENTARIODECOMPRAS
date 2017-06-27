@@ -10,13 +10,6 @@ public class Entrada {
 
     public Entrada(){}
 
-    public Entrada (int idProd, int cantAc, int cantA_Add)
-    {
-        this.idProducto= idProd;
-        this.cantidadActual=cantAc;
-        this.cantidadAAdicionar=cantA_Add;
-    }
-
     public long getId() {
         return id;
     }
