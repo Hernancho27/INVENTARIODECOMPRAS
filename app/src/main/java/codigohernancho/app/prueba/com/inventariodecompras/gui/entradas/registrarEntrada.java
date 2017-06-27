@@ -44,6 +44,8 @@ public class registrarEntrada extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_entrada);
+
+
         u = new EntradasSqliteHelper(this);
 
         codigoABuscar = (EditText) findViewById(R.id.txtcodigoABuscar);
@@ -76,6 +78,7 @@ public class registrarEntrada extends AppCompatActivity {
         stockMinimoProductoEncontrado = (EditText) findViewById(R.id.txtstockMinProductoEncontrado);
         stockMinimoProductoEncontrado.setEnabled(false);
         stockMinimoProductoEncontrado.setVisibility(View.INVISIBLE);
+
 
 
     }

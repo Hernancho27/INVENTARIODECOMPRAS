@@ -27,6 +27,7 @@ import android.widget.Toast;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DBHelper;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.entradas.inicioEntradas;
 
 
 public class DrawerMenu
@@ -156,7 +157,7 @@ public class DrawerMenu
             // Handle the camera action
         } else
             if (id == R.id.entradas) {
-                Intent intent1 = new Intent(DrawerMenu.this,ENTRADAS.class);
+                Intent intent1 = new Intent(DrawerMenu.this,inicioEntradas.class);
                 startActivity(intent1);
 
         } else if (id == R.id.salidas) {
