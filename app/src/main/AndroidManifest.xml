@@ -23,6 +23,24 @@
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
 
+        <!--ADICIONADO por balmes-->
+        <!--<activity
+            android:name=".gui_entradas.registrarEntrada"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/Entradas2" />-->
+        <activity android:name=".gui.entradas.modificarEntrada"
+            android:allowBackup="true"/>
+        <activity android:name=".gui.entradas.registrarEntrada"
+            android:allowBackup="true"/>
+        <activity android:name=".gui.entradas.listadoEntrada"
+            android:allowBackup="true"/>
+        <activity
+            android:name=".gui.entradas.inicioEntradas"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/Entradas" />
+        <!--FIN ADICIONES-->
         <activity
             android:name=".gui.productos.ActividadProductos"
             android:label="@string/app_name"
@@ -42,11 +60,6 @@
             android:label="@string/title_activity_add_edit"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name=".ENTRADAS"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/Entradas2" />
 
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
