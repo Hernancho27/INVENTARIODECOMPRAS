@@ -1,4 +1,4 @@
-package codigohernancho.app.prueba.com.inventariodecompras.gui_entradas;
+package codigohernancho.app.prueba.com.inventariodecompras.gui.entradas;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

@@ -1,16 +1,13 @@
-package codigohernancho.app.prueba.com.inventariodecompras.gui_entradas;
+package codigohernancho.app.prueba.com.inventariodecompras.gui.entradas;
 
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import codigohernancho.app.prueba.com.inventariodecompras.gui_entradas.registrarEntrada;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 
 public class inicioEntradas extends AppCompatActivity{
