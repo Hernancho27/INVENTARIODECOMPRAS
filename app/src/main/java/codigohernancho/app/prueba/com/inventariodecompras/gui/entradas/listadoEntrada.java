@@ -4,14 +4,19 @@ package codigohernancho.app.prueba.com.inventariodecompras.gui.entradas;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.content.Intent;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 
@@ -23,9 +28,14 @@ public class listadoEntrada extends AppCompatActivity {
     EntradasSqliteHelper u;
     ListView lvlitems;
     Cursor cursor;
+    List<String> entradas = null;
+
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         setContentView(R.layout.activity_listado_entrada);
         u = new EntradasSqliteHelper(this);
@@ -33,8 +43,12 @@ public class listadoEntrada extends AppCompatActivity {
             cursor = u.listarEntradas();
             lvlitems = (ListView) findViewById(R.id.lvlitems);
             lvlitems.setTextFilterEnabled(true);
-            final ControlListado todoAdapter = new ControlListado(this, cursor);
-            lvlitems.setAdapter(todoAdapter);
+
+
+            //final ControlListado todoAdapter = new ControlListado(this, cursor);
+            //lvlitems.setAdapter(todoAdapter);
+
+            lvlitems.setAdapter(cargarItems(cursor));
         }
 
         catch (Exception ex)
@@ -103,6 +117,19 @@ public class listadoEntrada extends AppCompatActivity {
 
     }
 
+
+    public ArrayAdapter cargarItems(Cursor c)
+    {
+        String valorEntrada;
+        entradas = new ArrayList<String>();
+        while (c.moveToNext())
+        {
+            valorEntrada = c.getString(1) +"\n "+ c.getString(2);
+            entradas.add(valorEntrada);
+        }
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, entradas);
+    return adaptador;
+    }
 
 
 }
