@@ -67,7 +67,7 @@ public class ActividadAgregarImagen extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            showOptions();
+                showOptions();
             }
         });
     }
@@ -128,7 +128,10 @@ public class ActividadAgregarImagen extends AppCompatActivity {
             File newFile=new File(mPath);
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+            intent.putExtra("imagen",mPath);
             startActivityForResult(intent,PHOTO_CODE);
+            setResult(RESULT_OK, intent);
+            finish();
         }
     }
 
@@ -161,7 +164,11 @@ public class ActividadAgregarImagen extends AppCompatActivity {
                             });
                     Bitmap bitmap = BitmapFactory.decodeFile(mPath);
                     mSetImage.setImageBitmap(bitmap);
+                    // Toast.makeText(ActividadAgregarImagen.this,RESULT_OK, Toast.LENGTH_LONG).show();
+                    //SystemClock.sleep(2000);
+                    finish();
                     break;
+
                 case SELECT_PICTURE:
                     Uri path = data.getData();
                     mSetImage.setImageURI(path);
@@ -189,22 +196,22 @@ public class ActividadAgregarImagen extends AppCompatActivity {
         builder.setTitle("Permisos denegados");
         builder.setMessage("Para usar las funciones necesitas aceptar los permisos");
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent();
-                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package",getPackageName(), null );
-                        intent.setData(uri);
-                        startActivity(intent);
-                    }
-                });
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package",getPackageName(), null );
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
         builder.show();
 
     }

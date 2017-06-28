@@ -21,6 +21,8 @@ import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.OperacionesBaseDatos;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by urreal on 05/06/2017.
  */
@@ -28,7 +30,7 @@ import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 public class FragmentoAgregarEditar extends Fragment {
 
     private static final String ARG_PRODUCTO_ID = "arg_producto_id";
-
+    private final int IMG_ID = 200;
     private String mProductoId;
 
     private OperacionesBaseDatos mOperacionesBaseDatos;
@@ -38,9 +40,11 @@ public class FragmentoAgregarEditar extends Fragment {
     private TextInputEditText mNombreField;
     private TextInputEditText mCantidadField;
     private TextInputEditText mDescripcionField;
+    private TextInputEditText mImagenField;
     private TextInputLayout mNombreLabel;
     private TextInputLayout mCantidadLabel;
     private TextInputLayout mDescripcionLabel;
+    private TextInputLayout mImagenLabel;
 
 
     public FragmentoAgregarEditar() {
@@ -74,9 +78,12 @@ public class FragmentoAgregarEditar extends Fragment {
         mNombreField = (TextInputEditText) root.findViewById(R.id.et_nombre);
         mCantidadField = (TextInputEditText) root.findViewById(R.id.et_cantidad);
         mDescripcionField = (TextInputEditText) root.findViewById(R.id.et_descripcion);
+        mImagenField = (TextInputEditText) root.findViewById(R.id.et_img_prod);
         mNombreLabel = (TextInputLayout) root.findViewById(R.id.til_nombre);
         mCantidadLabel = (TextInputLayout) root.findViewById(R.id.til_cantidad);
         mDescripcionLabel = (TextInputLayout) root.findViewById(R.id.til_descripcion);
+        mImagenLabel = (TextInputLayout) root.findViewById(R.id.til_img_prod);
+
 
         // Eventos
         mSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -108,9 +115,20 @@ public class FragmentoAgregarEditar extends Fragment {
 
     private void ShowScreenEditImgProducto(){
         Intent intent = new Intent(getActivity(), ActividadAgregarImagen.class);
-        startActivityForResult(intent, ActividadAgregarImagen.RESULT_OK);
+
+        startActivityForResult(intent, IMG_ID);
     }
 
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent data) {
+        // if (requestCode == IMG_ID) {
+        if (resultCode == RESULT_OK) {
+            String ruta = data.getStringExtra("imagen");
+            mImagenField.setText(ruta);
+            // use 'myValue' return value here
+        }
+        //  }
+    }
     private void addEditProducto() {
         boolean error = false;
 
@@ -118,6 +136,7 @@ public class FragmentoAgregarEditar extends Fragment {
         String cantidad = mCantidadField.getText().toString();
         String descripcion = mDescripcionField.getText().toString();
         String fecha = new Date().toString();
+        String imagen = mImagenField.getText().toString();
 
         if (TextUtils.isEmpty(nombre)) {
             mNombreField.setError(getString(R.string.field_error));
@@ -138,7 +157,7 @@ public class FragmentoAgregarEditar extends Fragment {
             return;
         }
 
-        Producto producto = new Producto(nombre, descripcion, fecha, cantidad, "", 1);
+        Producto producto = new Producto(nombre, descripcion, fecha, cantidad, imagen, 1);
 
         new AddEditProductoTask().execute(producto);
 
@@ -149,7 +168,7 @@ public class FragmentoAgregarEditar extends Fragment {
             showAddEditError();
             getActivity().setResult(Activity.RESULT_CANCELED);
         } else {
-            getActivity().setResult(Activity.RESULT_OK);
+            getActivity().setResult(RESULT_OK);
         }
 
         getActivity().finish();
@@ -203,6 +222,7 @@ public class FragmentoAgregarEditar extends Fragment {
             }
 
         }
+
 
         @Override
         protected void onPostExecute(Boolean result) {

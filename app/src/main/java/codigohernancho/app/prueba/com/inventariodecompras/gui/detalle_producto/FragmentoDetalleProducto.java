@@ -38,6 +38,7 @@ public class FragmentoDetalleProducto extends Fragment {
     private ImageView mAvatar;
     private TextView mCantidad;
     private TextView mDescripcion;
+    private TextView mImagen;
 
     private OperacionesBaseDatos mOperacionesBaseDatos;
 
@@ -73,7 +74,7 @@ public class FragmentoDetalleProducto extends Fragment {
         mAvatar = (ImageView) getActivity().findViewById(R.id.iv_avatar);
         mCantidad = (TextView) root.findViewById(R.id.tv_cantidad);
         mDescripcion = (TextView) root.findViewById(R.id.tv_descripcion);
-
+        mImagen = (TextView) root.findViewById(R.id.tv_imagen);
         mOperacionesBaseDatos = new OperacionesBaseDatos(getActivity());
 
         loadProducto();
@@ -111,11 +112,12 @@ public class FragmentoDetalleProducto extends Fragment {
     private void showProducto(Producto producto){
         mCollapsingView.setTitle(producto.getNombre());
         Glide.with(this)
-                .load(Uri.parse("file:///android_asset/" + producto.getImgProd()))
+                .load(Uri.parse("file://" + producto.getImgProd()))
                 .centerCrop()
                 .into(mAvatar);
         mCantidad.setText(producto.getCantidad());
         mDescripcion.setText(producto.getDescripcion());
+        mImagen.setText(producto.getImgProd());
     }
 
     private void showEditScreen() {
