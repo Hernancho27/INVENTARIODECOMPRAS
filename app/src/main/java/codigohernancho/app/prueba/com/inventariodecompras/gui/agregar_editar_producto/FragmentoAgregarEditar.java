@@ -50,7 +50,6 @@ import static android.app.Activity.RESULT_OK;
 public class FragmentoAgregarEditar extends Fragment {
     private static String APP_DIRECTORY = "MyPictureApp/";
     private static final String ARG_PRODUCTO_ID = "arg_producto_id";
-    private final int IMG_ID = 200;
     private String mProductoId;
     private String mPath ;
     private String imgFromGallery;
@@ -185,6 +184,8 @@ public class FragmentoAgregarEditar extends Fragment {
                     break;
 
                 case SELECT_PICTURE:
+                    Uri path = data.getData();
+                    imgFromGallery = RealPathUtil.getRealPath(getContext(),path).toString();
                     mImagenField.setText(imgFromGallery);
                     break;
             }
@@ -304,8 +305,9 @@ public class FragmentoAgregarEditar extends Fragment {
                     openCamera();
                 }else if (option[which] == "Elegir de Galeria"){
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    Uri path = intent.getData();
-                    imgFromGallery = RealPathUtil.getRealPath(getContext(),path);
+                    //intent.setType("image/*");
+                    //Uri path = intent.getData();
+                    //imgFromGallery = RealPathUtil.getRealPath(getContext(),path);
                     startActivityForResult(intent, SELECT_PICTURE);
                 }else{
                     dialog.dismiss();
