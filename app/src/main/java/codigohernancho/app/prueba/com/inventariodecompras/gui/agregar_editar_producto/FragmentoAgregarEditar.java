@@ -1,26 +1,46 @@
 package codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.Date;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.OperacionesBaseDatos;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -28,10 +48,16 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class FragmentoAgregarEditar extends Fragment {
-
+    private static String APP_DIRECTORY = "MyPictureApp/";
     private static final String ARG_PRODUCTO_ID = "arg_producto_id";
     private final int IMG_ID = 200;
     private String mProductoId;
+    private String mPath ;
+    private String imgFromGallery;
+    private final int MY_PERMISSIONS = 100;
+    private final int PHOTO_CODE = 200;
+    private final int SELECT_PICTURE = 300;
+    private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";
 
     private OperacionesBaseDatos mOperacionesBaseDatos;
 
@@ -45,6 +71,7 @@ public class FragmentoAgregarEditar extends Fragment {
     private TextInputLayout mCantidadLabel;
     private TextInputLayout mDescripcionLabel;
     private TextInputLayout mImagenLabel;
+    private RelativeLayout mRlView;
 
 
     public FragmentoAgregarEditar() {
@@ -83,8 +110,12 @@ public class FragmentoAgregarEditar extends Fragment {
         mCantidadLabel = (TextInputLayout) root.findViewById(R.id.til_cantidad);
         mDescripcionLabel = (TextInputLayout) root.findViewById(R.id.til_descripcion);
         mImagenLabel = (TextInputLayout) root.findViewById(R.id.til_img_prod);
-
-
+        mRlView = (RelativeLayout) root.findViewById(R.id.relLayAddImg);
+        mImagenField.setEnabled(false);
+        if(mayRequestStoragePermission())
+            mAddImgButton.setEnabled(true);
+        else
+            mAddImgButton.setEnabled(false);
         // Eventos
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +126,7 @@ public class FragmentoAgregarEditar extends Fragment {
         mAddImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShowScreenEditImgProducto();
+                showOptions();
             }
         });
 
@@ -108,26 +139,56 @@ public class FragmentoAgregarEditar extends Fragment {
 
         return root;
     }
-
+    private boolean mayRequestStoragePermission(){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return true;
+        if ((getActivity().checkSelfPermission(WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)&&
+                (getActivity().checkSelfPermission(CAMERA)==PackageManager.PERMISSION_GRANTED))
+            return true;
+        if ((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE))||(shouldShowRequestPermissionRationale(CAMERA))){
+            Snackbar.make(mRlView,"Los permisos son necesarios para utilizar la aplicacion",
+                    Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener(){
+                @TargetApi(Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View v) {
+                    requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA}, MY_PERMISSIONS);
+                }
+            });
+        }else{
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA}, MY_PERMISSIONS);
+        }
+        return false;
+    }
     private void loadProducto() {
         new GetProductoByIdTask().execute();
     }
 
-    private void ShowScreenEditImgProducto(){
-        Intent intent = new Intent(getActivity(), ActividadAgregarImagen.class);
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            switch (requestCode){
+                case PHOTO_CODE:
+                    MediaScannerConnection.scanFile(getContext(),
+                            new String[]{mPath}, null,
+                            new MediaScannerConnection.OnScanCompletedListener() {
+                                @Override
+                                public void onScanCompleted(String path, Uri uri) {
+                                    Log.i("ExternalStorage","Scanned "+path+":");
+                                    Log.i("ExternalStorage","-> Uri = "+ uri );
+                                }
+                            });
+                    Bitmap bitmap = BitmapFactory.decodeFile(mPath);
+                    mImagenField.setText(mPath);
 
-        startActivityForResult(intent, IMG_ID);
-    }
+                    break;
 
-    public void onActivityResult(int requestCode, int resultCode,
-                                 Intent data) {
-        // if (requestCode == IMG_ID) {
-        if (resultCode == RESULT_OK) {
-            String ruta = data.getStringExtra("imagen");
-            mImagenField.setText(ruta);
-            // use 'myValue' return value here
+                case SELECT_PICTURE:
+                    mImagenField.setText(imgFromGallery);
+                    break;
+            }
         }
-        //  }
     }
     private void addEditProducto() {
         boolean error = false;
@@ -183,6 +244,7 @@ public class FragmentoAgregarEditar extends Fragment {
         mNombreField.setText(producto.getNombre());
         mCantidadField.setText(producto.getCantidad());
         mDescripcionField.setText(producto.getDescripcion());
+        mImagenField.setText(producto.getImgProd());
     }
 
     private void showLoadError() {
@@ -230,5 +292,85 @@ public class FragmentoAgregarEditar extends Fragment {
         }
 
     }
+    private void showOptions(){
+        final CharSequence[] option = {"Tomar foto","Elegir de Galeria", "Cancelar"};
+        final AlertDialog.Builder builder = new AlertDialog.Builder(super.getContext());
+        builder.setTitle("Elegir una Opcion");
+        builder.setItems(option, new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (option[which] == "Tomar foto"){
+                    openCamera();
+                }else if (option[which] == "Elegir de Galeria"){
+                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Uri path = intent.getData();
+                    imgFromGallery = RealPathUtil.getRealPath(getContext(),path);
+                    startActivityForResult(intent, SELECT_PICTURE);
+                }else{
+                    dialog.dismiss();
+                }
 
+            }
+        });
+        builder.show();
+    }
+    private void openCamera(){
+        File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
+        Boolean isDirectoryCreated = file.exists();
+        if (!isDirectoryCreated){
+            isDirectoryCreated = file.mkdirs();
+        }
+
+        if (isDirectoryCreated){
+            Long timestamp = System.currentTimeMillis()/1000;
+            String imageName  = timestamp.toString()+".jpg";
+
+            mPath = Environment.getExternalStorageDirectory()+File.separator+MEDIA_DIRECTORY
+                    +File.separator+imageName;
+            File newFile=new File(mPath);
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+            intent.putExtra("imagen",mPath);
+            startActivityForResult(intent,PHOTO_CODE);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode ==  MY_PERMISSIONS){
+            if (grantResults.length ==2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getActivity(),"Permisos aceptados", Toast.LENGTH_SHORT).show();
+                mAddImgButton.setEnabled(true);
+            }
+        }else{
+            showExplanation();
+        }
+
+    }
+
+    private void showExplanation(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Permisos denegados");
+        builder.setMessage("Para usar las funciones necesitas aceptar los permisos");
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package",getActivity().getPackageName(), null );
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                getActivity().finish();
+            }
+        });
+        builder.show();
+
+    }
 }

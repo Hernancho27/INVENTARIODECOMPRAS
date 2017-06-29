@@ -31,10 +31,6 @@
             android:name=".gui.agregar_editar_producto.ActividadAgregarEditar"
             android:label="@string/title_activity_add_edit"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".gui.agregar_editar_producto.ActividadAgregarImagen"
-            android:label="@string/title_activity_actividad_agregar_imagen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 

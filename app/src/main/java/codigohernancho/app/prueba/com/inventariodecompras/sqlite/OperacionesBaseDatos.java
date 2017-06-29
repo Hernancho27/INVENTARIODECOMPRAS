@@ -37,16 +37,8 @@ public class OperacionesBaseDatos extends SQLiteOpenHelper{
 
     }
     private void mockData(SQLiteDatabase sqLiteDatabase) {
-        mockProducto(sqLiteDatabase, new Producto("Televisor",
-                "Televisor de 20 pulgadas", "20170601","0","tv.jpg",1));
-        mockProducto(sqLiteDatabase, new Producto("Cama",
-                "Cama de 1.90 x 1.40", "20170601","0","cama.jpg",1));
-        mockProducto(sqLiteDatabase, new Producto("Estufa",
-                "Estufa de 4 puestos", "20170601","0","estufa.jpg",1));
-        mockProducto(sqLiteDatabase, new Producto("Armario",
-                "Armario de 1.80 de alto por 60 de fondo por 1.40 de ancho", "20170601","0","armario.jpg",1));
-        mockProducto(sqLiteDatabase, new Producto("Bicicleta",
-                "Bicicleta de carreras", "20170601","0","bicicleta.jpg",1));
+        mockProducto(sqLiteDatabase, new Producto("Producto Dummy",
+                "Producto para pruebas", "20170601","0","tv.jpg",1));
     }
 
     public long mockProducto(SQLiteDatabase db, Producto producto) {
