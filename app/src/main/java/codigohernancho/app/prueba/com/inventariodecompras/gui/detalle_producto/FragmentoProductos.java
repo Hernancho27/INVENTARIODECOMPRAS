@@ -104,7 +104,7 @@ public class FragmentoProductos extends Fragment {
 
     private void showSuccessfullSavedMessage() {
         Toast.makeText(getActivity(),
-                "Producto guardado correctamente", Toast.LENGTH_SHORT).show();
+                "ProductoInventario guardado correctamente", Toast.LENGTH_SHORT).show();
     }
 
     private void showAddScreen() {

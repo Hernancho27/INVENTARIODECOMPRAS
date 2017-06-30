@@ -3,6 +3,8 @@
     package="codigohernancho.app.prueba.com.inventariodecompras">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -41,7 +43,6 @@
             android:name=".gui.agregar_editar_producto.ActividadAgregarEditar"
             android:label="@string/title_activity_add_edit"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ENTRADAS"
             android:allowBackup="true"
@@ -78,17 +79,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".INFORMES"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/Lista2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".DrawerMenu"
             android:label="@string/title_activity_drawer_menu"
             android:theme="@style/AppTheme">
@@ -99,14 +89,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ESCANEAR"></activity>
+        <activity android:name=".ESCANEAR" />
         <activity
             android:name=".BLOCNOTAS"
             android:label="@string/Bloc_de_notas"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -131,6 +120,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ResultadoInformes"
+            android:label="Resultado Informe">
+        </activity>
+        <activity android:name=".INFORMES"></activity>
+        <activity android:name=".DetalleInformesActivity"></activity>
     </application>
 
 </manifest>
