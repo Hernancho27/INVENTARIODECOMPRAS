@@ -27,6 +27,7 @@ import android.widget.Toast;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DBHelper;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.entradas.inicioEntradas;
 
 
 public class DrawerMenu
@@ -156,7 +157,7 @@ public class DrawerMenu
             // Handle the camera action
         } else
             if (id == R.id.entradas) {
-                Intent intent1 = new Intent(DrawerMenu.this,ENTRADAS.class);
+                Intent intent1 = new Intent(DrawerMenu.this,inicioEntradas.class);
                 startActivity(intent1);
 
         } else if (id == R.id.salidas) {
@@ -171,23 +172,10 @@ public class DrawerMenu
                 Intent intent1 = new Intent(DrawerMenu.this,INFORMES.class);
                 startActivity(intent1);
 
-        } else if (id == R.id.configuracion) {
-                Intent intent1 = new Intent(DrawerMenu.this, ActividadProductos.class);
-                startActivity(intent1);
-
-        } else if (id == R.id.usuarios) {
-        Context context = getApplicationContext();
-        CharSequence text = "Opción Usuarios no Configurada";
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
         } else if (id == R.id.bloc) {
                 Intent intent1 = new Intent(DrawerMenu.this, BLOCNOTAS.class);
                 startActivity(intent1);
-
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -198,14 +186,24 @@ public class DrawerMenu
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.button1){
-            Cursor c =manager.buscarContacto(tv.getText().toString());
-            adapter.changeCursor(c);
+        if (view.getId() == R.id.button1) {
+            //Cursor c =manager.buscarCodigo(tv.getText().toString());
+            //adapter.changeCursor(c);}
             //new BuscarTask().execute();
+            //if(adapter.equals("")){
+            Cursor c = manager.buscarNombre(tv.getText().toString());
+            if(tv.getText().toString().equals("")){
+                Context context = getApplicationContext();
+                CharSequence text = "Inserte un Nombre o Codigo";
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else{
+                adapter.changeCursor(c);}
 
-    }}
+
+        }}
 
 
 
 }
-

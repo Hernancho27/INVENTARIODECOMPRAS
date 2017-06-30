@@ -74,7 +74,7 @@ public class DataBaseManager {
         return db.query(TABLE_NAME,columnas,null,null,null,null,null);
     }
 
-    public Cursor buscarContacto(String nombre) {
+    public Cursor buscarNombre(String nombre) {
         String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_NAME,CN_DESCRIPCION};
 
         /*Retardo para simular demora en la busqueda*/
@@ -84,6 +84,11 @@ public class DataBaseManager {
             e.printStackTrace();
         }*/
         return db.query(TABLE_NAME,columnas,CN_NAME+ "=?", new  String[]{nombre},null,null,null);
+    }
+
+    public Cursor buscarCodigo(String codigo) {
+        String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_NAME,CN_DESCRIPCION};
+        return db.query(TABLE_NAME,columnas,CN_CODIGO+ "=?", new  String[]{codigo}, null,null,null);
     }
 
 }
