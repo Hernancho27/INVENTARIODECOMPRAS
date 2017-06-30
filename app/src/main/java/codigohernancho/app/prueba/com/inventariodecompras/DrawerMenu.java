@@ -199,12 +199,23 @@ public class DrawerMenu
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.button1){
-            Cursor c =manager.buscarContacto(tv.getText().toString());
-            adapter.changeCursor(c);
+        if (view.getId() == R.id.button1) {
+            //Cursor c =manager.buscarCodigo(tv.getText().toString());
+            //adapter.changeCursor(c);}
             //new BuscarTask().execute();
+            //if(adapter.equals("")){
+            Cursor c = manager.buscarNombre(tv.getText().toString());
+            if(tv.getText().toString().equals("")){
+                Context context = getApplicationContext();
+                CharSequence text = "Inserte un Nombre o Codigo";
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else{
+                adapter.changeCursor(c);}
 
-    }}
+
+        }}
 
 
 
