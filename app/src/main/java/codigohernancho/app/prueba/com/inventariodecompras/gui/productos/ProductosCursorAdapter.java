@@ -49,7 +49,7 @@ public class ProductosCursorAdapter extends CursorAdapter {
         nameText.setText(name);
         Glide
                 .with(context)
-                .load(Uri.parse("file:///android_asset/" + avatarUri))
+                .load(Uri.parse("file://" + avatarUri))
                 .asBitmap()
                 .error(R.drawable.ic_account_circle)
                 .centerCrop()

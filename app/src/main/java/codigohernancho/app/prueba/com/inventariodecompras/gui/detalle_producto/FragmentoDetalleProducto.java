@@ -112,7 +112,7 @@ public class FragmentoDetalleProducto extends Fragment {
     private void showProducto(Producto producto){
         mCollapsingView.setTitle(producto.getNombre());
         Glide.with(this)
-                .load(Uri.parse("file:///android_asset/" + producto.getImg_prod()))
+                .load(Uri.parse("file://" + producto.getImg_prod()))
                 .centerCrop()
                 .into(mAvatar);
 
