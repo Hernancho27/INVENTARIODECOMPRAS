@@ -17,7 +17,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.sqlite.ContratoInventario.ProductoEntrada;
+
+import static codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager.CN_IMG_PROD;
+import static codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager.CN_NAME;
 
 /**
  * Created by urreal on 05/06/2017.
@@ -42,8 +44,8 @@ public class ProductosCursorAdapter extends CursorAdapter {
         final ImageView avatarImage = (ImageView) view.findViewById(R.id.iv_avatar);
 
         // Get valores.
-        String name = cursor.getString(cursor.getColumnIndex(ProductoEntrada.CN_NAME));
-        String avatarUri = cursor.getString(cursor.getColumnIndex(ProductoEntrada.CN_IMG_PROD));
+        String name = cursor.getString(cursor.getColumnIndex(CN_NAME));
+        String avatarUri = cursor.getString(cursor.getColumnIndex(CN_IMG_PROD));
 
         // Setup.
         nameText.setText(name);
