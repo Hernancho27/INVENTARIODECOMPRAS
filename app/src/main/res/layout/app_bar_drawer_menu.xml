@@ -82,10 +82,11 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/ListView"
+            android:id="@+id/product_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:divider="@null"
+            tools:listitem="@layout/lista_item_producto" />
 
     </LinearLayout>
 

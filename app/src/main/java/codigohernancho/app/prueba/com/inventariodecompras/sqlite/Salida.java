@@ -1,4 +1,4 @@
-package codigohernancho.app.prueba.com.inventariodecompras.modelo;
+package codigohernancho.app.prueba.com.inventariodecompras.sqlite;
 
 import java.util.Date;
 
