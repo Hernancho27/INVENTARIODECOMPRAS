@@ -3,7 +3,9 @@ package codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_pr
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -95,7 +97,9 @@ public class FragmentoAgregarEditar extends Fragment {
     }
 
     private void loadProducto() {
-        new GetProductoByIdTask().execute();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+            new GetProductoByIdTask().execute();
+        }
     }
 
     private void addEditProducto() {
@@ -126,7 +130,9 @@ public class FragmentoAgregarEditar extends Fragment {
         }
         Producto producto = new Producto("", fecha, 1, "", "",nombre, descripcion);
 
-        new AddEditProductoTask().execute(producto);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+            new AddEditProductoTask().execute(producto);
+        }
 
     }
 
@@ -157,6 +163,7 @@ public class FragmentoAgregarEditar extends Fragment {
                 "Error al editar producto", Toast.LENGTH_SHORT).show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private class GetProductoByIdTask extends AsyncTask<Void, Void, Cursor> {
 
         @Override

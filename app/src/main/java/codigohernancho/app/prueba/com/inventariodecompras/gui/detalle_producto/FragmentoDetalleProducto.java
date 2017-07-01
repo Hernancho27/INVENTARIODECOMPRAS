@@ -22,6 +22,7 @@ import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseMana
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.FragmentoProductos;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 
 /**

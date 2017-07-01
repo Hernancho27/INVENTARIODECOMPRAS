@@ -1,4 +1,4 @@
-package codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto;
+package codigohernancho.app.prueba.com.inventariodecompras.gui.productos;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,8 +17,7 @@ import android.widget.Toast;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ProductosCursorAdapter;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.ActividadDetalleProducto;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.ContratoInventario.ProductoEntrada;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.OperacionesBaseDatos;
 

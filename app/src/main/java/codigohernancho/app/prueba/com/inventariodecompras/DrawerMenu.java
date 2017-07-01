@@ -229,8 +229,8 @@ public class DrawerMenu
         int id = item.getItemId();
 
         if (id == R.id.crear) {
-                Intent intent1 = new Intent(DrawerMenu.this,CREAR.class);
-                startActivity(intent1);
+                Intent intent1 = new Intent(DrawerMenu.this,ActividadAgregarEditar.class);
+                startActivityForResult(intent1, ActividadAgregarEditar.REQUEST_ADD_PRODUCTO);
             // Handle the camera action
         } else
             if (id == R.id.entradas) {
