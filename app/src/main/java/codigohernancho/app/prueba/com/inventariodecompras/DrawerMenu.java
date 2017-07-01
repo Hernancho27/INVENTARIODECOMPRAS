@@ -70,7 +70,7 @@ public class DrawerMenu
         bt.setOnClickListener(this);
                 /*ejemploscod, fecha, cant, img_prod, estado, nombre,descripcion*/
         manager.insertar("1236547","20170701", 3, "img.jpg","activo","Arroz Diana", "arroz ");
-        manager.insertar("789654","20170701", 3, "img.jpg","activo","Maiz", "Maiz tierno en harina ");
+        manager.insertar("0190576908517","20170701", 3, "img.jpg","activo","Maiz", "Maiz tierno en harina ");
         manager.insertar("456987","20170701", 3, "img.jpg","activo","Azucar", "Azucar Morena ");
 
         String[] from = new String[]{manager.CN_NAME,manager.CN_CODIGO,manager.CN_DESCRIPCION};
@@ -122,9 +122,23 @@ public class DrawerMenu
         Intent intent=getIntent();//Traemos el codigo de la activity escanear.
         Bundle extras=intent.getExtras();
 
-        if(extras!=null){//Validamos que el codigo no venga vacio.
+        if(extras!=null){
+            //Validamos que el codigo no venga vacio.
             String codigo=extras.getString("CODIGO");
             codNombre.setText(codigo);
+            Cursor c =manager.buscarCodigo(tv.getText().toString());
+
+
+            if(c.moveToFirst() == false){
+                //Revisamos si existe el producto
+                Context context = getApplicationContext();
+                CharSequence text = "No existe el producto";
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else{
+                adapter.changeCursor(c);
+            }
         }
 
 
@@ -249,23 +263,35 @@ public class DrawerMenu
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.button1) {
-            //Cursor c =manager.buscarCodigo(tv.getText().toString());
-            //adapter.changeCursor(c);}
-            //new BuscarTask().execute();
-            //if(adapter.equals("")){
-            Cursor c = manager.buscarNombre(tv.getText().toString());
-            if(tv.getText().toString().equals("")){
+        Cursor c = manager.buscarNombre(tv.getText().toString());
+        Cursor c2 = manager.buscarCodigo(tv.getText().toString());
+        if (tv.getText().toString().equals("")) {
+            Context context = getApplicationContext();
+            CharSequence text = "Inserte un Nombre o Codigo";
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        } else {
+            if (c.moveToFirst() == false) {
+                //Revisamos si existe el producto
                 Context context = getApplicationContext();
-                CharSequence text = "Inserte un Nombre o Codigo";
-                int duration = Toast.LENGTH_LONG;
+                CharSequence text = "Busqueda por codigo";
+                int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                toast.show();}
+            else{   adapter.changeCursor(c);}
+            if (c2.moveToFirst() == false) {
+                //Revisamos si existe el producto
+                Context context2 = getApplicationContext();
+                CharSequence text2 = "Busqueda por nombre";
+                int duration2 = Toast.LENGTH_SHORT;
+                Toast toast2 = Toast.makeText(context2, text2, duration2);
+                toast2.show();
             }else{
-                adapter.changeCursor(c);}
-
-
-        }}
+                adapter.changeCursor(c2);
+            }
+        }
+    }
 
 
 
