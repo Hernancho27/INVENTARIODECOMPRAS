@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper{
 
-    public static final String DB_NAME = "DBInventario_2.sqlite";
+    public static final String DB_NAME = "DBInventario_3.sqlite";
     public static final int DB_SCHEME_VERSION = 1;
 
 

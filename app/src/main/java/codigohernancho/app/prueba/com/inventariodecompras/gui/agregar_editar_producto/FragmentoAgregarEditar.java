@@ -226,7 +226,7 @@ public class FragmentoAgregarEditar extends Fragment {
         if (error) {
             return;
         }
-        Producto producto = new Producto("", fecha, 1, "", "",nombre, descripcion);
+        Producto producto = new Producto("", fecha, 1, imagen, "activo",nombre, descripcion);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
             new AddEditProductoTask().execute(producto);
