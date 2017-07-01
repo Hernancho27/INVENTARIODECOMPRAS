@@ -72,7 +72,7 @@ public class DataBaseManager {
         db.delete(TABLE_NAME,CN_NAME +"IN (?,?)", new String[]{nom1,nom2});
     }
 
-    public void modificarTelefono (String cod, String nombre, String descripcion){
+    public void modificarProducto (String cod, String nombre, String descripcion){
         db.update(TABLE_NAME,generarContentValues(cod, nombre,descripcion),CN_NAME +"=?", new String[]{nombre});
     }
 

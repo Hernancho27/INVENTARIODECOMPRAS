@@ -100,9 +100,21 @@ public class DrawerMenu
         Intent intent=getIntent();//Traemos el codigo de la activity escanear.
         Bundle extras=intent.getExtras();
 
-        if(extras!=null){//Validamos que el codigo no venga vacio.
+        if(extras!=null){
+            //Validamos que el codigo no venga vacio.
             String codigo=extras.getString("CODIGO");
             codNombre.setText(codigo);
+            Cursor c =manager.buscarCodigo(tv.getText().toString());
+            if(c.moveToFirst() == false){
+                //Revisamos si existe el producto
+                Context context = getApplicationContext();
+                CharSequence text = "No existe el producto";
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else{
+                adapter.changeCursor(c);
+            }
         }
 
 
