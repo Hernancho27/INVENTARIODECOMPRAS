@@ -33,4 +33,14 @@
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_check" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:tint="@android:color/white"
+        app:fabSize="normal"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
 </android.support.design.widget.CoordinatorLayout>
