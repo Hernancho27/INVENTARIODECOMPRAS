@@ -75,14 +75,14 @@ public class DataBaseManager {
         return sqLiteDatabase.insert(
                 TABLE_NAME,
                 null,
-                producto.toContentValues());
+                generarContentValues(producto.getCod(),producto.getFecha(), producto.getCant(), producto.getImg_prod(), producto.getEstado(), producto.getNombre(), producto.getDescripcion()));
 
     }
 
     public int updateProducto(Producto producto, String productoId) {
         return helper.getWritableDatabase().update(
                 TABLE_NAME,
-                producto.toContentValues(),
+                generarContentValues(producto.getCod(),producto.getFecha(), producto.getCant(), producto.getImg_prod(), producto.getEstado(), producto.getNombre(), producto.getDescripcion()),
                 CN_ID + " LIKE ?",
                 new String[]{productoId}
         );
