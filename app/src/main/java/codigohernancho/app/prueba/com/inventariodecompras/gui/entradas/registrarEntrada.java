@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
+import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Entrada;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.EntradasSqliteHelper;
 
 public class registrarEntrada extends AppCompatActivity {

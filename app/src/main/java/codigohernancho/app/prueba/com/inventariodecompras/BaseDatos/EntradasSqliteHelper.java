@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
+import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Entrada;
 
 
 public class EntradasSqliteHelper extends SQLiteOpenHelper{
