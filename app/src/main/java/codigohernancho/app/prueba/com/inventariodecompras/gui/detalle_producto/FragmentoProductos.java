@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
@@ -28,8 +29,8 @@ import codigohernancho.app.prueba.com.inventariodecompras.sqlite.OperacionesBase
 public class FragmentoProductos extends Fragment {
 
     public static final int REQUEST_UPDATE_DELETE_PRODUCT = 2;
-    private OperacionesBaseDatos mOperacionesBaseDatos;
-
+    //private OperacionesBaseDatos mOperacionesBaseDatos;
+    private DataBaseManager manager;
     private ListView mProductosLista;
     private ProductosCursorAdapter mProductosAdapter;
     private FloatingActionButton mBtnAgregar;
@@ -59,7 +60,7 @@ public class FragmentoProductos extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Cursor currentItem = (Cursor) mProductosAdapter.getItem(i);
                 String currentProductoId = currentItem.getString(
-                        currentItem.getColumnIndex(ProductoEntrada.ID));
+                        currentItem.getColumnIndex(ProductoEntrada.CN_ID));
 
                 showDetailScreen(currentProductoId);
             }
@@ -75,7 +76,7 @@ public class FragmentoProductos extends Fragment {
         getActivity().deleteDatabase(OperacionesBaseDatos.DATABASE_NAME);
 
         // Instancia de helper
-        mOperacionesBaseDatos = new OperacionesBaseDatos(getActivity());
+        manager = new DataBaseManager(getActivity());
 
         // Carga de datos
         loadProductos();
@@ -122,7 +123,7 @@ public class FragmentoProductos extends Fragment {
 
         @Override
         protected Cursor doInBackground(Void... voids) {
-            return mOperacionesBaseDatos.getAllProductos();
+            return manager.getAllProductos();
         }
 
         @Override

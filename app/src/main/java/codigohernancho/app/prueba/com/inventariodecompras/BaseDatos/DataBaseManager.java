@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
+
 /**
  * Created by Hernancho on 22/06/2017.
  */
@@ -30,6 +32,7 @@ public class DataBaseManager {
             + CN_CANTIDAD + " integer,"
             + CN_IMG_PROD + " text not null,"
             + CN_ESTADO + " text not null,"
+            + CN_NAME + " text not null,"
             + CN_DESCRIPCION + " text);";
 
     private DBHelper helper;
@@ -48,17 +51,57 @@ public class DataBaseManager {
         //db.rawQuery();
 
     }
+    public Cursor getProductoById(String productoId) {
+        Cursor c = helper.getReadableDatabase().query(
+                TABLE_NAME,
+                null,
+                CN_ID + " LIKE ?",
+                new String[]{productoId},
+                null,
+                null,
+                null);
+        return c;
+    }
+    public int deleteProducto(String productoId) {
+        return helper.getWritableDatabase().delete(
+                TABLE_NAME,
+                CN_ID + " LIKE ?",
+                new String[]{productoId});
+    }
 
-    public ContentValues generarContentValues(String cod, String nombre, String descripcion){
+    public long saveProducto(Producto producto) {
+        SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
+
+        return sqLiteDatabase.insert(
+                TABLE_NAME,
+                null,
+                producto.toContentValues());
+
+    }
+
+    public int updateProducto(Producto producto, String productoId) {
+        return helper.getWritableDatabase().update(
+                TABLE_NAME,
+                producto.toContentValues(),
+                CN_ID + " LIKE ?",
+                new String[]{productoId}
+        );
+    }
+
+    public ContentValues generarContentValues(String cod, String fecha, Integer cant, String img_prod, String estado, String nombre, String descripcion){
         ContentValues valores = new ContentValues();
         valores.put(CN_CODIGO, cod);
+        valores.put(CN_FECHA_CREACION, fecha);
+        valores.put(CN_CANTIDAD, cant);
+        valores.put(CN_IMG_PROD, img_prod);
+        valores.put(CN_ESTADO, estado);
         valores.put(CN_NAME, nombre);
         valores.put(CN_DESCRIPCION, descripcion);
         return valores;
     }
 
-    public void insertar(String cod, String nombre, String descripcion){
-        db.insert(TABLE_NAME, null,generarContentValues(cod,nombre,descripcion));
+    public void insertar(String cod, String fecha, Integer cant, String img_prod, String estado, String nombre, String descripcion){
+        db.insert(TABLE_NAME, null,generarContentValues(cod, fecha, cant, img_prod, estado, nombre,descripcion));
     }
     public void insertar2 (String codigo, String nombre, String descripcion){
         db.execSQL("insert into "+TABLE_NAME+" values (null,'"+codigo+"',"+nombre+","+descripcion+")");
@@ -72,12 +115,12 @@ public class DataBaseManager {
         db.delete(TABLE_NAME,CN_NAME +"IN (?,?)", new String[]{nom1,nom2});
     }
 
-    public void modificarTelefono (String cod, String nombre, String descripcion){
-        db.update(TABLE_NAME,generarContentValues(cod, nombre,descripcion),CN_NAME +"=?", new String[]{nombre});
+    public void modificarTelefono (String cod, String fecha, Integer cant, String img_prod, String estado, String nombre, String descripcion){
+        db.update(TABLE_NAME,generarContentValues(cod, fecha, cant, img_prod, estado, nombre,descripcion),CN_NAME +"=?", new String[]{nombre});
     }
 
     public Cursor cargarCursorContactos(){
-        String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_NAME,CN_DESCRIPCION};
+        String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_FECHA_CREACION,CN_CANTIDAD,CN_IMG_PROD,CN_NAME,CN_ESTADO,CN_DESCRIPCION};
         return db.query(TABLE_NAME,columnas,null,null,null,null,null);
     }
 
@@ -91,6 +134,17 @@ public class DataBaseManager {
             e.printStackTrace();
         }*/
         return db.query(TABLE_NAME,columnas,CN_NAME+ "=?", new  String[]{nombre},null,null,null);
+    }
+    public Cursor getAllProductos() {
+        return helper.getReadableDatabase()
+                .query(
+                        TABLE_NAME,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
     }
 
     public Cursor buscarCodigo(String codigo) {

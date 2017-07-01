@@ -18,10 +18,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
-import codigohernancho.app.prueba.com.inventariodecompras.sqlite.OperacionesBaseDatos;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 
 /**
@@ -36,9 +36,10 @@ public class FragmentoDetalleProducto extends Fragment {
     private CollapsingToolbarLayout mCollapsingView;
     private ImageView mAvatar;
     private TextView mCantidad;
+    private TextView mImagen;
     private TextView mDescripcion;
+    private DataBaseManager manager;
 
-    private OperacionesBaseDatos mOperacionesBaseDatos;
 
 
     public FragmentoDetalleProducto() {
@@ -71,9 +72,9 @@ public class FragmentoDetalleProducto extends Fragment {
         mCollapsingView = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
         mAvatar = (ImageView) getActivity().findViewById(R.id.iv_avatar);
         mCantidad = (TextView) root.findViewById(R.id.tv_cantidad);
+        mImagen = (TextView) root.findViewById(R.id.tv_imagen);
         mDescripcion = (TextView) root.findViewById(R.id.tv_descripcion);
-
-        mOperacionesBaseDatos = new OperacionesBaseDatos(getActivity());
+        manager = new DataBaseManager(getActivity());
 
         loadProducto();
 
@@ -110,11 +111,13 @@ public class FragmentoDetalleProducto extends Fragment {
     private void showProducto(Producto producto){
         mCollapsingView.setTitle(producto.getNombre());
         Glide.with(this)
-                .load(Uri.parse("file:///android_asset/" + producto.getImgProd()))
+                .load(Uri.parse("file:///android_asset/" + producto.getImg_prod()))
                 .centerCrop()
                 .into(mAvatar);
-        mCantidad.setText(producto.getCantidad());
+
+        mCantidad.setText(producto.getCant().toString());
         mDescripcion.setText(producto.getDescripcion());
+        mImagen.setText(producto.getImg_prod());
     }
 
     private void showEditScreen() {
@@ -145,7 +148,7 @@ public class FragmentoDetalleProducto extends Fragment {
 
         @Override
         protected Cursor doInBackground(Void... voids) {
-            return mOperacionesBaseDatos.getProductoById(mProductoId);
+            return manager.getProductoById(mProductoId);
         }
 
         @Override
@@ -163,7 +166,7 @@ public class FragmentoDetalleProducto extends Fragment {
 
         @Override
         protected Integer doInBackground(Void... voids) {
-            return mOperacionesBaseDatos.deleteProducto(mProductoId);
+            return manager.deleteProducto(mProductoId);
         }
 
         @Override

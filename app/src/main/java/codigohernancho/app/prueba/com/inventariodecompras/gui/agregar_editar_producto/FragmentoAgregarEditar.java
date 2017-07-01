@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import java.util.Date;
 
+import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.sqlite.OperacionesBaseDatos;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 
 /**
@@ -30,7 +30,8 @@ public class FragmentoAgregarEditar extends Fragment {
 
     private String mProductoId;
 
-    private OperacionesBaseDatos mOperacionesBaseDatos;
+    //private OperacionesBaseDatos mOperacionesBaseDatos;
+    private DataBaseManager manager;
 
     private FloatingActionButton mSaveButton;
     private TextInputEditText mNombreField;
@@ -83,8 +84,8 @@ public class FragmentoAgregarEditar extends Fragment {
             }
         });
 
-        mOperacionesBaseDatos = new OperacionesBaseDatos(getActivity());
-
+        //mOperacionesBaseDatos = new OperacionesBaseDatos(getActivity());
+        manager =  new DataBaseManager(getActivity());
         // Carga de datos
         if (mProductoId != null) {
             loadProducto();
@@ -123,8 +124,7 @@ public class FragmentoAgregarEditar extends Fragment {
         if (error) {
             return;
         }
-
-        Producto producto = new Producto(nombre, descripcion, fecha, cantidad, "", 1);
+        Producto producto = new Producto("", fecha, 1, "", "",nombre, descripcion);
 
         new AddEditProductoTask().execute(producto);
 
@@ -148,7 +148,7 @@ public class FragmentoAgregarEditar extends Fragment {
 
     private void showProducto(Producto producto) {
         mNombreField.setText(producto.getNombre());
-        mCantidadField.setText(producto.getCantidad());
+        mCantidadField.setText(producto.getCant().toString());
         mDescripcionField.setText(producto.getDescripcion());
     }
 
@@ -161,7 +161,7 @@ public class FragmentoAgregarEditar extends Fragment {
 
         @Override
         protected Cursor doInBackground(Void... voids) {
-            return mOperacionesBaseDatos.getProductoById(mProductoId);
+            return manager.getProductoById(mProductoId);
         }
 
         @Override
@@ -182,10 +182,10 @@ public class FragmentoAgregarEditar extends Fragment {
         @Override
         protected Boolean doInBackground(Producto... productos) {
             if (mProductoId != null) {
-                return mOperacionesBaseDatos.updateProducto(productos[0], mProductoId) > 0;
+                return manager.updateProducto(productos[0], mProductoId) > 0;
 
             } else {
-                return mOperacionesBaseDatos.saveProducto(productos[0]) > 0;
+                return manager.saveProducto(productos[0]) > 0;
             }
 
         }

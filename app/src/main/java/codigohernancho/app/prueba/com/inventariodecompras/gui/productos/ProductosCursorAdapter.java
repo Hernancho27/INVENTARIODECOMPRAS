@@ -42,8 +42,8 @@ public class ProductosCursorAdapter extends CursorAdapter {
         final ImageView avatarImage = (ImageView) view.findViewById(R.id.iv_avatar);
 
         // Get valores.
-        String name = cursor.getString(cursor.getColumnIndex(ProductoEntrada.NOMBRE));
-        String avatarUri = cursor.getString(cursor.getColumnIndex(ProductoEntrada.IMG_PROD));
+        String name = cursor.getString(cursor.getColumnIndex(ProductoEntrada.CN_NAME));
+        String avatarUri = cursor.getString(cursor.getColumnIndex(ProductoEntrada.CN_IMG_PROD));
 
         // Setup.
         nameText.setText(name);

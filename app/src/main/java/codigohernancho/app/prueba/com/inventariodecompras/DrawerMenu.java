@@ -1,10 +1,12 @@
 package codigohernancho.app.prueba.com.inventariodecompras;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -16,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -25,16 +28,22 @@ import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DBHelper;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.ActividadDetalleProducto;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.entradas.inicioEntradas;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ProductosCursorAdapter;
 
 
 public class DrawerMenu
         extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    public static final int REQUEST_UPDATE_DELETE_PRODUCT = 2;
     private DataBaseManager manager;
     private Cursor cursor;
     private ListView lista;
     private SimpleCursorAdapter adapter;
+    private ProductosCursorAdapter mProductosAdapter;
     private TextView tv;
     private Button bt;
 
@@ -56,12 +65,13 @@ public class DrawerMenu
         lista = (ListView) findViewById(R.id.product_list);
         tv= (TextView) findViewById(R.id.codbarras);
         bt= (Button) findViewById(R.id.button1);
+        mProductosAdapter = new ProductosCursorAdapter(getBaseContext(), null);
 
         bt.setOnClickListener(this);
-                /*ejemplos*/
-        manager.insertar("1236547","Arroz","Arroz Diana");
-        manager.insertar("789654","Maiz","Maiz tierno en arina");
-        manager.insertar("456987","Azucar","Azucar Morena");
+                /*ejemploscod, fecha, cant, img_prod, estado, nombre,descripcion*/
+        manager.insertar("1236547","20170701", 3, "img.jpg","activo","Arroz Diana", "arroz ");
+        manager.insertar("789654","20170701", 3, "img.jpg","activo","Maiz", "Maiz tierno en harina ");
+        manager.insertar("456987","20170701", 3, "img.jpg","activo","Azucar", "Azucar Morena ");
 
         String[] from = new String[]{manager.CN_NAME,manager.CN_CODIGO,manager.CN_DESCRIPCION};
         int [] to = new int[] {R.id.tv_name,android.R.id.text2};
@@ -69,6 +79,18 @@ public class DrawerMenu
         cursor = manager.cargarCursorContactos();
         adapter = new SimpleCursorAdapter(this,R.layout.lista_item_producto,cursor,from,to);
         lista.setAdapter(adapter);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Cursor currentItem = (Cursor) adapter.getItem(i);
+                String currentProductoId = currentItem.getString(
+                        currentItem.getColumnIndex(manager.CN_ID));
+
+                showDetailScreen(currentProductoId);
+            }
+        });
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -108,7 +130,50 @@ public class DrawerMenu
 
     }
 
+    private void showDetailScreen(String productoId) {
+        Intent intent = new Intent(getBaseContext(), ActividadDetalleProducto.class);
+        intent.putExtra(ActividadProductos.EXTRA_PRODUCTO_ID, productoId);
+        startActivityForResult(intent, REQUEST_UPDATE_DELETE_PRODUCT);
+    }
+    private void showSuccessfullSavedMessage() {
+        Toast.makeText(getBaseContext(),
+                "Producto guardado correctamente", Toast.LENGTH_SHORT).show();
+    }
+    private void loadProductos() {
+        new ProductoLoadTask().execute();
+    }
 
+    private class ProductoLoadTask extends AsyncTask<Void, Void, Cursor> {
+
+        @Override
+        protected Cursor doInBackground(Void... voids) {
+            return manager.getAllProductos();
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            if (cursor != null && cursor.getCount() > 0) {
+                adapter.swapCursor(cursor);
+            } else {
+                // Mostrar empty state
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Activity.RESULT_OK == resultCode) {
+            switch (requestCode) {
+                case ActividadAgregarEditar.REQUEST_ADD_PRODUCTO:
+                    showSuccessfullSavedMessage();
+                    loadProductos();
+                    break;
+                case REQUEST_UPDATE_DELETE_PRODUCT:
+                    loadProductos();
+                    break;
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {
