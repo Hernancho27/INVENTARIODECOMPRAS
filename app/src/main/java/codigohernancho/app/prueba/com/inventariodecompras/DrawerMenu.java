@@ -69,7 +69,7 @@ public class DrawerMenu
 
         bt.setOnClickListener(this);
                 /*ejemploscod, fecha, cant, img_prod, estado, nombre,descripcion*/
-        manager.insertar("019057","20170701", 3, "img.jpg","activo","Maiz", "Maiz tierno en harina ");
+
         String[] from = new String[]{manager.CN_NAME, manager.CN_IMG_PROD};
         int [] to = new int[] {R.id.tv_name, R.id.iv_avatar};
 
