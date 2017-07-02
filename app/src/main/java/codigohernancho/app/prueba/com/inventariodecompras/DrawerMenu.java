@@ -259,7 +259,7 @@ public class DrawerMenu
 
     @Override
     public void onClick(View view) {
-
+        int busqueda = 0;
         Cursor c = manager.buscarNombre(tv.getText().toString());
         Cursor c2 = manager.buscarCodigo(tv.getText().toString());
         if (tv.getText().toString().equals("")) {
@@ -268,6 +268,10 @@ public class DrawerMenu
             int duration = Toast.LENGTH_LONG;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
+            Cursor Reset = manager.cargarCursorInventario();
+            adapter.changeCursor(Reset);
+            //adapter = new SimpleCursorAdapter(this,R.layout.lista_item_producto,cursor,from,to);
+            //lista.setAdapter(adapter);
         } else {
             if (c.moveToFirst() == false) {
                 //Revisamos si existe el producto
@@ -275,8 +279,10 @@ public class DrawerMenu
                 CharSequence text = "Busqueda por codigo";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
-                toast.show();}
-            else{   adapter.changeCursor(c);}
+                toast.show();
+                busqueda ++;}
+            else{   adapter.changeCursor(c);
+            }
             if (c2.moveToFirst() == false) {
                 //Revisamos si existe el producto
                 Context context2 = getApplicationContext();
@@ -284,9 +290,18 @@ public class DrawerMenu
                 int duration2 = Toast.LENGTH_SHORT;
                 Toast toast2 = Toast.makeText(context2, text2, duration2);
                 toast2.show();
+                busqueda ++;
             }else{
                 adapter.changeCursor(c2);
             }
+        } if(busqueda == 2){
+            Context context = getApplicationContext();
+            CharSequence text = "No se encontro el producto";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            Cursor Reset = manager.cargarCursorInventario();
+            adapter.changeCursor(Reset);
         }
     }
 
