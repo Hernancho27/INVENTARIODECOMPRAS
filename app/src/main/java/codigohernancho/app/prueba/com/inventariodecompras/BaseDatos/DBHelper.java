@@ -30,6 +30,7 @@ public class DBHelper extends SQLiteOpenHelper{
         String nombre ="Maiz";
         String descripcion = "Maiz tierno en harina ";*/
         db.execSQL(codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager.CREATE_TABLE);
+        db.execSQL(codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager.CREATE_TABLE2);
         //db.execSQL("insert into Inventario values ( '1', '"+cod+"', '"+fecha+"', "+cant.toString()+", '"+img_prod+"', '"+estado+"', '"+nombre+"', '"+descripcion+"'); ");
     }
 
