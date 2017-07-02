@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
+import codigohernancho.app.prueba.com.inventariodecompras.DrawerMenu;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
@@ -130,6 +131,8 @@ public class FragmentoDetalleProducto extends Fragment {
         if (!requery) {
             showDeleteError();
         }
+        Intent intent = new Intent(getActivity(), DrawerMenu.class);
+        startActivityForResult(intent, FragmentoProductos.REQUEST_UPDATE_DELETE_PRODUCT);
         getActivity().setResult(requery ? Activity.RESULT_OK : Activity.RESULT_CANCELED);
         getActivity().finish();
     }
