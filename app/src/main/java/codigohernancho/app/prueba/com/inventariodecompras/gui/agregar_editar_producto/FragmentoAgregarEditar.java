@@ -66,10 +66,12 @@ public class FragmentoAgregarEditar extends Fragment {
     private FloatingActionButton mSaveButton;
     private FloatingActionButton mAddImgButton;
     private TextInputEditText mNombreField;
+    private TextInputEditText mCodigoField;
     private TextInputEditText mCantidadField;
     private TextInputEditText mDescripcionField;
     private TextInputEditText mImagenField;
     private TextInputLayout mNombreLabel;
+    private TextInputLayout mCodigoLabel;
     private TextInputLayout mCantidadLabel;
     private TextInputLayout mDescripcionLabel;
     private TextInputLayout mImagenLabel;
@@ -104,10 +106,12 @@ public class FragmentoAgregarEditar extends Fragment {
         mSaveButton = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         mAddImgButton = (FloatingActionButton) getActivity().findViewById(R.id.fabimg);
         mNombreField = (TextInputEditText) root.findViewById(R.id.et_nombre);
+        mCodigoField = (TextInputEditText) root.findViewById(R.id.et_codigo);
         mCantidadField = (TextInputEditText) root.findViewById(R.id.et_cantidad);
         mDescripcionField = (TextInputEditText) root.findViewById(R.id.et_descripcion);
         mImagenField = (TextInputEditText) root.findViewById(R.id.et_img_prod);
         mNombreLabel = (TextInputLayout) root.findViewById(R.id.til_nombre);
+        mCodigoLabel = (TextInputLayout) root.findViewById(R.id.til_codigo);
         mCantidadLabel = (TextInputLayout) root.findViewById(R.id.til_cantidad);
         mDescripcionLabel = (TextInputLayout) root.findViewById(R.id.til_descripcion);
         mImagenLabel = (TextInputLayout) root.findViewById(R.id.til_img_prod);
@@ -203,6 +207,7 @@ public class FragmentoAgregarEditar extends Fragment {
         boolean error = false;
 
         String nombre = mNombreField.getText().toString();
+        String codigo = mCodigoField.getText().toString();
         String cantidad = mCantidadField.getText().toString();
         String descripcion = mDescripcionField.getText().toString();
         String fecha = new Date().toString();
@@ -210,6 +215,11 @@ public class FragmentoAgregarEditar extends Fragment {
 
         if (TextUtils.isEmpty(nombre)) {
             mNombreField.setError(getString(R.string.field_error));
+            error = true;
+        }
+
+        if (TextUtils.isEmpty(codigo)) {
+            mCodigoField.setError(getString(R.string.field_error));
             error = true;
         }
 
@@ -226,7 +236,7 @@ public class FragmentoAgregarEditar extends Fragment {
         if (error) {
             return;
         }
-        Producto producto = new Producto("", fecha, 1, imagen, "activo",nombre, descripcion);
+        Producto producto = new Producto(codigo, fecha, 1, imagen, "activo",nombre, descripcion);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
             new AddEditProductoTask().execute(producto);
@@ -252,6 +262,7 @@ public class FragmentoAgregarEditar extends Fragment {
 
     private void showProducto(Producto producto) {
         mNombreField.setText(producto.getNombre());
+        mCodigoField.setText(producto.getNombre());
         mCantidadField.setText(producto.getCant().toString());
         mDescripcionField.setText(producto.getDescripcion());
         mImagenField.setText(producto.getImg_prod());
