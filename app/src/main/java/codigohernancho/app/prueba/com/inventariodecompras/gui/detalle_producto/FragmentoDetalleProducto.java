@@ -36,6 +36,7 @@ public class FragmentoDetalleProducto extends Fragment {
     private String mProductoId;
     private CollapsingToolbarLayout mCollapsingView;
     private ImageView mAvatar;
+    private TextView mCodigo;
     private TextView mCantidad;
     private TextView mImagen;
     private TextView mDescripcion;
@@ -72,6 +73,7 @@ public class FragmentoDetalleProducto extends Fragment {
         View root = inflater.inflate(R.layout.fragmento_detalle_producto, container, false);
         mCollapsingView = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
         mAvatar = (ImageView) getActivity().findViewById(R.id.iv_avatar);
+        mCodigo = (TextView) root.findViewById(R.id.tv_codigo);
         mCantidad = (TextView) root.findViewById(R.id.tv_cantidad);
         mImagen = (TextView) root.findViewById(R.id.tv_imagen);
         mDescripcion = (TextView) root.findViewById(R.id.tv_descripcion);
@@ -116,6 +118,7 @@ public class FragmentoDetalleProducto extends Fragment {
                 .centerCrop()
                 .into(mAvatar);
 
+        mCodigo.setText(producto.getCod().toString());
         mCantidad.setText(producto.getCant().toString());
         mDescripcion.setText(producto.getDescripcion());
         mImagen.setText(producto.getImg_prod());

@@ -262,7 +262,7 @@ public class FragmentoAgregarEditar extends Fragment {
 
     private void showProducto(Producto producto) {
         mNombreField.setText(producto.getNombre());
-        mCodigoField.setText(producto.getNombre());
+        mCodigoField.setText(producto.getCod());
         mCantidadField.setText(producto.getCant().toString());
         mDescripcionField.setText(producto.getDescripcion());
         mImagenField.setText(producto.getImg_prod());
