@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
@@ -32,8 +31,8 @@ import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 public class FragmentoDetalleProducto extends Fragment {
     private static final String ARG_PRODUCTO_ID = "productoId";
 
-    private String mProductoId;
 
+    private String mProductoId;
     private CollapsingToolbarLayout mCollapsingView;
     private ImageView mAvatar;
     private TextView mCantidad;
@@ -176,5 +175,7 @@ public class FragmentoDetalleProducto extends Fragment {
         }
 
     }
+
+
 
 }

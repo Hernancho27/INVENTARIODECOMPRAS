@@ -70,10 +70,10 @@ public class DrawerMenu
         bt.setOnClickListener(this);
                 /*ejemploscod, fecha, cant, img_prod, estado, nombre,descripcion*/
 
-        String[] from = new String[]{manager.CN_NAME, manager.CN_IMG_PROD};
+        String[] from = new String[]{manager.CN_NAME, manager.CN_IMG_PROD, manager.CN_CODIGO};
         int [] to = new int[] {R.id.tv_name, R.id.iv_avatar};
 
-        cursor = manager.cargarCursorContactos();
+        cursor = manager.cargarCursorInventario();
         adapter = new SimpleCursorAdapter(this,R.layout.lista_item_producto,cursor,from,to);
         lista.setAdapter(adapter);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {

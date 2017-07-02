@@ -119,13 +119,13 @@ public class DataBaseManager {
         db.update(TABLE_NAME,generarContentValues(cod, fecha, cant, img_prod, estado, nombre,descripcion),CN_NAME +"=?", new String[]{nombre});
     }
 
-    public Cursor cargarCursorContactos(){
+    public Cursor cargarCursorInventario(){
         String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_FECHA_CREACION,CN_CANTIDAD,CN_IMG_PROD,CN_NAME,CN_ESTADO,CN_DESCRIPCION};
         return db.query(TABLE_NAME,columnas,null,null,null,null,null);
     }
 
     public Cursor buscarNombre(String nombre) {
-        String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_NAME,CN_DESCRIPCION};
+        String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_FECHA_CREACION,CN_CANTIDAD, CN_IMG_PROD, CN_ESTADO, CN_NAME,CN_DESCRIPCION};
 
         /*Retardo para simular demora en la busqueda*/
         /*try{
@@ -148,7 +148,7 @@ public class DataBaseManager {
     }
 
     public Cursor buscarCodigo(String codigo) {
-        String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_NAME,CN_DESCRIPCION};
+        String[] columnas = new String[]{CN_ID,CN_CODIGO,CN_FECHA_CREACION,CN_CANTIDAD, CN_IMG_PROD, CN_ESTADO, CN_NAME,CN_DESCRIPCION};
         return db.query(TABLE_NAME,columnas,CN_CODIGO+ "=?", new  String[]{codigo}, null,null,null);
     }
 

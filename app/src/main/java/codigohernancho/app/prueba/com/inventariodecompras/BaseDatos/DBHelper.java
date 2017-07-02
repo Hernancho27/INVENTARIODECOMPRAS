@@ -22,15 +22,15 @@ public class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String cod = "019057";
+        /*String cod = "019057";
         String fecha = "20170701" ;
         Integer cant = 3;
         String img_prod = "img.jpg" ;
         String estado = "activo";
         String nombre ="Maiz";
-        String descripcion = "Maiz tierno en harina ";
+        String descripcion = "Maiz tierno en harina ";*/
         db.execSQL(codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager.CREATE_TABLE);
-        db.execSQL("insert into Inventario values ( '1', '"+cod+"', '"+fecha+"', "+cant.toString()+", '"+img_prod+"', '"+estado+"', '"+nombre+"', '"+descripcion+"'); ");
+        //db.execSQL("insert into Inventario values ( '1', '"+cod+"', '"+fecha+"', "+cant.toString()+", '"+img_prod+"', '"+estado+"', '"+nombre+"', '"+descripcion+"'); ");
     }
 
     @Override
