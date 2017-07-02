@@ -71,7 +71,7 @@ public class DrawerMenu
                 /*ejemploscod, fecha, cant, img_prod, estado, nombre,descripcion*/
 
         String[] from = new String[]{manager.CN_NAME, manager.CN_IMG_PROD, manager.CN_CODIGO};
-        int [] to = new int[] {R.id.tv_name, R.id.iv_avatar};
+        int [] to = new int[] {R.id.tv_name, R.id.iv_avatar, R.id.tv_codigo};
 
         cursor = manager.cargarCursorInventario();
         adapter = new SimpleCursorAdapter(this,R.layout.lista_item_producto,cursor,from,to);

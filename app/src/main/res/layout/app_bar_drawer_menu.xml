@@ -54,29 +54,28 @@
                 android:layout_width="60dp"
                 android:layout_height="55dp"
                 android:layout_gravity="bottom|end"
+                android:layout_weight="0.01"
                 android:background="@drawable/ic_buscar"
                 android:onClick="Buscar"
                 app:layout_anchor="@+id/include"
                 app:layout_anchorGravity="top|right"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="311dp"
-                tools:layout_editor_absoluteY="138dp"
-                android:layout_weight="0.01" />
+                tools:layout_editor_absoluteY="138dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="60dp"
                 android:layout_height="55dp"
                 android:layout_gravity="bottom|end"
+                android:layout_weight="0.01"
                 android:background="@drawable/botonscanner"
                 android:onClick="Scanner"
                 app:layout_anchor="@+id/include"
                 app:layout_anchorGravity="top|right"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="311dp"
-                tools:layout_editor_absoluteY="138dp"
-                android:layout_weight="0.01" />
-
+                tools:layout_editor_absoluteY="138dp" />
 
 
         </LinearLayout>
