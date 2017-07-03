@@ -14,7 +14,7 @@ import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 public class DataBaseManager {
 
 
-    public static final String TABLE_NAME = "Inventario";
+    public static final String TABLE_NAME = "Crear";
     public static final String TABLE_NAME2 = "Salidas";
     public static final String CN_ID = "_id";
     public static final String CN_CODIGO = "cod";
