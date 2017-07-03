@@ -17,12 +17,14 @@ public class DataBaseManager {
     public static final String TABLE_NAME = "Crear";
     public static final String TABLE_NAME2 = "Salidas";
     public static final String TABLE_NAME3 = "Entradas";
+    public static final String TABLE_NAME4 = "Inventario";
     public static final String CN_ID = "_id";
     public static final String CN_CODIGO = "cod";
     public static final String CN_FECHA_CREACION = "fecha";
     public static final String CN_CANTIDAD = "cant";
     public static final String CN_CANTIDAD_SALIDA = "cant";
     public static final String CN_CANTIDAD_ENTRADA = "cant";
+    public static final String CN_CANTIDAD_INVENTARIO = "cant";
     public static final String CN_IMG_PROD = "img_prod";
     public static final String CN_ESTADO = "estado";
     public static final String CN_NAME = "nombre";
@@ -53,6 +55,16 @@ public class DataBaseManager {
             + CN_CODIGO + " text not null,"
             + CN_FECHA_CREACION + " text not null,"
             + CN_CANTIDAD_ENTRADA + " integer,"
+            + CN_IMG_PROD + " text not null,"
+            + CN_ESTADO + " text not null,"
+            + CN_NAME + " text not null,"
+            + CN_DESCRIPCION + " text);";
+
+    public static final String CREATE_TABLE4 = " create table " +TABLE_NAME4+ " ("
+            + CN_ID + " integer primary key autoincrement,"
+            + CN_CODIGO + " text not null,"
+            + CN_FECHA_CREACION + " text not null,"
+            + CN_CANTIDAD_INVENTARIO + " integer,"
             + CN_IMG_PROD + " text not null,"
             + CN_ESTADO + " text not null,"
             + CN_NAME + " text not null,"
