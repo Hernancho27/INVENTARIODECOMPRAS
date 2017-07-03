@@ -6,26 +6,33 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.ActividadDetalleProducto;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ProductosCursorAdapter;
 
 public class SALIDAS extends AppCompatActivity implements View.OnClickListener {
 
-
-    private TextView tv;
-    private Button bt;
-    private SimpleCursorAdapter adapter;
-    private ProductosCursorAdapter mProductosAdapter;
-    Button leerCodigo;
-    EditText codNombre;
+    public static final int REQUEST_UPDATE_DELETE_PRODUCT = 2;
+    public static final String EXTRA_PRODUCTO_ID = "extra_producto_id";
     private DataBaseManager manager;
     private Cursor cursor;
+    private ListView lista;
+    private SimpleCursorAdapter adapter;
+    private ProductosCursorAdapter mProductosAdapter;
+    private TextView tv;
+    private Button bt;
+
+    Button leerCodigo;
+    EditText codNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +40,11 @@ public class SALIDAS extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_salidas);
 
         manager = new DataBaseManager(this);
-
+        lista = (ListView) findViewById(R.id.product_list);
         tv= (TextView) findViewById(R.id.codbarras);
         bt= (Button) findViewById(R.id.button1);
         mProductosAdapter = new ProductosCursorAdapter(getBaseContext(), null);
+
         bt.setOnClickListener(this);
                 /*ejemploscod, fecha, cant, img_prod, estado, nombre,descripcion*/
 
@@ -44,18 +52,28 @@ public class SALIDAS extends AppCompatActivity implements View.OnClickListener {
         int [] to = new int[] {R.id.tv_name, R.id.iv_avatar, R.id.tv_codigo};
 
         cursor = manager.cargarCursorInventario();
+        adapter = new SimpleCursorAdapter(this,R.layout.lista_item_producto,cursor,from,to);
+        lista.setAdapter(adapter);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Cursor currentItem = (Cursor) adapter.getItem(i);
+                String currentProductoId = currentItem.getString(
+                        currentItem.getColumnIndex(manager.CN_ID));
 
-
+                showDetailScreen(currentProductoId);
+            }
+        });
 
         leerCodigo = (Button) findViewById(R.id.button2);
         leerCodigo.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
+            public void onClick(View view) {
                 Context context = getApplicationContext();
                 CharSequence text = "Enfoque la cámara hacia un Código de Barras";
                 int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-                Intent intent1 = new Intent(SALIDAS.this,ESCANEAR.class);
+                Intent intent1 = new Intent(SALIDAS.this, ESCANEAR.class);
                 startActivity(intent1);
             }
         });
@@ -85,6 +103,12 @@ public class SALIDAS extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    private void showDetailScreen(String productoId) {
+        Intent intent = new Intent(getBaseContext(), ActividadDetalleProducto.class);
+        intent.putExtra(ActividadProductos.EXTRA_PRODUCTO_ID, productoId);
+        startActivityForResult(intent, REQUEST_UPDATE_DELETE_PRODUCT);
+    }
+
     @Override
     public void onClick(View view) {
         int busqueda = 0;
@@ -96,7 +120,7 @@ public class SALIDAS extends AppCompatActivity implements View.OnClickListener {
             int duration = Toast.LENGTH_LONG;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-            Cursor Reset = manager.cargarCursorInventario();/*
+            Cursor Reset = manager.cargarCursorInventario();
             adapter.changeCursor(Reset);
             //adapter = new SimpleCursorAdapter(this,R.layout.lista_item_producto,cursor,from,to);
             //lista.setAdapter(adapter);
@@ -129,7 +153,7 @@ public class SALIDAS extends AppCompatActivity implements View.OnClickListener {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
             Cursor Reset = manager.cargarCursorInventario();
-            adapter.changeCursor(Reset);*/
+            adapter.changeCursor(Reset);
         }
 
     }

@@ -39,6 +39,7 @@ public class DrawerMenu
         extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     public static final int REQUEST_UPDATE_DELETE_PRODUCT = 2;
+    public static final String EXTRA_PRODUCTO_ID = "extra_producto_id";
     private DataBaseManager manager;
     private Cursor cursor;
     private ListView lista;
@@ -46,8 +47,6 @@ public class DrawerMenu
     private ProductosCursorAdapter mProductosAdapter;
     private TextView tv;
     private Button bt;
-
-    public static final String EXTRA_PRODUCTO_ID = "extra_producto_id";
 
     Button leerCodigo;
     EditText codNombre;
@@ -103,7 +102,7 @@ public class DrawerMenu
                 Intent intent1 = new Intent(DrawerMenu.this,ESCANEAR.class);
                 startActivity(intent1);
             }
-                                });
+        });
 
         codNombre = (EditText) findViewById(R.id.codbarras);
 
@@ -137,8 +136,6 @@ public class DrawerMenu
                 adapter.changeCursor(c);
             }
         }
-
-
     }
 
     private void showDetailScreen(String productoId) {
