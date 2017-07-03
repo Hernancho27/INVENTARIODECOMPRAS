@@ -25,19 +25,20 @@ public class OperacionesBaseDatos extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + ProductoEntrada.TABLE_NAME + " ("
                 + ProductoEntrada._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + ProductoEntrada.ID + " TEXT NOT NULL,"
-                + ProductoEntrada.NOMBRE + " TEXT NOT NULL,"
-                + ProductoEntrada.DESCRIPCION + " TEXT NOT NULL,"
-                + ProductoEntrada.FECHA_CREACION + " TEXT NOT NULL,"
-                + ProductoEntrada.CANTIDAD + " INTEGER,"
-                + ProductoEntrada.IMG_PROD + " TEXT NOT NULL,"
-                + ProductoEntrada.ESTADO + " INTEGER" + ")");
+                + ProductoEntrada.CN_ID + " TEXT NOT NULL,"
+                + ProductoEntrada.CN_CODIGO + " TEXT NOT NULL,"
+                + ProductoEntrada.CN_FECHA_CREACION + " TEXT NOT NULL,"
+                + ProductoEntrada.CN_CANTIDAD + " TEXT NOT NULL,"
+                + ProductoEntrada.CN_IMG_PROD + " TEXT NOT NULL,"
+                + ProductoEntrada.CN_ESTADO + " INTEGER,"
+                + ProductoEntrada.CN_NAME + " TEXT NOT NULL,"
+                + ProductoEntrada.CN_DESCRIPCION + " INTEGER" + ")");
 
         // Insertar datos ficticios para prueba inicial
-        mockData(db);
+       // mockData(db);
 
     }
-    private void mockData(SQLiteDatabase sqLiteDatabase) {
+    /*private void mockData(SQLiteDatabase sqLiteDatabase) {
         mockProducto(sqLiteDatabase, new Producto("Televisor",
                 "Televisor de 20 pulgadas", "20170601","0","tv.jpg",1));
         mockProducto(sqLiteDatabase, new Producto("Cama",
@@ -48,7 +49,7 @@ public class OperacionesBaseDatos extends SQLiteOpenHelper{
                 "Armario de 1.80 de alto por 60 de fondo por 1.40 de ancho", "20170601","0","armario.jpg",1));
         mockProducto(sqLiteDatabase, new Producto("Bicicleta",
                 "Bicicleta de carreras", "20170601","0","bicicleta.jpg",1));
-    }
+    }*/
 
     public long mockProducto(SQLiteDatabase db, Producto producto) {
         return db.insert(
@@ -86,7 +87,7 @@ public class OperacionesBaseDatos extends SQLiteOpenHelper{
         Cursor c = getReadableDatabase().query(
                 ProductoEntrada.TABLE_NAME,
                 null,
-                ProductoEntrada.ID + " LIKE ?",
+                ProductoEntrada.CN_ID + " LIKE ?",
                 new String[]{productoId},
                 null,
                 null,
@@ -97,7 +98,7 @@ public class OperacionesBaseDatos extends SQLiteOpenHelper{
     public int deleteProducto(String productoId) {
         return getWritableDatabase().delete(
                 ProductoEntrada.TABLE_NAME,
-                ProductoEntrada.ID + " LIKE ?",
+                ProductoEntrada.CN_ID + " LIKE ?",
                 new String[]{productoId});
     }
 
@@ -105,7 +106,7 @@ public class OperacionesBaseDatos extends SQLiteOpenHelper{
         return getWritableDatabase().update(
                 ProductoEntrada.TABLE_NAME,
                 producto.toContentValues(),
-                ProductoEntrada.ID + " LIKE ?",
+                ProductoEntrada.CN_ID + " LIKE ?",
                 new String[]{productoId}
         );
     }

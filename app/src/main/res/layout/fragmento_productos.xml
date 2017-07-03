@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gui.detalle_producto.FragmentoProductos">
+    tools:context=".gui.productos.FragmentoProductos">
 
     <ListView
         android:id="@+id/lawyers_list"

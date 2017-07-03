@@ -1,21 +1,24 @@
 package codigohernancho.app.prueba.com.inventariodecompras;
 
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.database.Cursor;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,24 +26,27 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DBHelper;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.ActividadDetalleProducto;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.entradas.inicioEntradas;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ProductosCursorAdapter;
 
 
 public class DrawerMenu
         extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    public static final int REQUEST_UPDATE_DELETE_PRODUCT = 2;
+    public static final String EXTRA_PRODUCTO_ID = "extra_producto_id";
     private DataBaseManager manager;
     private Cursor cursor;
     private ListView lista;
     private SimpleCursorAdapter adapter;
+    private ProductosCursorAdapter mProductosAdapter;
     private TextView tv;
     private Button bt;
-
-    public static final String EXTRA_PRODUCTO_ID = "extra_producto_id";
 
     Button leerCodigo;
     EditText codNombre;
@@ -55,22 +61,32 @@ public class DrawerMenu
         SQLiteDatabase db = helper.getWritableDatabase();
 
         manager = new DataBaseManager(this);
-        lista = (ListView) findViewById(R.id.ListView);
+        lista = (ListView) findViewById(R.id.product_list);
         tv= (TextView) findViewById(R.id.codbarras);
         bt= (Button) findViewById(R.id.button1);
+        mProductosAdapter = new ProductosCursorAdapter(getBaseContext(), null);
 
         bt.setOnClickListener(this);
-                /*ejemplos*/
-        manager.insertar("1236547","Arroz","Arroz Diana");
-        manager.insertar("789654","Maiz","Maiz tierno en arina");
-        manager.insertar("456987","Azucar","Azucar Morena");
+                /*ejemploscod, fecha, cant, img_prod, estado, nombre,descripcion*/
 
-        String[] from = new String[]{manager.CN_NAME,manager.CN_CODIGO,manager.CN_DESCRIPCION};
-        int [] to = new int[] {android.R.id.text1,android.R.id.text2};
+        String[] from = new String[]{manager.CN_NAME, manager.CN_IMG_PROD, manager.CN_CODIGO};
+        int [] to = new int[] {R.id.tv_name, R.id.iv_avatar, R.id.tv_codigo};
 
-        cursor = manager.cargarCursorContactos();
-        adapter = new SimpleCursorAdapter(this,android.R.layout.two_line_list_item,cursor,from,to);
+        cursor = manager.cargarCursorInventario();
+        adapter = new SimpleCursorAdapter(this,R.layout.lista_item_producto,cursor,from,to);
         lista.setAdapter(adapter);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Cursor currentItem = (Cursor) adapter.getItem(i);
+                String currentProductoId = currentItem.getString(
+                        currentItem.getColumnIndex(manager.CN_ID));
+
+                showDetailScreen(currentProductoId);
+            }
+        });
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,7 +102,7 @@ public class DrawerMenu
                 Intent intent1 = new Intent(DrawerMenu.this,ESCANEAR.class);
                 startActivity(intent1);
             }
-                                });
+        });
 
         codNombre = (EditText) findViewById(R.id.codbarras);
 
@@ -102,15 +118,70 @@ public class DrawerMenu
         Intent intent=getIntent();//Traemos el codigo de la activity escanear.
         Bundle extras=intent.getExtras();
 
-        if(extras!=null){//Validamos que el codigo no venga vacio.
+        if(extras!=null){
+            //Validamos que el codigo no venga vacio.
             String codigo=extras.getString("CODIGO");
             codNombre.setText(codigo);
+            Cursor c =manager.buscarCodigo(tv.getText().toString());
+
+
+            if(c.moveToFirst() == false){
+                //Revisamos si existe el producto
+                Context context = getApplicationContext();
+                CharSequence text = "No existe el producto";
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else{
+                adapter.changeCursor(c);
+            }
         }
-
-
     }
 
+    private void showDetailScreen(String productoId) {
+        Intent intent = new Intent(getBaseContext(), ActividadDetalleProducto.class);
+        intent.putExtra(ActividadProductos.EXTRA_PRODUCTO_ID, productoId);
+        startActivityForResult(intent, REQUEST_UPDATE_DELETE_PRODUCT);
+    }
+    private void showSuccessfullSavedMessage() {
+        Toast.makeText(getBaseContext(),
+                "Producto guardado correctamente", Toast.LENGTH_SHORT).show();
+    }
+    private void loadProductos() {
+        new ProductoLoadTask().execute();
+    }
 
+    private class ProductoLoadTask extends AsyncTask<Void, Void, Cursor> {
+
+        @Override
+        protected Cursor doInBackground(Void... voids) {
+            return manager.getAllProductos();
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            if (cursor != null && cursor.getCount() > 0) {
+                adapter.swapCursor(cursor);
+            } else {
+                // Mostrar empty state
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Activity.RESULT_OK == resultCode) {
+            switch (requestCode) {
+                case ActividadAgregarEditar.REQUEST_ADD_PRODUCTO:
+                    showSuccessfullSavedMessage();
+                    loadProductos();
+                    break;
+                case REQUEST_UPDATE_DELETE_PRODUCT:
+                    loadProductos();
+                    break;
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -152,8 +223,8 @@ public class DrawerMenu
         int id = item.getItemId();
 
         if (id == R.id.crear) {
-                Intent intent1 = new Intent(DrawerMenu.this,CREAR.class);
-                startActivity(intent1);
+                Intent intent1 = new Intent(DrawerMenu.this,ActividadAgregarEditar.class);
+                startActivityForResult(intent1, ActividadAgregarEditar.REQUEST_ADD_PRODUCTO);
             // Handle the camera action
         } else
             if (id == R.id.entradas) {
@@ -172,23 +243,10 @@ public class DrawerMenu
                 Intent intent1 = new Intent(DrawerMenu.this,INFORMES.class);
                 startActivity(intent1);
 
-        } else if (id == R.id.configuracion) {
-                Intent intent1 = new Intent(DrawerMenu.this, ActividadProductos.class);
-                startActivity(intent1);
-
-        } else if (id == R.id.usuarios) {
-        Context context = getApplicationContext();
-        CharSequence text = "Opción Usuarios no Configurada";
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
         } else if (id == R.id.bloc) {
                 Intent intent1 = new Intent(DrawerMenu.this, BLOCNOTAS.class);
                 startActivity(intent1);
-
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -198,13 +256,51 @@ public class DrawerMenu
 
     @Override
     public void onClick(View view) {
-
-        if (view.getId() == R.id.button1){
-            Cursor c =manager.buscarContacto(tv.getText().toString());
-            adapter.changeCursor(c);
-            //new BuscarTask().execute();
-
-    }}
+        int busqueda = 0;
+        Cursor c = manager.buscarNombre(tv.getText().toString());
+        Cursor c2 = manager.buscarCodigo(tv.getText().toString());
+        if (tv.getText().toString().equals("")) {
+            Context context = getApplicationContext();
+            CharSequence text = "Inserte un Nombre o Codigo";
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            Cursor Reset = manager.cargarCursorInventario();
+            adapter.changeCursor(Reset);
+            //adapter = new SimpleCursorAdapter(this,R.layout.lista_item_producto,cursor,from,to);
+            //lista.setAdapter(adapter);
+        } else {
+            if (c.moveToFirst() == false) {
+                //Revisamos si existe el producto
+                Context context = getApplicationContext();
+                CharSequence text = "Busqueda por codigo";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                busqueda ++;}
+            else{   adapter.changeCursor(c);
+            }
+            if (c2.moveToFirst() == false) {
+                //Revisamos si existe el producto
+                Context context2 = getApplicationContext();
+                CharSequence text2 = "Busqueda por nombre";
+                int duration2 = Toast.LENGTH_SHORT;
+                Toast toast2 = Toast.makeText(context2, text2, duration2);
+                toast2.show();
+                busqueda ++;
+            }else{
+                adapter.changeCursor(c2);
+            }
+        } if(busqueda == 2){
+            Context context = getApplicationContext();
+            CharSequence text = "No se encontro el producto";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            Cursor Reset = manager.cargarCursorInventario();
+            adapter.changeCursor(Reset);
+        }
+    }
 
 
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.FragmentoProductos;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 
 /**

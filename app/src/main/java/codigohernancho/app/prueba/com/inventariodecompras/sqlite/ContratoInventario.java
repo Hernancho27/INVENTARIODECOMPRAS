@@ -8,15 +8,16 @@ import android.provider.BaseColumns;
 
 public class ContratoInventario{
     public static abstract class ProductoEntrada implements BaseColumns{
-        public static  final String TABLE_NAME = "producto";
+        public static final String TABLE_NAME = "Inventario";
 
-        public static final String ID = "id";
-        public static final String NOMBRE = "nombre";
-        public static final String DESCRIPCION = "descripcion";
-        public static final String FECHA_CREACION = "fecha_creacion";
-        public static final String CANTIDAD = "cantidad";
-        public static final String IMG_PROD = "imgProd";
-        public static final String ESTADO = "estado";
+        public static final String CN_ID = "_id";
+        public static final String CN_CODIGO = "cod";
+        public static final String CN_FECHA_CREACION = "fecha";
+        public static final String CN_CANTIDAD = "cant";
+        public static final String CN_IMG_PROD = "img_prod";
+        public static final String CN_ESTADO = "estado";
+        public static final String CN_NAME = "nombre";
+        public static final String CN_DESCRIPCION = "descripcion";
     }
 
 }

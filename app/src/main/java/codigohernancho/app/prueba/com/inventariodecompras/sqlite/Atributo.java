@@ -1,4 +1,4 @@
-package codigohernancho.app.prueba.com.inventariodecompras.modelo;
+package codigohernancho.app.prueba.com.inventariodecompras.sqlite;
 
 /**
  * Created by urreal on 26/05/2017.

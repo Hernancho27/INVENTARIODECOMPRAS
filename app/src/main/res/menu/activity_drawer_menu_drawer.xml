@@ -27,14 +27,14 @@
             android:id="@+id/informes"
             android:icon="@drawable/ic_informes"
             android:title="Informes" />
-        <item
+        <!--<item
             android:id="@+id/configuracion"
             android:icon="@drawable/ic_configuracion"
             android:title="Configuracion" />
         <item
             android:id="@+id/usuarios"
             android:icon="@drawable/ic_usuarios"
-            android:title="Usuarios" />
+            android:title="Usuarios" />-->
         <item
             android:id="@+id/bloc"
             android:icon="@drawable/ic_notas"

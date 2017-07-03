@@ -17,7 +17,7 @@ import android.support.design.widget.FloatingActionButton;
 import com.bumptech.glide.Glide;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
+import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Entrada;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.EntradasSqliteHelper;
 
 public class modificarEntrada extends AppCompatActivity {
