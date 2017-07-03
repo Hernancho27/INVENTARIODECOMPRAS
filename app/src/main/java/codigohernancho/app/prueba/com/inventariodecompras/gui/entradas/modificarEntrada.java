@@ -24,7 +24,7 @@ public class modificarEntrada extends AppCompatActivity {
     EditText nombre_producto;
     EditText cantidad_producto;
     EntradasSqliteHelper u;
-    int IdProducto;
+    String IdProducto;
     long IdEntrada;
     String mensaje;
     FloatingActionButton fab;
@@ -48,15 +48,15 @@ public class modificarEntrada extends AppCompatActivity {
 
         try {
             Entrada e = new Entrada();
-            Long id = getIntent().getExtras().getLong("entrada_id");
+            Long id = getIntent().getExtras().getLong("_id");
             e.setId(id.longValue());
             Cursor c = u.encontrarEntradaPorId(e);
-            IdProducto = c.getInt(c.getColumnIndexOrThrow("producto_id"));
+            IdProducto = c.getString(c.getColumnIndexOrThrow("cod"));
             IdEntrada = id.longValue();
             nombre_producto.setText(c.getString(c.getColumnIndexOrThrow("nombre")));
             cantidad_producto.setText(c.getString(c.getColumnIndexOrThrow("cantidad")));
             Glide.with(this)
-                    .load(Uri.parse("file:///android_asset/" + ""))
+                    .load(Uri.parse("file://" + c.getString(c.getColumnIndexOrThrow("img_prod"))))
                     .centerCrop()
                     .into(imagenProducto);
         }
@@ -91,7 +91,7 @@ public class modificarEntrada extends AppCompatActivity {
                 catch (Exception ex)
                 {
                     //Toast.makeText(modificarEntrada.this, "Se ha producido un Error: \n Se deben ingresar valores numericos \n No se logrò modificar el registro", Toast.LENGTH_LONG ).show();
-                    mensaje("No se logrà modificar la entrada: Se ingresò un valor no numèrico");
+                    mensaje("No se logrò modificar la entrada: Se ingresò un valor no numèrico");
                     //Toast.makeText(modificarEntrada.this, "Se ha producido un error al mdificar el registro", Toast.LENGTH_LONG ).show();
                 }
                 //Snackbar.make(view, "Se presionó el FAB", Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -184,7 +184,7 @@ public class modificarEntrada extends AppCompatActivity {
             Intent intent = new Intent(modificarEntrada.this, listadoEntrada.class);
             Entrada e = new Entrada();
             e.setId(IdEntrada);
-            e.setEstado(0);
+            e.setEstado("inactivo");
             if (u.eliminarEntrada(e))
             {
                 startActivity(intent);

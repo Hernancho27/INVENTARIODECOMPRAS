@@ -2,21 +2,25 @@ package codigohernancho.app.prueba.com.inventariodecompras.sqlite;
 
 public class Entrada {
     long id;
-    int idProducto;
+    String idProducto;
     String nombre;
+    String rutaImagen;
     int cantidadActual;
     int cantidadAAdicionar;
     int cantidadTotal;
-    int estado;
+    String estado;
 
     public Entrada(){}
 
-    public Entrada(int idProd, int cantAct, int nuevaCant)
+    public Entrada(String idProd, int cantAct, int nuevaCant, String nomb, String img_path)
     {
         this.idProducto = idProd;
         this.cantidadActual = cantAct;
         this.cantidadAAdicionar =nuevaCant;
+        this.nombre = nomb;
+        this.rutaImagen = img_path;
     }
+
 
     public long getId() {
         return id;
@@ -26,11 +30,11 @@ public class Entrada {
         this.id = id;
     }
 
-    public int getIdProducto() {
+    public String getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -58,6 +62,14 @@ public class Entrada {
         this.cantidadAAdicionar = cantidadAAdicionar;
     }
 
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+
     public int getCantidadTotal() {
         return cantidadTotal;
     }
@@ -66,11 +78,11 @@ public class Entrada {
         this.cantidadTotal = cantidadTotal;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 }

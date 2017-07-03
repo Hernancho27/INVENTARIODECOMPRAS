@@ -45,7 +45,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentStart="true"
                     android:background="@color/colorPrimary"
-                    android:text="MODULO ENTRADAS"
+                    android:text="ENTRADAS"
                     android:textAlignment="center"
                     android:textColor="@android:color/background_light"
                     android:textSize="30sp"
@@ -88,8 +88,29 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_weight="1"
-                        android:text="VER ENTRADAS"
-                        android:onClick="verEntradas_clicked"/>
+                        android:onClick="verEntradas_clicked"
+                        android:text="VER ENTRADAS" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_ayuda"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ayuda"
+                        android:onClick="ayuda_clicked"/>
+
                 </LinearLayout>
 
             </RelativeLayout>

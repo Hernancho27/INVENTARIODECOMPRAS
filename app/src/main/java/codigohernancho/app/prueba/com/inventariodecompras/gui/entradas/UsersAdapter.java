@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
+import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Entrada;
 
 public class UsersAdapter extends ArrayAdapter<Entrada>
 {

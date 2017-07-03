@@ -19,7 +19,7 @@ import java.util.List;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.EntradasSqliteHelper;
-import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
+import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Entrada;
 
 public class listadoEntrada extends AppCompatActivity {
 
@@ -37,7 +37,7 @@ public class listadoEntrada extends AppCompatActivity {
         setContentView(R.layout.activity_listado_entrada);
         u = new EntradasSqliteHelper(this);
         try {
-            View header = getLayoutInflater().inflate(R.layout.activity_barra_superior_listado_entradas, null);
+            //View header = getLayoutInflater().inflate(R.layout.activity_barra_superior_listado_entradas, null);
 
             cursor = u.listarEntradas();
             lvlitems = (ListView) findViewById(R.id.lvlitems);
@@ -75,7 +75,7 @@ public class listadoEntrada extends AppCompatActivity {
                     Intent intent = new Intent(listadoEntrada.this, modificarEntrada.class);
                     //intent.putExtra("entrada_id",id);
                     Bundle bundle = new Bundle();
-                    bundle.putLong("entrada_id", adaptador.getItem(position).getId());
+                    bundle.putLong("_id", adaptador.getItem(position).getId());
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }

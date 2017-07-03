@@ -49,6 +49,19 @@ public class inicioEntradas extends AppCompatActivity{
 
     }
 
+    public void ayuda_clicked(View view){
+        try
+        {
+            Intent intent = new Intent(this, ayuda.class);
+            startActivity(intent);
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this, "ERROR AYUDA "+ex, Toast.LENGTH_LONG ).show();
+        }
+
+    }
+
 
 
 }
