@@ -33,6 +33,8 @@
             android:label="@string/Entradas2" />-->
         <activity android:name=".gui.entradas.modificarEntrada"
             android:allowBackup="true"/>
+        <activity android:name=".gui.entradas.ayuda"
+            android:allowBackup="true"/>
         <activity android:name=".gui.entradas.registrarEntrada"
             android:allowBackup="true"/>
         <activity android:name=".gui.entradas.listadoEntrada"

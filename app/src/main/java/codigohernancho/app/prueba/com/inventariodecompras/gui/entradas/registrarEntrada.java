@@ -4,12 +4,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Entrada;
@@ -28,11 +33,15 @@ public class registrarEntrada extends AppCompatActivity {
     EditText descripcionProductoEncontrado;
     EditText stockMinimoProductoEncontrado;
     EditText stockMaximoProductoEncontrado;
+    ImageView imagen;
 
     Button adicionar;
+    Button limpiarCantidad;
+    Button limpiarTodo;
     EntradasSqliteHelper u;
-    int idProductoEncontrado;
+    String idProductoEncontrado;
     int cantidadActualProductoEncontrado;
+    String ruta;
 
 
     public registrarEntrada()
@@ -51,34 +60,23 @@ public class registrarEntrada extends AppCompatActivity {
         codigoABuscar = (EditText) findViewById(R.id.txtcodigoABuscar);
         nombreProductoABuscar = (EditText) findViewById(R.id.txtnombreProductoABuscar);
         cantidadARegistrar = (EditText) findViewById(R.id.txtCantidadAAdicionar);
+        cantidadARegistrar.setEnabled(false);
+        imagen = (ImageView) findViewById(R.id.imagenProducto);
+
+        adicionar = (Button) findViewById(R.id.btnGuardarEntrada);
+        adicionar.setEnabled(false);
+
+        limpiarCantidad = (Button) findViewById(R.id.btnLimpiarCantidad);
+        limpiarCantidad.setEnabled(false);
 
 
-        stockMaximoProductoEncontrado = (EditText) findViewById(R.id.txtstockActualProductoEncontrado);
-        stockMaximoProductoEncontrado.setEnabled(false);
-        stockMaximoProductoEncontrado.setVisibility(View.INVISIBLE);
 
         nombreProductoEncontrado = (EditText) findViewById(R.id.txtnombreProductoEncontrado);
         nombreProductoEncontrado.setEnabled(false);
-
-        marcaProductoEncontrado = (EditText) findViewById(R.id.txtMarcaProductoEncontrado);
-        marcaProductoEncontrado.setEnabled(false);
-        marcaProductoEncontrado.setVisibility(View.INVISIBLE);
-
         cantidadProductoEncontrado = (EditText) findViewById(R.id.txtCantidadProductoEncontrado);
         cantidadProductoEncontrado.setEnabled(false);
-
-        unidadProductoEncontrado = (EditText) findViewById(R.id.txtunidadProductoEncontrado);
-        unidadProductoEncontrado.setEnabled(false);
-        unidadProductoEncontrado.setVisibility(View.INVISIBLE);
-
-
         descripcionProductoEncontrado = (EditText) findViewById(R.id.txtdescripcionProductoEncontrado);
         descripcionProductoEncontrado.setEnabled(false);
-
-        stockMinimoProductoEncontrado = (EditText) findViewById(R.id.txtstockMinProductoEncontrado);
-        stockMinimoProductoEncontrado.setEnabled(false);
-        stockMinimoProductoEncontrado.setVisibility(View.INVISIBLE);
-
 
 
     }
@@ -88,14 +86,32 @@ public class registrarEntrada extends AppCompatActivity {
     public void guardarEntrada_clicked(View view){
         try
         {
-            Cursor cursor=null;
-            u.crearEntrada(new Entrada(idProductoEncontrado, cantidadActualProductoEncontrado, Integer.parseInt(cantidadARegistrar.getText().toString())));
-            Intent intent = new Intent(registrarEntrada.this, listadoEntrada.class);
-            startActivity(intent);
+
+            if (Integer.parseInt(cantidadARegistrar.getText().toString()) <= 0)
+            {
+                Cursor cursor=null;
+                Entrada nuevaEntrada = new Entrada();
+                nuevaEntrada.setIdProducto(idProductoEncontrado);
+                nuevaEntrada.setCantidadActual(cantidadActualProductoEncontrado);
+                nuevaEntrada.setCantidadAAdicionar(Integer.parseInt(cantidadARegistrar.getText().toString()));
+                nuevaEntrada.setNombre(nombreProductoEncontrado.getText().toString());
+                nuevaEntrada.setRutaImagen(ruta);
+                if (u.crearEntrada(nuevaEntrada))
+                {
+                    Intent intent = new Intent(registrarEntrada.this, listadoEntrada.class);
+                    startActivity(intent);
+                }
+            }
+            else
+            {
+                confirmacion("Debe Ingresar un valor mayor a cero", "Validacion");
+            }
+
         }
         catch (Exception ex)
         {
-            Toast.makeText(this, "ERROR GUARDAR LA ENTRADA \n Debe ingresar un valor numérico. ", Toast.LENGTH_LONG ).show();
+            //Toast.makeText(this, "ERROR GUARDAR LA ENTRADA \n Debe ingresar un valor numérico. ", Toast.LENGTH_LONG ).show();
+            confirmacion("Debe ingresar un valor o el valor ingresado no es numèrico", "Validacion");
         }
 
 
@@ -103,34 +119,54 @@ public class registrarEntrada extends AppCompatActivity {
 
 
 
+
+    public void confirmacion(String msg, String title){
+
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setMessage(msg);
+        dlgAlert.setTitle(title);
+        dlgAlert.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //dismiss the dialog
+                    }
+                });
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+    }
+
+
     public void buscarProducto_clicked(View view){
-        int codigo =0;
+        String codigo ="";
         String nombre ="";
         try
         {
             if(!codigoABuscar.getText().toString().equals(""))
             {
-                codigo = Integer.parseInt( codigoABuscar.getText().toString() );
+                codigo = codigoABuscar.getText().toString();
             }
             if(!nombreProductoABuscar.getText().toString().equals(""))
             {
                 nombre = nombreProductoABuscar.getText().toString();
             }
             Cursor c = u.encontrarProductoPorId(codigo, nombre);
-
-            idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("producto_id")) );
+            adicionar.setEnabled(true);
+            cantidadARegistrar.setEnabled(true);
+            limpiarCantidad.setEnabled(true);
+            idProductoEncontrado =  c.getString(c.getColumnIndexOrThrow("cod")) ;
             nombreProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("nombre")));
             descripcionProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
-            cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
-            /*idProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("id")) );
-            nombreProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("nombreProducto")));
-            cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cantidad") ) );
+            cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cant") ) );
             cantidadProductoEncontrado.setText(cantidadActualProductoEncontrado+"");
-            marcaProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("marca")) );
-            unidadProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("unidad")) );
-            descripcionProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
-            stockMinimoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_minimo")));
-            stockMaximoProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("stock_maximo")));*/
+            ruta = c.getString(c.getColumnIndexOrThrow("img_prod"));
+            Glide.with(this)
+                    .load(Uri.parse("file://" + c.getString(c.getColumnIndexOrThrow("img_prod"))))
+                    .centerCrop()
+                    .into(imagen);
+            InputMethodManager imm = (InputMethodManager)getSystemService(this.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(codigoABuscar.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(nombreProductoABuscar.getWindowToken(), 0);
+
 
         }
         catch (Exception ex)
@@ -150,31 +186,19 @@ public class registrarEntrada extends AppCompatActivity {
     }
 
 
-    public void confirmacion(){
 
-        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-        dlgAlert.setMessage("El Proceso de realizo correctamente exitosamente!");
-        dlgAlert.setTitle("Agregar Entrada");
-        dlgAlert.setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        //dismiss the dialog
-                    }
-                });
-        dlgAlert.setCancelable(true);
-        dlgAlert.create().show();
-    }
 
     public void limpiarCajas()
     {
-        stockMaximoProductoEncontrado.setText("");
-        cantidadARegistrar.setText("");
+
         codigoABuscar.setText("");
+        nombreProductoABuscar.setText("");
+        cantidadARegistrar.setText("");
         nombreProductoEncontrado.setText("");
-        marcaProductoEncontrado.setText("");
-        unidadProductoEncontrado.setText("");
+        cantidadProductoEncontrado.setText("");
         descripcionProductoEncontrado.setText("");
-        stockMinimoProductoEncontrado.setText("");
+
+
     }
 
 
