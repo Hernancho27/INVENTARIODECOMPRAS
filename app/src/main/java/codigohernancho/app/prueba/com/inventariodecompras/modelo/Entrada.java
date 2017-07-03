@@ -3,6 +3,7 @@ package codigohernancho.app.prueba.com.inventariodecompras.modelo;
 public class Entrada {
     long id;
     int idProducto;
+    String nombre;
     int cantidadActual;
     int cantidadAAdicionar;
     int cantidadTotal;
@@ -31,6 +32,14 @@ public class Entrada {
 
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getCantidadActual() {

@@ -70,8 +70,10 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
     }
 
     public Cursor encontrarProductoPorId(int idEntrada, String nombre){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM Productos WHERE (1=1)";
+        try
+        {
+            SQLiteDatabase db = getWritableDatabase();
+            String query = "SELECT * FROM Productos WHERE (1=1)";
             if (idEntrada > 0)
             {
                 query += " AND (producto_id = " + idEntrada + ") ";
@@ -81,14 +83,21 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
             {
                 query += "AND (nombre LIKE '%"+nombre + "%') ";
             }
-        query += ";";
-        Cursor c = db.rawQuery(query, null);
+            query += ";";
+            Cursor c = db.rawQuery(query, null);
 
-        if (c != null) {
-            c.moveToFirst();
+            if (c != null) {
+                c.moveToFirst();
+            }
+
+            return c;
         }
+        catch (Exception ex)
+        {
 
-        return c;
+        }
+        return  null;
+
     }
 
 
@@ -123,49 +132,72 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
     public boolean modificarEntrada(Entrada e)
     {
 
-        Date fechaActual = new Date();
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        int totalEntrada = e.getCantidadActual() + e.getCantidadAAdicionar();
-
-        ContentValues valores = new ContentValues();
-        valores.put("producto_id", e.getIdProducto());
-        valores.put("cantidad_entrada", e.getCantidadAAdicionar());
-        valores.put("fecha", formato.format(fechaActual));
-        valores.put("estado", 1);
-        SQLiteDatabase db = getWritableDatabase();
-        int entradas = db.update("Entradas", valores, "entrada_id" + "= ?", new String[]{String.valueOf(e.getId())});
-        db.close();
-        if (entradas > 0)
+        try
         {
-            return true;
+            Date fechaActual = new Date();
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            int totalEntrada = e.getCantidadActual() + e.getCantidadAAdicionar();
+
+            ContentValues valores = new ContentValues();
+            valores.put("producto_id", e.getIdProducto());
+            valores.put("cantidad_entrada", e.getCantidadAAdicionar());
+            valores.put("fecha", formato.format(fechaActual));
+            valores.put("estado", 1);
+            SQLiteDatabase db = getWritableDatabase();
+            int entradas = db.update("Entradas", valores, "entrada_id" + "= ?", new String[]{String.valueOf(e.getId())});
+            db.close();
+            if (entradas > 0)
+            {
+                return true;
+            }
         }
+        catch (Exception ex)
+        {
+
+        }
+
         return false;
     }
 
 
     public Cursor listarEntradas()
     {
-        SQLiteDatabase db = getReadableDatabase();
-        String query = ("SELECT e.entrada_id as _id, p.nombre, e.cantidad_entrada FROM Productos as p INNER JOIN Entradas as e ON e.producto_id = p.producto_id WHERE 1 ORDER BY e.entrada_id;");
-        Cursor c = db.rawQuery(query, null);
+        try
+        {
+            SQLiteDatabase db = getReadableDatabase();
+            String query = ("SELECT e.entrada_id as _id, p.nombre, e.cantidad_entrada FROM Productos as p INNER JOIN Entradas as e ON e.producto_id = p.producto_id WHERE 1 ORDER BY e.entrada_id;");
+            Cursor c = db.rawQuery(query, null);
 
-        if (c != null) {
-            c.moveToFirst();
+            if (c != null) {
+                c.moveToFirst();
+            }
+
+            return c;
         }
+        catch (Exception ex)
+        {
 
-        return c;
+        }
+        return  null;
     }
 
 
     public boolean eliminarEntrada(Entrada e)
     {
-        SQLiteDatabase db = getWritableDatabase();
-        //db.execSQL("DELETE FROM Entradas WHERE entrada_id = " + e.getId() + ";");
-        int entradas = db.delete("Entradas", "entrada_id" + "= ?", new String[]{String.valueOf(e.getId())});
-        db.close();
-        if (entradas > 0)
+        try
         {
-            return true;
+            SQLiteDatabase db = getWritableDatabase();
+            //db.execSQL("DELETE FROM Entradas WHERE entrada_id = " + e.getId() + ";");
+            int entradas = db.delete("Entradas", "entrada_id" + "= ?", new String[]{String.valueOf(e.getId())});
+            db.close();
+            if (entradas > 0)
+            {
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+
         }
         return false;
     }
@@ -173,14 +205,21 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
 
     public boolean eliminarEntradaLogico(Entrada e)
     {
-        ContentValues valores = new ContentValues();
-        valores.put("estado", e.getEstado());
-        SQLiteDatabase db = getWritableDatabase();
-        int entradas = db.update("Entradas", valores, "estado" + "= ?", new String[]{String.valueOf(e.getEstado())});
-        db.close();
-        if (entradas > 0)
+        try
         {
-            return true;
+            ContentValues valores = new ContentValues();
+            valores.put("estado", e.getEstado());
+            SQLiteDatabase db = getWritableDatabase();
+            int entradas = db.update("Entradas", valores, "estado" + "= ?", new String[]{String.valueOf(e.getEstado())});
+            db.close();
+            if (entradas > 0)
+            {
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+
         }
         return false;
     }

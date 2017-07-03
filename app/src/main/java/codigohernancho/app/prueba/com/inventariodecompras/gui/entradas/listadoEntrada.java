@@ -4,13 +4,11 @@ package codigohernancho.app.prueba.com.inventariodecompras.gui.entradas;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.content.Intent;
 import android.widget.Toast;
@@ -21,6 +19,7 @@ import java.util.List;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.EntradasSqliteHelper;
+import codigohernancho.app.prueba.com.inventariodecompras.modelo.Entrada;
 
 public class listadoEntrada extends AppCompatActivity {
 
@@ -28,27 +27,38 @@ public class listadoEntrada extends AppCompatActivity {
     EntradasSqliteHelper u;
     ListView lvlitems;
     Cursor cursor;
-    List<String> entradas = null;
+    List<Entrada> entradas = null;
+    UsersAdapter adaptador;
 
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         setContentView(R.layout.activity_listado_entrada);
         u = new EntradasSqliteHelper(this);
         try {
+            View header = getLayoutInflater().inflate(R.layout.activity_barra_superior_listado_entradas, null);
+
             cursor = u.listarEntradas();
             lvlitems = (ListView) findViewById(R.id.lvlitems);
             lvlitems.setTextFilterEnabled(true);
+            //lvlitems.addFooterView(header);
 
+            String valorEntrada;
+            entradas = new ArrayList<Entrada>();
+            Entrada e;
+            while (cursor.moveToNext())
+            {
+                e = new Entrada();
+                e.setId( cursor.getLong(0) );
+                e.setNombre(cursor.getString(1));
+                e.setCantidadTotal(cursor.getInt(2));
 
-            //final ControlListado todoAdapter = new ControlListado(this, cursor);
-            //lvlitems.setAdapter(todoAdapter);
+                entradas.add(e);
+            }
 
-            lvlitems.setAdapter(cargarItems(cursor));
+             adaptador = new UsersAdapter(listadoEntrada.this, R.layout.activity_listado_entrada, (ArrayList<Entrada>) entradas);
+             lvlitems.setAdapter(adaptador);
         }
 
         catch (Exception ex)
@@ -65,11 +75,12 @@ public class listadoEntrada extends AppCompatActivity {
                     Intent intent = new Intent(listadoEntrada.this, modificarEntrada.class);
                     //intent.putExtra("entrada_id",id);
                     Bundle bundle = new Bundle();
-                    bundle.putLong("entrada_id", id);
+                    bundle.putLong("entrada_id", adaptador.getItem(position).getId());
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
             });
+
 
 
     }
@@ -118,18 +129,6 @@ public class listadoEntrada extends AppCompatActivity {
     }
 
 
-    public ArrayAdapter cargarItems(Cursor c)
-    {
-        String valorEntrada;
-        entradas = new ArrayList<String>();
-        while (c.moveToNext())
-        {
-            valorEntrada = c.getString(1) +"\n "+ c.getString(2);
-            entradas.add(valorEntrada);
-        }
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, entradas);
-    return adaptador;
-    }
 
 
 }

@@ -6,90 +6,105 @@
     android:layout_height="match_parent"
     tools:context="codigohernancho.app.prueba.com.inventariodecompras.gui.entradas.listadoEntrada">
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.AppBarLayout>
+        android:layout_height="wrap_content">
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/id_txt"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="21dp"
-                    android:text="Id"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:visibility="invisible" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/nombre_txt"
-                    android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    android:layout_alignTop="@+id/cantidad_txt"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_toEndOf="@+id/cantidad_txt"
-                    android:layout_toRightOf="@+id/cantidad_txt"
-                    android:layout_weight="1"
-                    android:text="Nombre"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    <TextView
+                        android:id="@+id/id_txt"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="21dp"
+                        android:layout_weight="1"
+                        android:text="Id"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:visibility="invisible" />
 
-                <TextView
-                    android:id="@+id/cantidad_txt"
-                    android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    android:layout_alignBottom="@+id/id_txt"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginStart="21dp"
-                    android:layout_toEndOf="@+id/id_txt"
-                    android:layout_toRightOf="@+id/id_txt"
-                    android:layout_weight="1"
-                    android:text="Cantidad"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    <TextView
+                        android:id="@+id/nombre_txt"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_alignTop="@+id/cantidad_txt"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_toEndOf="@+id/cantidad_txt"
+                        android:layout_toRightOf="@+id/cantidad_txt"
+                        android:layout_weight="1"
+                        android:text="Nombre"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/cantidad_txt"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_alignBottom="@+id/id_txt"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginStart="21dp"
+                        android:layout_toEndOf="@+id/id_txt"
+                        android:layout_toRightOf="@+id/id_txt"
+                        android:layout_weight="1"
+                        android:text="Cantidad"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                </LinearLayout>
+
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/lvlitems"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/toolbar"
+                    android:layout_weight="1" />
 
             </TableRow>
 
         </TableLayout>
 
-        <ListView
-            android:id="@+id/lvlitems"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
 
