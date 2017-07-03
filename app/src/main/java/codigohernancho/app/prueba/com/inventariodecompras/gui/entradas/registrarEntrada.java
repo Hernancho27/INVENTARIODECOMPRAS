@@ -87,7 +87,7 @@ public class registrarEntrada extends AppCompatActivity {
         try
         {
 
-            if (Integer.parseInt(cantidadARegistrar.getText().toString()) <= 0)
+            if (Integer.parseInt(cantidadARegistrar.getText().toString()) > 0)
             {
                 Cursor cursor=null;
                 Entrada nuevaEntrada = new Entrada();
@@ -139,6 +139,7 @@ public class registrarEntrada extends AppCompatActivity {
     public void buscarProducto_clicked(View view){
         String codigo ="";
         String nombre ="";
+        Cursor c;
         try
         {
             if(!codigoABuscar.getText().toString().equals(""))
@@ -149,23 +150,32 @@ public class registrarEntrada extends AppCompatActivity {
             {
                 nombre = nombreProductoABuscar.getText().toString();
             }
-            Cursor c = u.encontrarProductoPorId(codigo, nombre);
-            adicionar.setEnabled(true);
-            cantidadARegistrar.setEnabled(true);
-            limpiarCantidad.setEnabled(true);
-            idProductoEncontrado =  c.getString(c.getColumnIndexOrThrow("cod")) ;
-            nombreProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("nombre")));
-            descripcionProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
-            cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cant") ) );
-            cantidadProductoEncontrado.setText(cantidadActualProductoEncontrado+"");
-            ruta = c.getString(c.getColumnIndexOrThrow("img_prod"));
-            Glide.with(this)
-                    .load(Uri.parse("file://" + c.getString(c.getColumnIndexOrThrow("img_prod"))))
-                    .centerCrop()
-                    .into(imagen);
-            InputMethodManager imm = (InputMethodManager)getSystemService(this.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(codigoABuscar.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(nombreProductoABuscar.getWindowToken(), 0);
+            c = u.encontrarProductoPorId(codigo, nombre);
+            c.moveToFirst();
+            if (c.getCount() > 0)
+            {
+                adicionar.setEnabled(true);
+                cantidadARegistrar.setEnabled(true);
+                limpiarCantidad.setEnabled(true);
+                idProductoEncontrado =  c.getString(c.getColumnIndexOrThrow("cod")) ;
+                nombreProductoEncontrado.setText(c.getString(c.getColumnIndexOrThrow("nombre")));
+                descripcionProductoEncontrado.setText( c.getString(c.getColumnIndexOrThrow("descripcion")) );
+                cantidadActualProductoEncontrado = Integer.parseInt( c.getString(c.getColumnIndexOrThrow("cant") ) );
+                cantidadProductoEncontrado.setText(cantidadActualProductoEncontrado+"");
+                ruta = c.getString(c.getColumnIndexOrThrow("img_prod"));
+                Glide.with(this)
+                        .load(Uri.parse("file://" + c.getString(c.getColumnIndexOrThrow("img_prod"))))
+                        .centerCrop()
+                        .into(imagen);
+                InputMethodManager imm = (InputMethodManager)getSystemService(this.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(codigoABuscar.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(nombreProductoABuscar.getWindowToken(), 0);
+            }
+            else
+            {
+                confirmacion("El item que intenta buscar no se encuentra registrado ", "Validacion");
+            }
+
 
 
         }
