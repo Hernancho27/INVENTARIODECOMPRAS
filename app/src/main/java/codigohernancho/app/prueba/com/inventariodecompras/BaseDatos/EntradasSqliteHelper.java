@@ -71,6 +71,7 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
     }
 
     public Cursor encontrarProductoPorId(String idProducto, String nombre){
+        Cursor c;
         try
         {
             SQLiteDatabase db = getWritableDatabase();
@@ -85,19 +86,15 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
                 query += "AND (nombre LIKE '%"+nombre + "%') ";
             }
             query += " AND (estado = 'activo');";
-            Cursor c = db.rawQuery(query, null);
+            c = db.rawQuery(query, null);
 
-            if (c != null) {
-                c.moveToFirst();
-            }
-
-            return c;
         }
         catch (Exception ex)
         {
             Toast.makeText(null, "ERROR CREAR buscar producto "+ex, Toast.LENGTH_LONG ).show();
+            return  null;
         }
-        return  null;
+        return c;
 
     }
 
