@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DBHelper;
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.CrearProducto;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.ActividadDetalleProducto;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.entradas.inicioEntradas;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
@@ -172,7 +172,7 @@ public class DrawerMenu
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Activity.RESULT_OK == resultCode) {
             switch (requestCode) {
-                case ActividadAgregarEditar.REQUEST_ADD_PRODUCTO:
+                case CrearProducto.REQUEST_ADD_PRODUCTO:
                     showSuccessfullSavedMessage();
                     loadProductos();
                     break;
@@ -223,8 +223,8 @@ public class DrawerMenu
         int id = item.getItemId();
 
         if (id == R.id.crear) {
-                Intent intent1 = new Intent(DrawerMenu.this,ActividadAgregarEditar.class);
-                startActivityForResult(intent1, ActividadAgregarEditar.REQUEST_ADD_PRODUCTO);
+                Intent intent1 = new Intent(DrawerMenu.this,CrearProducto.class);
+                startActivityForResult(intent1, CrearProducto.REQUEST_ADD_PRODUCTO);
             // Handle the camera action
         } else
             if (id == R.id.entradas) {

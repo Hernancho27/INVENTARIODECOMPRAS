@@ -11,13 +11,13 @@ import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.Activida
  * Created by urreal on 05/06/2017.
  */
 
-public class ActividadAgregarEditar extends AppCompatActivity{
+public class CrearProducto extends AppCompatActivity{
     public static final int REQUEST_ADD_PRODUCTO = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.agregar_editar_actividad);
+        setContentView(R.layout.crearproducto);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

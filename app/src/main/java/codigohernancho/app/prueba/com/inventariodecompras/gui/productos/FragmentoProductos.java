@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.ActividadAgregarEditar;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.CrearProducto;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.ActividadDetalleProducto;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.ContratoInventario.ProductoEntrada;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.OperacionesBaseDatos;
@@ -87,7 +87,7 @@ public class FragmentoProductos extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Activity.RESULT_OK == resultCode) {
             switch (requestCode) {
-                case ActividadAgregarEditar.REQUEST_ADD_PRODUCTO:
+                case CrearProducto.REQUEST_ADD_PRODUCTO:
                     showSuccessfullSavedMessage();
                     loadProductos();
                     break;
@@ -108,8 +108,8 @@ public class FragmentoProductos extends Fragment {
     }
 
     private void showAddScreen() {
-        Intent intent = new Intent(getActivity(), ActividadAgregarEditar.class);
-        startActivityForResult(intent, ActividadAgregarEditar.REQUEST_ADD_PRODUCTO);
+        Intent intent = new Intent(getActivity(), CrearProducto.class);
+        startActivityForResult(intent, CrearProducto.REQUEST_ADD_PRODUCTO);
     }
 
     private void showDetailScreen(String productoId) {

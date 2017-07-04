@@ -55,21 +55,9 @@
             android:label="@string/title_activity_lawyer_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".gui.agregar_editar_producto.ActividadAgregarEditar"
+            android:name=".gui.agregar_editar_producto.CrearProducto"
             android:label="@string/title_activity_add_edit"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name=".ENTRADAS"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/Entradas2" />
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
 
         <activity
             android:name=".SALIDAS"
