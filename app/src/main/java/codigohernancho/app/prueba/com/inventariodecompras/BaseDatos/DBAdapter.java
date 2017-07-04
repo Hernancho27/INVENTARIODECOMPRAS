@@ -23,10 +23,10 @@ public class DBAdapter implements DataBaseInterface {
     protected int INGRESO = 1;
     protected int PENDIENTE = 3;
     protected int EN_CURSO = 5;
-    protected static final int ENTURNADO = 5;
     protected int DENEGADO = 0;
     protected int FINALIZADO = 7;
     private static final String TAG = "Querys DB";
+    protected static final int ENTURNADO = 5;
     private Context context;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;

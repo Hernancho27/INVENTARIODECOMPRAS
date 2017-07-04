@@ -199,27 +199,5 @@ public class EntradasSqliteHelper extends SQLiteOpenHelper{
         return false;
     }
 
-
-    public boolean eliminarEntradaLogico(Entrada e)
-    {
-        try
-        {
-            ContentValues valores = new ContentValues();
-            valores.put("estado", e.getEstado());
-            SQLiteDatabase db = getWritableDatabase();
-            int entradas = db.update("Entradas", valores, "estado" + "= ?", new String[]{String.valueOf(e.getEstado())});
-            db.close();
-            if (entradas > 0)
-            {
-                return true;
-            }
-        }
-        catch (Exception ex)
-        {
-
-        }
-        return false;
-    }
-
 }
 
