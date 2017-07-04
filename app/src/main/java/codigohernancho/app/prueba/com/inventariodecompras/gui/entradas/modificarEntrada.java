@@ -207,18 +207,4 @@ public class modificarEntrada extends AppCompatActivity {
     }
 
 
-    public void crearEntrada_clicked(View view)
-    {
-        try
-        {
-            Intent i = new Intent(this, registrarEntrada.class);
-            startActivity(i);
-        }
-        catch (Exception ex)
-        {
-            Toast.makeText(this, "ERROR CREAR ENTRADA "+ex, Toast.LENGTH_LONG ).show();
-        }
-
-    }
-
 }
