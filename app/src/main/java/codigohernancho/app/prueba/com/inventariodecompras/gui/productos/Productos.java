@@ -10,7 +10,7 @@ import codigohernancho.app.prueba.com.inventariodecompras.R;
  * Created by urreal on 05/06/2017.
  */
 
-public class ActividadProductos extends AppCompatActivity {
+public class Productos extends AppCompatActivity {
     public static final String EXTRA_PRODUCTO_ID = "extra_producto_id";
 
     @Override

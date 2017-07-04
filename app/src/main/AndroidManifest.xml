@@ -41,7 +41,7 @@
             android:label="@string/Entradas" />
         <!--FIN ADICIONES-->
         <activity
-            android:name=".gui.productos.ActividadProductos"
+            android:name=".gui.productos.Productos"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

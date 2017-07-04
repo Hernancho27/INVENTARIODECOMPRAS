@@ -21,7 +21,7 @@ import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseMana
 import codigohernancho.app.prueba.com.inventariodecompras.DrawerMenu;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.agregar_editar_producto.CrearProducto;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.Productos;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.FragmentoProductos;
 import codigohernancho.app.prueba.com.inventariodecompras.sqlite.Producto;
 
@@ -126,7 +126,7 @@ public class FragmentoDetalleProducto extends Fragment {
 
     private void showEditScreen() {
         Intent intent = new Intent(getActivity(), CrearProducto.class);
-        intent.putExtra(ActividadProductos.EXTRA_PRODUCTO_ID, mProductoId);
+        intent.putExtra(Productos.EXTRA_PRODUCTO_ID, mProductoId);
         startActivityForResult(intent, FragmentoProductos.REQUEST_UPDATE_DELETE_PRODUCT);
     }
 

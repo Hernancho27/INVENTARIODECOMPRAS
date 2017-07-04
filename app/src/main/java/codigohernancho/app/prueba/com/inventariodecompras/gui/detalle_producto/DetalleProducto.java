@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.Productos;
 
 public class DetalleProducto extends AppCompatActivity{
     @Override
@@ -17,7 +17,7 @@ public class DetalleProducto extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String id = getIntent().getStringExtra(ActividadProductos.EXTRA_PRODUCTO_ID);
+        String id = getIntent().getStringExtra(Productos.EXTRA_PRODUCTO_ID);
 
         FragmentoDetalleProducto fragment = (FragmentoDetalleProducto)
                 getSupportFragmentManager().findFragmentById(R.id.lawyer_detail_container);

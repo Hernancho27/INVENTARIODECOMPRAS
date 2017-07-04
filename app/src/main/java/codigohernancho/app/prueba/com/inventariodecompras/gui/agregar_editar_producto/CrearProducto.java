@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import codigohernancho.app.prueba.com.inventariodecompras.R;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.Productos;
 
 /**
  * Created by urreal on 05/06/2017.
@@ -22,7 +22,7 @@ public class CrearProducto extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String productoId = getIntent().getStringExtra(ActividadProductos.EXTRA_PRODUCTO_ID);
+        String productoId = getIntent().getStringExtra(Productos.EXTRA_PRODUCTO_ID);
 
         setTitle(productoId == null ? "Añadir producto" : "Editar producto");
 

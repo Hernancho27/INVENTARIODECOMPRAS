@@ -114,7 +114,7 @@ public class FragmentoProductos extends Fragment {
 
     private void showDetailScreen(String productoId) {
         Intent intent = new Intent(getActivity(), DetalleProducto.class);
-        intent.putExtra(ActividadProductos.EXTRA_PRODUCTO_ID, productoId);
+        intent.putExtra(Productos.EXTRA_PRODUCTO_ID, productoId);
         startActivityForResult(intent, REQUEST_UPDATE_DELETE_PRODUCT);
     }
 

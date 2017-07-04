@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import codigohernancho.app.prueba.com.inventariodecompras.BaseDatos.DataBaseManager;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.detalle_producto.DetalleProducto;
-import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
+import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.Productos;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ProductosCursorAdapter;
 
 public class SALIDAS extends AppCompatActivity implements View.OnClickListener {
@@ -105,7 +105,7 @@ public class SALIDAS extends AppCompatActivity implements View.OnClickListener {
 
     private void showDetailScreen(String productoId) {
         Intent intent = new Intent(getBaseContext(), DetalleProducto.class);
-        intent.putExtra(ActividadProductos.EXTRA_PRODUCTO_ID, productoId);
+        intent.putExtra(Productos.EXTRA_PRODUCTO_ID, productoId);
         startActivityForResult(intent, REQUEST_UPDATE_DELETE_PRODUCT);
     }
 
