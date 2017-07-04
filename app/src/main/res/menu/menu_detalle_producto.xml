@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="gui.detalle_producto.ActividadDetalleProducto">
+    tools:context=".gui.detalle_producto.DetalleProducto">
     <item
         android:id="@+id/action_edit"
         android:orderInCategory="1"

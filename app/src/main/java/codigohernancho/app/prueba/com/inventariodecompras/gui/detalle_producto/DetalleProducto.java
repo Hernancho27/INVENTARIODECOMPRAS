@@ -8,11 +8,11 @@ import android.view.Menu;
 import codigohernancho.app.prueba.com.inventariodecompras.R;
 import codigohernancho.app.prueba.com.inventariodecompras.gui.productos.ActividadProductos;
 
-public class ActividadDetalleProducto extends AppCompatActivity{
+public class DetalleProducto extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detalle_producto_actividad);
+        setContentView(R.layout.detalleproducto);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
