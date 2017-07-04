@@ -25,16 +25,10 @@ public class registrarEntrada extends AppCompatActivity {
     EditText codigoABuscar;
     EditText nombreProductoABuscar;
     EditText cantidadARegistrar;
-
     EditText nombreProductoEncontrado;
-    EditText marcaProductoEncontrado;
     EditText cantidadProductoEncontrado;
-    EditText unidadProductoEncontrado;
     EditText descripcionProductoEncontrado;
-    EditText stockMinimoProductoEncontrado;
-    EditText stockMaximoProductoEncontrado;
     ImageView imagen;
-
     Button adicionar;
     Button limpiarCantidad;
     Button limpiarTodo;
@@ -43,11 +37,6 @@ public class registrarEntrada extends AppCompatActivity {
     int cantidadActualProductoEncontrado;
     String ruta;
 
-
-    public registrarEntrada()
-    {
-//        createProducto();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
